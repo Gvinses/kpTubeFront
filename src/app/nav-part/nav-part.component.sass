@@ -1,0 +1,93 @@
+.burger-menu
+  display: flex
+  flex-direction: column
+  float: left
+  align-items: center
+  padding: 10px
+  width: 120px
+  height: 100%
+  background: #444444
+  position: fixed
+  left: 0
+  top: 0
+
+  button
+    background: none
+    border: none
+    cursor: pointer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    width: 40px
+    height: 40px
+    position: relative
+    z-index: 2
+
+    .bar
+      border: 1.1px solid black
+      border-radius: 90px
+      display: block
+      width: 30px
+      background-color: #333
+      margin: 6px 0
+      transition: all 0.3s ease
+
+      &:nth-child(1)
+        transition: transform 0.3s ease, opacity 0.3s ease
+
+      &:nth-child(2)
+        transition: transform 0.3s ease
+
+      &:nth-child(3)
+        transition: transform 0.3s ease, opacity 0.3s ease
+
+    &.open
+      .bar:nth-child(1)
+        transform: translate(0, 13px) rotate(45deg)
+
+      .bar:nth-child(2)
+        transform: rotate(135deg)
+
+      .bar:nth-child(3)
+        transform: translate(0, -13px) rotate(45deg)
+        opacity: 0
+
+  .menu
+    position: absolute
+    top: 50px
+    left: 0
+    background-color: white
+    border: 1px solid #ddd
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+    width: 100%
+    transition: opacity 0.3s ease
+    z-index: 1
+
+    ul
+      list-style: none
+      padding: 0
+      margin: 0
+
+      li
+        padding: 10px
+
+        a
+          text-decoration: none
+          color: #333
+          transition: color 0.3s ease
+
+          &:hover
+            color: #007bff
+            text-decoration: underline
+
+@media (max-width: 768px)
+  .burger-menu
+    padding: 10px
+    width: calc(120px / 2)
+
+@media (max-width: 480px)
+  .burger-menu
+    padding: 10px 3px
+    width: calc(120px / 3)
+    height: 100%

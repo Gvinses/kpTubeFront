@@ -1,0 +1,50 @@
+.main
+  display: grid
+  grid-template-columns: 3fr 1fr
+  margin-bottom: 60px
+  .videoPart
+    margin-left: 200px
+    video
+      width: 70%
+      height: auto
+
+    .comments
+      border-top: 2px solid black
+      padding-left: 40px
+      p
+        color: white
+        border-left: 3px solid white
+        padding-left: 30px
+  .videoInfo
+    border: 3px solid black
+    .videoName
+      font-size: 50px
+    //h3
+    //  cursor: pointer
+    .videoContent
+      display: grid
+      grid-template-columns: 1.7fr 1fr
+      align-items: baseline
+      gap: 30px
+      font-size: 30px
+      .aboutVideo
+        float: left
+        button
+          background: none
+          outline: none
+          border: none
+          display: flex
+          flex-direction: row
+          align-items: center
+          justify-content: center
+
+          .likeImg
+            width: 50px
+            filter: invert(0)
+          p
+            color: white
+            margin-left: 10px
+      .category
+        position: relative
+        top: -50px
+        float: right

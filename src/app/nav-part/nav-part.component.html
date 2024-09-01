@@ -1,0 +1,20 @@
+<div class="burger-menu">
+  <button (click)="toggleMenu()" [ngClass]="{ 'open': isOpen }">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <div class="menu" *ngIf="isOpen" @fadeInOut>
+    <ul>
+      <li><a href="/">Главная</a></li>
+<!--      <li><a href="#">KPatok</a></li>-->
+    </ul>
+    <ul>
+      <li><a href="/account">Мой канал</a></li>
+<!--      <li><a href="#">В тренде</a></li>-->
+<!--      <li><a href="#">История</a></li>-->
+<!--      <li><a href="#">Понравившиеся</a></li>-->
+    </ul>
+  </div>
+</div>

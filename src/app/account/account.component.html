@@ -1,0 +1,75 @@
+<div class="container">
+      <div class="HaveAnAccount" *ngIf="getUserID()">
+        <div class="userInfo">
+          <div class="header">
+            <img src="{{userHeader}}">
+          </div>
+          <div class="avatar">
+            <img src="{{userAvatar}}">
+          </div>
+          <div class="userName">
+            <h1 class="userName">{{userName}}</h1>
+          </div>
+        </div>
+      </div>
+      <div class="dontHaveAnAccount" *ngIf="!getUserID()">
+        <div class="enter">
+          <form class="enterForm" (ngSubmit)="onEnter()" #emailForm="ngForm">
+            <label for="enterName">Имя:</label>
+            <input id="enterName" name="name" required="required" [(ngModel)]="enterName">
+            <label for="enterPass">Пароль:</label>
+            <input id="enterPass" name="password" required="required" [(ngModel)]="enterPass">
+            <button type="submit" class="enterSubmit">Отправить</button>
+            <div class="errorMessage" *ngIf="errorMessage">
+              <h1>{{errorMessage}}</h1>
+            </div>
+          </form>
+        </div>
+        <div class="register">
+          <form class="registerForm" (ngSubmit)="onRegister()" #emailForm="ngForm">
+            <div class="avatarPart">
+              <div class="haveAvatar" *ngIf="avatarUrl">
+                <div class="avatar">
+                  <img width="100" [src]="avatarUrl">
+                </div>
+              </div>
+              <div class="dontHaveAvatar">
+                <label for="avatar">Аватар:
+                  <span>Выберите файл</span>
+                </label>
+                <input type="file" id="avatar" required name="avatar" hidden="hidden" (change)="avatarCreate($event)" [(ngModel)]="avatar">
+              </div>
+            </div>
+            <div class="namePart">
+              <label for="name">Имя:</label>
+              <input type="text" id="name" required name="name" [(ngModel)]="name">
+            </div>
+
+            <div class="passPart">
+              <label for="password">Пароль:</label>
+              <input type="password" id="password" required name="password" [(ngModel)]="password">
+            </div>
+
+            <div class="emailPart">
+              <label for="email">Почта:</label>
+              <input type="email" id="email" required name="email" [(ngModel)]="email">
+            </div>
+
+            <div class="headerPart">
+              <div class="haveHeader" *ngIf="headerUrl">
+                <div class="avatar">
+                  <img width="200" [src]="headerUrl">
+                </div>
+              </div>
+              <div class="dontHaveHeader">
+                <label for="header">Шапка профиля:
+                  <span>Выберите файл</span>
+                </label>
+                <input type="file" id="header" required name="header" hidden="hidden" (change)="headerCreate($event)" [(ngModel)]="header">
+              </div>
+            </div>
+            <button type="submit" class="submitButton">Отправить</button>
+          </form>
+        </div>
+      </div>
+</div>

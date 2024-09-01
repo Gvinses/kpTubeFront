@@ -1,0 +1,50 @@
+.search
+  display: grid
+  grid-template-columns: 140px 1700px auto
+  margin-bottom: 10px
+  align-items: center
+  .search
+    display: flex
+    input
+      padding: 15px 0
+      border-radius: 20px
+      outline: none
+      border: none
+      width: 100%
+
+  .account
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 10px
+    order: 1
+    position: fixed
+    top: 15px
+    right: 10px
+    button
+      padding: 7px
+      outline: none
+      border: none
+
+@media (max-width: 950px)
+  .search
+    grid-template-columns: 140px 500px auto
+
+    .search
+      input
+        max-width: 500px
+
+@media (max-width: 600px)
+  .search
+    grid-template-columns: 1fr
+    // Одноколоночный макет
+    grid-row-gap: 10px
+
+    .account
+      justify-content: flex-start
+    // Выравниваем по левому краю
+
+    .search
+      input
+        width: 100%
+// Полная ширина
