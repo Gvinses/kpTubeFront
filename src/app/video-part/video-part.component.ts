@@ -23,15 +23,15 @@ export let videos = [
 export let items = [
   {
     "id": 0,
-    "Video_ID": "1724933638183",
-    "name": "Никиту бьёт сенсей",
-    "description": "Мне очень жаль никиту",
+    "Video_ID": "-1",
+    "name": "Ой! У нас ошибка!",
+    "description": "Простите, возможно мы перезапускаем сервер, или выпускаем обновление",
     "likes": 0,
     "views": 0,
-    "video": "http://127.0.0.1:8000/videos_db/videos/%D0%9F%D1%80%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80_%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0_2024-08-23_11-34-29.mp4",
-    "preview": "http://127.0.0.1:8000/videos_db/previews/drevo.jpg",
-    "category": "porn",
-    "owner": "aboba"
+    "video": null,
+    "preview": 'https://cs9.pikabu.ru/post_img/big/2017/05/16/5/1494914961183622594.png',
+    "category": null,
+    "owner": 'KP229'
   }
   // добавьте остальные элементы
 ];
@@ -66,8 +66,8 @@ export class VideoPartComponent {
           video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
         }
       })
-      this.videos = data
-      console.log(data)
+      this.videos = data.reverse()
+      console.log(this.videos)
     });
   }
 }

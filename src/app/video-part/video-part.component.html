@@ -9,8 +9,8 @@
     </div>
   } @empty {
     <div *ngFor="let item of items">
-      <button [routerLink]="['/video', item.id]">
-        <div class="video" [routerLink]="['/video', item.Video_ID]">
+      <button>
+        <div class="video">
           <img src="{{item.preview}}" alt="{{item.preview}}">
           <div class="info">
             <h5>{{item.name}}</h5>

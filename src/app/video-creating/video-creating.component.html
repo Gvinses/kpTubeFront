@@ -38,4 +38,15 @@
 <div *ngIf="loading" class="popup">
   <h1>Загрузка</h1>
   <p>не закрывайте это окно</p>
+  <p>Прогресс: {{ uploadProgress }}%</p>
+  <button (click)="cancelUpload()">Отменить загрузку</button>
+</div>
+
+
+<div *ngIf="errorMessage" class="popup">
+  <h1>Ошибка!</h1>
+  <p>Необходимо верефицировать аккаунт!</p>
+  <i>Сейчас это доступно только бета тестерам <br>(т.е вы знаете куда жаловаться!!!)</i>
+  <br>
+  <button (click)="close()">Закрыть</button>
 </div>

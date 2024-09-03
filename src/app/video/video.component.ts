@@ -44,7 +44,7 @@ export class VideoComponent implements OnInit {
   VideoOwnerId: any | null = null
   loadVideoDetails(): void {
     if (this.videoId !== null) {
-      this.http.get<any>(`https://kringeproduction.ru/videos?Video_ID=${this.videoId}`).subscribe(data => {
+      this.http.get<any>(`https://kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/')
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/')
         this.videoData = data[0];
@@ -58,6 +58,7 @@ export class VideoComponent implements OnInit {
         this.VideosFetchService.enterUser(this.videoData.owner).subscribe(
           (data: any) => {
             this.VideoOwnerId = data[0];
+            console.log(this.VideoOwnerId);
           }
         )
       });

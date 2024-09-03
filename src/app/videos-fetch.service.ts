@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpRequest} from "@angular/common/http";
+import {map, Observable} from "rxjs";
 import {videos} from "./video-part/video-part.component";
 
 @Injectable({
@@ -8,8 +8,8 @@ import {videos} from "./video-part/video-part.component";
 })
 export class VideosFetchService {
 
-  apiUrl = 'https://kringeproduction.ru/videos';
-  account = 'https://kringeproduction.ru/users';
+  apiUrl = 'https://kringeproduction.ru/videos/';
+  account = 'https://kringeproduction.ru/users/';
   category = 'https://kringeproduction.ru/categories';
 
   http = inject(HttpClient)
@@ -18,6 +18,10 @@ export class VideosFetchService {
 
   getVideos(): any {
     return this.http.get<any>(this.apiUrl)
+  }
+
+  getVideosByUser(userName: string): any {
+    return this.http.get<any>(this.apiUrl + '?owner=' + userName)
   }
 
   getVideo(id: number) {
@@ -38,7 +42,11 @@ export class VideosFetchService {
     formData.append('owner', owner);
     formData.append('category', category);
 
-    return this.http.post(this.apiUrl, formData);
+    const req = new HttpRequest('POST', this.apiUrl, formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
   }
 
   createUser(userID: number, name: string, email: string, password: string, avatar: File, header: File) {
@@ -59,6 +67,10 @@ export class VideosFetchService {
 
   getUserByID(UserID: string) {
     return this.http.get<any>(this.account+'?User_ID='+UserID);
+  }
+
+  getUserNames(): Observable<any> {
+    return this.http.get<any>(this.account)
   }
 
   updateVideo(video: any) {

@@ -1,6 +1,27 @@
 <div class="main">
   <div class="videoPart">
     <video autoplay="autoplay" controls="controls" [src]="videoData.video"></video>
+    <div class="videoInfo">
+      <h1 class="videoName">{{ videoData.name }}</h1>
+      <h3 [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{ videoData.owner }}</h3>
+
+      <div class="videoContent">
+        <div class="aboutVideo">
+          <!--        <button (click)="toggleInvert()">-->
+          <!--          <img class="likeImg" [style.filter]="imageFilter" src="image.png">-->
+          <!--          <p>{{videoData.likes}} лайков</p>-->
+          <!--        </button>-->
+          <details class="aboutVideoDetails">
+            <summary>Описание</summary>
+            <p>{{ videoData.description }}</p>
+          </details>
+        </div>
+
+        <div class="category">
+          <p>Категория: <b>{{videoData.category}}</b></p>
+        </div>
+      </div>
+    </div>
     <div class="comments">
       <h2>Комментарии:</h2>
       @for (comment of comments; track comment) {
@@ -13,27 +34,6 @@
 <!--          </button>-->
         </div>
       }
-    </div>
-  </div>
-  <div class="videoInfo">
-    <h1 class="videoName">{{ videoData.name }}</h1>
-    <h3>Автор - {{ videoData.owner }}</h3>
-    <!--    [routerLink]="['/account', VideoOwnerId.User_ID]"-->
-    <div class="videoContent">
-      <div class="aboutVideo">
-        <!--        <button (click)="toggleInvert()">-->
-        <!--          <img class="likeImg" [style.filter]="imageFilter" src="image.png">-->
-        <!--          <p>{{videoData.likes}} лайков</p>-->
-        <!--        </button>-->
-        <details class="aboutVideoDetails">
-          <summary>Описание</summary>
-          <p>{{ videoData.description }}</p>
-        </details>
-      </div>
-
-      <div class="category">
-        <p>Категория: <b>{{videoData.category}}</b></p>
-      </div>
     </div>
   </div>
 </div>

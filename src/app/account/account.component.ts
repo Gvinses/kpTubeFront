@@ -28,7 +28,7 @@ export class AccountComponent {
   enterName: string = '';
   enterPass: string = '';
 
-  errorMessage: string | null = null;
+  errorMessage: string | null = 'Войдите или Зарегистрируйтесь';
 
   avatarCreate(event: any): void  {
     if (event.target.files.length > 0) {
@@ -62,22 +62,41 @@ export class AccountComponent {
     }
   }
 
+  AlluserNames: any[] = []
   onRegister() {
     if (this.avatar && this.header) {
       let userID = Number(new Date);
+
       console.log(userID);
-      this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
-        response => {
-          console.log('Upload successful!', response);
-          if (localStorage) {
-            localStorage.setItem('UserID', String(userID*2));
-            localStorage.setItem('UserName', String(this.name));
+      this.VideosFetchService.getUserNames().subscribe((response => {
+          for (let i = 0; i < response.length; i++) {
+            this.AlluserNames.push(response[i].name);
           }
-        },
-        error => {
-          console.error('Upload error:', error);
-        }
-      );
+          response = null
+            console.log(this.AlluserNames)
+            if (this.AlluserNames.includes(this.name)) {
+              this.errorMessage = 'Не может быть двух одинаковых имён!'
+              setTimeout( () => {
+                this.errorMessage = null;
+              }, 3500)
+            } else {
+              if (this.avatar && this.header) {
+                this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
+                  response => {
+                    console.log('Upload successful!', response);
+                    if (localStorage) {
+                      localStorage.setItem('UserID', String(userID * 2));
+                      localStorage.setItem('UserName', String(this.name));
+                    }
+                  },
+                  error => {
+                    console.error('Upload error:', error);
+                  }
+                );
+              }
+            }
+        })
+      )
     }
   }
 
@@ -135,5 +154,9 @@ export class AccountComponent {
           this.userVideos = response[0].videos
         }
       )
+  }
+
+  exitAccount() {
+    localStorage.clear()
   }
 }

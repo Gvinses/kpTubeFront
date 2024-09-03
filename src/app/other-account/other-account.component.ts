@@ -2,6 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {VideosFetchService} from "../videos-fetch.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {response} from "express";
 
 @Component({
   selector: 'app-other-account',
@@ -34,8 +35,9 @@ export class OtherAccountComponent implements OnInit {
     });
   }
 
-  // VideoData: any | null = null
   loadVideoDetails(): void {
+    console.log(this.UserID)
+    console.log(String(this.UserID))
     this.VideosFetchService.getUserByID(String(this.UserID)).subscribe(
       response => {
         this.userData = response[0];
@@ -51,10 +53,23 @@ export class OtherAccountComponent implements OnInit {
 
         this.userName = response[0].name
 
-        if (response[0].videos.length > 0) {
-          this.userVideos = response[0].videos
-        }
+        console.log(response[0])
+        this.loadNameVideos()
       }
     )
+  }
+  loadNameVideos(): void {
+    this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
+      data.forEach((video: any) => {
+        if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
+          video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+        }
+        if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
+          video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+        }
+      })
+      this.userVideos = data
+      console.log(data)
+    });
   }
 }
