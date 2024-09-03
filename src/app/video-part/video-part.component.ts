@@ -67,7 +67,6 @@ export class VideoPartComponent {
         }
       })
       this.videos = data.reverse()
-      console.log(this.videos)
     });
   }
 }

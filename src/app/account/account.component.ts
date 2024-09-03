@@ -84,7 +84,7 @@ export class AccountComponent {
                 this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
                   response => {
                     console.log('Upload successful!', response);
-                    if (localStorage) {
+                    if (typeof localStorage !== undefined) {
                       localStorage.setItem('UserID', String(userID * 2));
                       localStorage.setItem('UserName', String(this.name));
                     }
@@ -100,11 +100,16 @@ export class AccountComponent {
     }
   }
 
-  getUserID() {
-    let usID = localStorage.getItem('UserID')
-    let UsNa = localStorage.getItem('UserName')
+  usID: any | null = null;
+  UsNa: any | null = null;
 
-    return usID !== null && UsNa !== null;
+  getUserID() {
+    if (localStorage) {
+      this.usID = localStorage.getItem('UserID')
+      this.UsNa = localStorage.getItem('UserName')
+    }
+
+    return this.usID !== null && this.UsNa !== null;
   }
 
   onEnter() {
@@ -112,9 +117,10 @@ export class AccountComponent {
       response => {
         if (response[0].password === this.enterPass) {
           let userID = response[0].User_ID
-          localStorage.setItem('UserID', String(userID*2));
-          localStorage.setItem('UserName', String(this.enterName));
-
+          if (localStorage) {
+            localStorage.setItem('UserID', String(userID*2));
+            localStorage.setItem('UserName', String(this.enterName));
+          }
         } else {
           this.errorMessage = 'Неверный пароль';
           setTimeout( () => {
@@ -133,10 +139,12 @@ export class AccountComponent {
   userAvatar: string | ArrayBuffer | null = null;
   userName: string | null = null;
   userVideos: any[] = []
-
+  usNa: any | null = null;
   constructor() {
-    let usNa = localStorage.getItem('UserName')
-      this.VideosFetchService.enterUser(String(usNa)).subscribe(
+    if (typeof localStorage !== 'undefined') {
+      this.usNa = localStorage.getItem('UserName')
+    }
+      this.VideosFetchService.enterUser(String(this.usNa)).subscribe(
         response => {
           this.userData = response[0];
           if (response[0].header && response[0].header.startsWith('http://127.0.0.1:8000/')) {
@@ -157,6 +165,8 @@ export class AccountComponent {
   }
 
   exitAccount() {
-    localStorage.clear()
+    if (localStorage) {
+      localStorage.clear()
+    }
   }
 }
