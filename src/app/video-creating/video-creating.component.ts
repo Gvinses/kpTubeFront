@@ -88,19 +88,24 @@ export class VideoCreatingComponent implements OnInit {
   uploadProgress = 0;
   uploadSub: Subscription | null = null;
   errorMessage: string | null = '1';
-
+  nameLS: any | null = null
+  ownerLS: any | null = null
   onSubmit(): void {
     const videoID = Number(new Date());
     console.log(videoID);
 
     if (this.selectedFile && this.selectedPreview) {
       this.loading = true;
-      const owner = String(localStorage.getItem('UserName'));
+      if (localStorage) {
+        this.ownerLS = String(localStorage.getItem('UserName'));
+      }
       this.isButtonDisabled = true;
 
       console.log('Upload Started');
-
-      let name = localStorage.getItem('UserName');
+    
+      if (localStorage) {
+        this.nameLS = localStorage.getItem('UserName');
+      }
       if (name !== null) {
         this.videoUploadService.enterUser(String(name)).subscribe(
           userResponse => {
@@ -111,7 +116,7 @@ export class VideoCreatingComponent implements OnInit {
                   this.name,
                   this.description,
                   this.selectedPreview,
-                  owner,
+                  this.ownerLS,
                   this.choosedCategory
                 ).subscribe(event => {
                   if (event.type === HttpEventType.UploadProgress) {
