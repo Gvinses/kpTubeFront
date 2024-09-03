@@ -96,14 +96,14 @@ export class VideoCreatingComponent implements OnInit {
 
     if (this.selectedFile && this.selectedPreview) {
       this.loading = true;
-      if (localStorage) {
+      if (typeof localStorage !== 'undefined') {
         this.ownerLS = String(localStorage.getItem('UserName'));
       }
       this.isButtonDisabled = true;
 
       console.log('Upload Started');
     
-      if (localStorage) {
+      if (typeof localStorage !== 'undefined') {
         this.nameLS = localStorage.getItem('UserName');
       }
       if (name !== null) {
