@@ -1,187 +1,132 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-left: 140px; }
-  .container .HaveAnAccount {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    width: 100%;
-    height: 100vh; }
-    .container .HaveAnAccount .userInfo {
-      width: 100%;
-      height: 30vh; }
-      .container .HaveAnAccount .userInfo .header {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        height: 130%;
-        position: relative;
-        overflow: hidden; }
-        .container .HaveAnAccount .userInfo .header img {
-          min-width: 100%;
-          min-height: 100%;
-          object-fit: revert; }
-      .container .HaveAnAccount .userInfo .avatar {
-        display: flex;
-        width: 160px;
-        height: 160px;
-        position: relative;
-        bottom: 50px;
-        left: 50px;
-        border-radius: 50%; }
-        .container .HaveAnAccount .userInfo .avatar img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain; }
-      .container .HaveAnAccount .userInfo .userName {
-        position: relative;
-        top: -30px;
-        left: 25px; }
-      .container .HaveAnAccount .userInfo .exitAccount {
-        position: relative;
-        top: -230px;
-        float: right; }
-        .container .HaveAnAccount .userInfo .exitAccount button {
-          padding: 13px;
-          border-radius: 15px;
-          outline: none;
-          border: none;
-          margin-right: 30px; }
-  .container .dontHaveAnAccount {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; }
-    .container .dontHaveAnAccount .interactive {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px; }
-      .container .dontHaveAnAccount .interactive .enter,
-      .container .dontHaveAnAccount .interactive .register {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center; }
-        .container .dontHaveAnAccount .interactive .enter .enterForm,
-        .container .dontHaveAnAccount .interactive .enter .registerForm,
-        .container .dontHaveAnAccount .interactive .register .enterForm,
-        .container .dontHaveAnAccount .interactive .register .registerForm {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          width: 200px;
-          overflow: hidden; }
-          .container .dontHaveAnAccount .interactive .enter .enterForm .namePart,
-          .container .dontHaveAnAccount .interactive .enter .enterForm .passPart,
-          .container .dontHaveAnAccount .interactive .enter .enterForm .emailPart,
-          .container .dontHaveAnAccount .interactive .enter .enterForm .avatarPart,
-          .container .dontHaveAnAccount .interactive .enter .enterForm .headerPart,
-          .container .dontHaveAnAccount .interactive .enter .registerForm .namePart,
-          .container .dontHaveAnAccount .interactive .enter .registerForm .passPart,
-          .container .dontHaveAnAccount .interactive .enter .registerForm .emailPart,
-          .container .dontHaveAnAccount .interactive .enter .registerForm .avatarPart,
-          .container .dontHaveAnAccount .interactive .enter .registerForm .headerPart,
-          .container .dontHaveAnAccount .interactive .register .enterForm .namePart,
-          .container .dontHaveAnAccount .interactive .register .enterForm .passPart,
-          .container .dontHaveAnAccount .interactive .register .enterForm .emailPart,
-          .container .dontHaveAnAccount .interactive .register .enterForm .avatarPart,
-          .container .dontHaveAnAccount .interactive .register .enterForm .headerPart,
-          .container .dontHaveAnAccount .interactive .register .registerForm .namePart,
-          .container .dontHaveAnAccount .interactive .register .registerForm .passPart,
-          .container .dontHaveAnAccount .interactive .register .registerForm .emailPart,
-          .container .dontHaveAnAccount .interactive .register .registerForm .avatarPart,
-          .container .dontHaveAnAccount .interactive .register .registerForm .headerPart {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center; }
-            .container .dontHaveAnAccount .interactive .enter .enterForm .namePart input,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .passPart input,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .emailPart input,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .avatarPart input,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .headerPart input,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .namePart input,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .passPart input,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .emailPart input,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .avatarPart input,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .headerPart input,
-            .container .dontHaveAnAccount .interactive .register .enterForm .namePart input,
-            .container .dontHaveAnAccount .interactive .register .enterForm .passPart input,
-            .container .dontHaveAnAccount .interactive .register .enterForm .emailPart input,
-            .container .dontHaveAnAccount .interactive .register .enterForm .avatarPart input,
-            .container .dontHaveAnAccount .interactive .register .enterForm .headerPart input,
-            .container .dontHaveAnAccount .interactive .register .registerForm .namePart input,
-            .container .dontHaveAnAccount .interactive .register .registerForm .passPart input,
-            .container .dontHaveAnAccount .interactive .register .registerForm .emailPart input,
-            .container .dontHaveAnAccount .interactive .register .registerForm .avatarPart input,
-            .container .dontHaveAnAccount .interactive .register .registerForm .headerPart input {
-              width: 200px; }
-            .container .dontHaveAnAccount .interactive .enter .enterForm .namePart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .passPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .emailPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .avatarPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .enterForm .headerPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .namePart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .passPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .emailPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .avatarPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .enter .registerForm .headerPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .enterForm .namePart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .enterForm .passPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .enterForm .emailPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .enterForm .avatarPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .enterForm .headerPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .registerForm .namePart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .registerForm .passPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .registerForm .emailPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .registerForm .avatarPart .haveAvatar .avatar,
-            .container .dontHaveAnAccount .interactive .register .registerForm .headerPart .haveAvatar .avatar {
-              width: 100px;
-              height: 100px; }
-              .container .dontHaveAnAccount .interactive .enter .enterForm .namePart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .enterForm .passPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .enterForm .emailPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .enterForm .avatarPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .enterForm .headerPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .registerForm .namePart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .registerForm .passPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .registerForm .emailPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .registerForm .avatarPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .enter .registerForm .headerPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .enterForm .namePart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .enterForm .passPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .enterForm .emailPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .enterForm .avatarPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .enterForm .headerPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .registerForm .namePart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .registerForm .passPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .registerForm .emailPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .registerForm .avatarPart .haveAvatar .avatar img,
-              .container .dontHaveAnAccount .interactive .register .registerForm .headerPart .haveAvatar .avatar img {
-                width: 100px;
-                height: 100px;
-                object-fit: contain; }
+.container
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  margin-left: 140px
+
+  .HaveAnAccount
+    display: flex
+    flex-direction: column
+    border: 2px solid black
+    width: 100%
+    height: 100vh
+
+    .userInfo
+      width: 100%
+      height: 30vh
+
+      .header
+        display: flex
+        justify-content: center
+        width: 100%
+        height: 130%
+        position: relative
+        overflow: hidden
+
+        img
+          min-width: 100%
+          min-height: 100%
+          object-fit: revert
+
+      .avatar
+        display: flex
+        width: 160px
+        height: 160px
+        position: relative
+        bottom: 50px
+        left: 50px
+        border-radius: 50%
+
+        img
+          width: 100%
+          height: 100%
+          object-fit: contain
+
+      .userName
+        position: relative
+        top: -30px
+        left: 25px
+
+      .exitAccount
+        position: relative
+        top: -230px
+        float: right
+
+        button
+          padding: 13px
+          border-radius: 15px
+          outline: none
+          border: none
+          margin-right: 30px
+
+  .dontHaveAnAccount
+    display: flex
+    flex-direction: column
+    gap: 20px
+
+    .interactive
+      display: grid
+      grid-template-columns: 1fr 1fr
+      gap: 20px
+
+      .enter,  // header
+      .register
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+
+        .enterForm,
+        .registerForm
+          display: flex
+          flex-direction: column
+          align-items: center
+          justify-content: center
+          width: 200px
+          overflow: hidden
+
+          .namePart,
+          .passPart,
+          .emailPart,
+          .avatarPart,
+          .headerPart
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+
+            input
+              width: 200px
+
+            .haveAvatar
+              .avatar
+                width: 100px
+                height: 100px
+
+                img
+                  width: 100px
+                  height: 100px
+                  object-fit: contain
 
 .submitButton,
-.enterSubmit {
-  width: 300px; }
+.enterSubmit
+  width: 300px
 
-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%; }
-  label span {
-    display: flex;
-    justify-content: center;
-    padding: 4px 0;
-    border-radius: 15px;
-    width: 200px;
-    background: black; }
+label
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  width: 100%
 
-.errorMessage {
-  position: relative; }
+  span
+    display: flex
+    justify-content: center
+    padding: 4px 0
+    border-radius: 15px
+    width: 200px
+    background: black
+
+.errorMessage
+  position: relative
