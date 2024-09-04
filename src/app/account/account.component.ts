@@ -89,7 +89,8 @@ export class AccountComponent implements OnInit {
                   response => {
                     console.log('Upload successful!', response);
                     if (typeof localStorage !== undefined) {
-                      localStorage.setItem('UserID', String(userID * 2));
+                      localStorage.clear()
+                      localStorage.setItem('UserID', String(userID));
                       localStorage.setItem('UserName', String(this.name));
                     }
                   },
@@ -122,6 +123,7 @@ export class AccountComponent implements OnInit {
         if (response[0].password === this.enterPass) {
           let userID = response[0].User_ID
           if (typeof localStorage !== 'undefined') {
+            localStorage.clear()
             localStorage.setItem('UserID', String(userID*2));
             localStorage.setItem('UserName', String(this.enterName));
           }

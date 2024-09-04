@@ -82,12 +82,11 @@ export class VideoCreatingComponent implements OnInit {
     console.log('Selected Category ID:', this.choosedCategory);
   }
 
-  progress: number = 0;
   loading: boolean = false;
   isButtonDisabled: boolean = false;
   uploadProgress = 0;
   uploadSub: Subscription | null = null;
-  errorMessage: string | null = '1';
+  errorMessage: string | null = null;
   nameLS: any | null = null
   ownerLS: any | null = null
   onSubmit(): void {
@@ -95,21 +94,22 @@ export class VideoCreatingComponent implements OnInit {
     console.log(videoID);
 
     if (this.selectedFile && this.selectedPreview) {
-      this.loading = true;
-      if (typeof localStorage !== 'undefined') {
-        this.ownerLS = String(localStorage.getItem('UserName'));
-      }
-      this.isButtonDisabled = true;
-
-      console.log('Upload Started');
-    
       if (typeof localStorage !== 'undefined') {
         this.nameLS = localStorage.getItem('UserName');
       }
       if (name !== null) {
-        this.videoUploadService.enterUser(String(name)).subscribe(
+        this.videoUploadService.enterUser(String(this.nameLS)).subscribe(
           userResponse => {
+            console.log(userResponse[0])
             if (userResponse[0].isEmailVerified === true) {
+              this.loading = true;
+              if (typeof localStorage !== 'undefined') {
+                this.ownerLS = String(localStorage.getItem('UserName'));
+              }
+              this.isButtonDisabled = true;
+
+              console.log('Upload Started');
+
               if (this.selectedFile && this.selectedPreview) {
                 this.uploadSub = this.videoUploadService.uploadVideo(
                   this.selectedFile,

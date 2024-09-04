@@ -10,7 +10,7 @@ export class VideosFetchService {
 
   apiUrl = 'https://kringeproduction.ru/videos/';
   account = 'https://kringeproduction.ru/users/';
-  category = 'https://kringeproduction.ru/categories';
+  category = 'https://kringeproduction.ru/categories/';
 
   http = inject(HttpClient)
 
