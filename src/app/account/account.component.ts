@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {VideosFetchService} from "../videos-fetch.service";
 import {NgIf} from "@angular/common";
@@ -14,7 +14,7 @@ import {response} from "express";
   templateUrl: './account.component.html',
   styleUrl: './account.component.sass'
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
 
   name: string = '';
@@ -29,6 +29,10 @@ export class AccountComponent {
   enterPass: string = '';
 
   errorMessage: string | null = 'Войдите или Зарегистрируйтесь';
+
+  ngOnInit(): void {
+    this.starter()
+  }
 
   avatarCreate(event: any): void  {
     if (event.target.files.length > 0) {
@@ -140,17 +144,18 @@ export class AccountComponent {
   userName: string | null = null;
   userVideos: any[] = []
   usNa: any | null = null;
-  constructor() {
+
+  starter() {
     if (typeof localStorage !== 'undefined') {
       this.usNa = localStorage.getItem('UserName')
     }
       this.VideosFetchService.enterUser(String(this.usNa)).subscribe(
         response => {
           this.userData = response[0];
-          console.log(this.userData);
           if (response[0].header.startsWith('http://127.0.0.1:8000/')) {
             response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
             this.userHeader = response[0].header;
+            console.log(response[0].header)
           }
 
 
@@ -165,6 +170,7 @@ export class AccountComponent {
         }
       )
   }
+
 
   exitAccount() {
     if (typeof localStorage !== 'undefined') {
