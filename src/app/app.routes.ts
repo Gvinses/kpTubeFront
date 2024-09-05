@@ -5,6 +5,8 @@ import {VideoCreatingComponent} from "./video-creating/video-creating.component"
 import {HomeComponent} from "./home/home.component";
 import {VideoComponent} from "./video/video.component";
 import {OtherAccountComponent} from "./other-account/other-account.component";
+import {KpMusicComponent} from "./kp-music/kp-music.component";
+import {MusicCreatingComponent} from "./music-creating/music-creating.component";
 
 export const routes: Routes = [
   {
@@ -24,5 +26,13 @@ export const routes: Routes = [
   {
     path: 'account/:User_ID',
     component: OtherAccountComponent
+  },
+  {
+    path: 'KPmusic',
+    component: KpMusicComponent
+  },
+  {
+    path: 'KPmusic/creating',
+    component: MusicCreatingComponent
   },
 ];

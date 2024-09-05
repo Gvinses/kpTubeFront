@@ -92,6 +92,7 @@ export class AccountComponent implements OnInit {
                       localStorage.clear()
                       localStorage.setItem('UserID', String(userID));
                       localStorage.setItem('UserName', String(this.name));
+                      location.reload()
                     }
                   },
                   error => {
@@ -126,6 +127,7 @@ export class AccountComponent implements OnInit {
             localStorage.clear()
             localStorage.setItem('UserID', String(userID*2));
             localStorage.setItem('UserName', String(this.enterName));
+            location.reload()
           }
         } else {
           this.errorMessage = 'Неверный пароль';

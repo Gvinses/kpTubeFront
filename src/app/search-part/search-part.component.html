@@ -7,8 +7,13 @@
       <input type="text">
     </div>
     <div class="account">
-      <button><a href="/creating">Видео</a></button>
-      <button><a href="/account">Аккаунт</a></button>
+      <button><a href="/creating"><img src="newVideo.svg"></a></button>
+      <button><a href="/KPmusic/creating"><img src="NewMusic.svg"></a></button>
+      @if (isLogin()) {
+        <button class="userAvaterButton"><a href="/account"><img [src]="userAvatar"></a></button>
+      } @else {
+        <button><a href="/account">Аккаунт</a></button>
+      }
     </div>
   </div>
 </nav>

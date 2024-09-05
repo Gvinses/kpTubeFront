@@ -1,0 +1,47 @@
+.carousel
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  overflow: hidden
+
+.track
+  display: flex
+  transition: transform 0.5s ease
+
+.track-item
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  flex: 0 0 100%
+  text-align: center
+  opacity: 0.5
+  transition: opacity 0.5s ease
+
+  &.active
+    opacity: 1
+    display: flex
+    flex-direction: column
+
+  .audio
+    margin-top: 30px
+    width: 50%
+  img
+    max-width: 500px
+    height: auto
+
+.audioContent
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+.controls
+  display: flex
+  justify-content: center
+  gap: 10px
+  button
+    padding: 20px
+    border-radius: 35px
+    outline: none
+    border: none

@@ -1,0 +1,19 @@
+<div class="audioContent">
+  <div class="carousel">
+    <div class="track" [style.transform]="getTransform()">
+      <div
+        *ngFor="let track of tracks; let i = index"
+        class="track-item"
+        [class.active]="i === currentTrackIndex"
+      >
+        <img [src]="track.image" [style.opacity]="i === currentTrackIndex ? 1 : 0.5" />
+        <audio class="audio" #audio controls [src]="track.src" (play)="onPlay(i)"></audio>
+        <div class="description">{{ track.description }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button (click)="prevTrack()">Previous</button>
+    <button (click)="nextTrack()">Next</button>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+.form
+  display: grid
+  grid-template-columns: 3fr auto
+  justify-content: center
+  align-items: center
+  flex-direction: column
+
+  .file
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    margin-left: 130px
+    border: 2px solid black
+
+    #fileUploadLabel
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+      padding: 50px 0
+      width: 100%
+      cursor: pointer
+
+      video
+        max-width: 70%
+        max-height: 70%
+        object-fit: contain
+
+  textarea
+    resize: none
+    width: 273px
+    padding-left: 10px
+
+  .info
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 10px
+    overflow: hidden
+    width: 270px
+
+    label
+      position: relative
+      top: 10px
+      left: -70px
+      z-index: 2
+      transition: 1s
+
+    #nameText,
+    #descriptionText
+      resize: none
+
+    .upload-label
+      cursor: pointer
+      position: relative
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+      left: 3px
+      width: 150%
+
+      p
+        position: relative
+        top: 10px
+        left: -70px
+        z-index: 2
+
+      .upload-container
+        border-radius: 4px
+        padding: 10px
+        text-align: center
+        width: 270px
+        height: 100px
+        display: flex
+        align-items: center
+        justify-content: center
+        background-color: #f9f9f9
+
+        img
+          max-width: 100%
+          max-height: 100%
+          object-fit: contain
+
+    .uploadButt
+      padding: 10px 0
+      width: 300px
+
+  select
+    padding: 10px 0
+    width: 273px
+
+.popup
+  color: black
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  padding: 20px
+  background-color: white
+  border: 1px solid #ccc
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+
+@media (max-width: 768px)
+  .form
+    padding: 10px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+    .file
+      margin-left: 0
+      width: 100%
+
+    textarea,
+    select,
+    .info
+      width: 70%
+
+    .upload-label
+      width: 100%
+
+      .upload-container
+        width: 100%
+
+
+@media (max-width: 480px)
+  .form
+    .file #fileUploadLabel
+      padding: 20px 0
+
+    .info label,
+    .upload-label p
+      left: 0
+      text-align: center

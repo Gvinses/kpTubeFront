@@ -15,16 +15,24 @@
   .account
     display: flex
     justify-content: center
-    align-items: center
+    align-items: baseline
     gap: 10px
-    order: 1
     position: fixed
-    top: 15px
+    top: 16px
     right: 10px
     button
-      padding: 7px
+      height: 100%
+      object-fit: cover
       outline: none
       border: none
+      background: none
+      img
+        width: 25px
+        height: 25px
+        object-fit: scale-down
+
+a
+  text-decoration: none
 
 @media (max-width: 950px)
   .search
