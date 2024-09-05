@@ -21,24 +21,25 @@
   .account
     display: flex
     justify-content: center
-    align-items: baseline
+    align-items: center
     gap: 10px
+
     position: fixed
     top: 16px
     right: 10px
+
     button
-      height: 100%
-      object-fit: cover
       outline: none
       border: none
       background: none
-      img
-        width: 25px
-        height: 25px
-        object-fit: scale-down
-
-a
-  text-decoration: none
+      cursor: pointer
+      a
+        text-decoration: none
+        display: flex
+        align-items: center
+        img
+          width: 25px
+          height: 25px
 
 @media (max-width: 950px)
   .search
