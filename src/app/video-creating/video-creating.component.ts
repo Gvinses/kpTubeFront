@@ -89,6 +89,7 @@ export class VideoCreatingComponent implements OnInit {
   errorMessage: string | null = null;
   nameLS: any | null = null
   ownerLS: any | null = null
+
   onSubmit(): void {
     const videoID = Number(new Date());
     console.log(videoID);

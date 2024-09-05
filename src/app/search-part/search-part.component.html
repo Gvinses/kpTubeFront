@@ -7,12 +7,12 @@
       <input type="text">
     </div>
     <div class="account">
-      <button><a href="/creating"><img src="newVideo.svg"></a></button>
-      <button><a href="/KPmusic/Creating"><img src="NewMusic.svg"></a></button>
+      <button><a routerLink="/creating"><img src="newVideo.svg"></a></button>
+      <button><a routerLink="/KPmusic/Creating"><img src="NewMusic.svg"></a></button>
       @if (isLogin()) {
-        <button class="userAvaterButton"><a href="/account"><img [src]="userAvatar"></a></button>
+        <button class="userAvaterButton"><a routerLink="/account"><img [src]="userAvatar"></a></button>
       } @else {
-        <button><a href="/account">Аккаунт</a></button>
+        <button><a routerLink="/account">Аккаунт</a></button>
       }
     </div>
   </div>

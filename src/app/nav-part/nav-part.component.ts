@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import { trigger, transition, style, animate } from '@angular/animations';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-nav-part',
   standalone: true,
   imports: [
     NgIf,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './nav-part.component.html',
   styleUrl: './nav-part.component.sass',
