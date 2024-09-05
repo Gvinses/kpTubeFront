@@ -4,7 +4,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {MusicFetchService} from "../music-fetch.service";
 
 @Component({
-  selector: 'app-video-part',
+  selector: 'app-music-part',
   standalone: true,
   imports: [
     NgForOf,

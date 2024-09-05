@@ -9,7 +9,7 @@ import {MusicFetchService} from "../music-fetch.service";
 import {VideosFetchService} from "../videos-fetch.service";
 
 @Component({
-  selector: 'app-video-creating',
+  selector: 'app-music-creating',
   standalone: true,
   imports: [
     FormsModule,
