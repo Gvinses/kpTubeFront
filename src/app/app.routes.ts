@@ -32,7 +32,7 @@ export const routes: Routes = [
     component: KpMusicComponent
   },
   {
-    path: 'KPmusicCreating',
+    path: 'KPmusic/Creating',
     component: MusicCreatingComponent
   },
 ];

@@ -162,5 +162,6 @@ export class VideoCreatingComponent implements OnInit {
 
   close() {
     this.errorMessage = null
+    this.router.navigate(['/']);
   }
 }

@@ -50,7 +50,6 @@ export class MusicCreatingComponent {
   }
 
   imageSrc: string | ArrayBuffer | null = null;
-  category: any[] = [];
 
   previewChange(event: any): void {
     if (event.target.files.length > 0) {
@@ -148,5 +147,6 @@ export class MusicCreatingComponent {
 
   close() {
     this.errorMessage = null
+    this.router.navigate(['/']);
   }
 }
