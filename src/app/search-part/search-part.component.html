@@ -4,7 +4,8 @@
 
     </div>
     <div class="search">
-      <input type="text">
+      <button (click)="onEnter()">Search</button>
+      <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" placeholder="Введите запрос" />
     </div>
     <div class="account">
       <button><a routerLink="/creating"><img src="newVideo.svg"></a></button>

@@ -1,20 +1,25 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {VideosFetchService} from "../videos-fetch.service";
 import {response} from "express";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-search-part',
   standalone: true,
-    imports: [
-        RouterLink,
-        RouterLinkActive
-    ],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    FormsModule
+  ],
   templateUrl: './search-part.component.html',
   styleUrl: './search-part.component.sass'
 })
 export class SearchPartComponent implements OnInit{
   userAvatar: string | null = null;
+  userInput: string = '';
+
+  constructor(private router: Router) {}
 
   VideosFetchService = inject(VideosFetchService)
 
@@ -41,5 +46,11 @@ export class SearchPartComponent implements OnInit{
 
   isLogin(): boolean {
     return (localStorage.getItem('UserName') !== null) && (localStorage.getItem('UserID') !== null);
+  }
+
+  onEnter(): void {
+    if (this.userInput.trim()) {
+      this.router.navigate(['/search', this.userInput]);
+    }
   }
 }

@@ -1,0 +1,51 @@
+.videos
+  margin-left: 150px
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  gap: 70px
+
+  .video
+    width: 100%
+    max-width: 300px
+    height: auto
+    aspect-ratio: 16/9
+    // Сохранение соотношения сторон
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    img
+      width: 100%
+      height: 100%
+      object-fit: scale-down
+      border: 2px solid black
+      padding: 5px
+
+    .info
+      position: relative
+      top: 5px
+      text-align: left
+      h5
+        margin: 10px 0 5px
+        font-size: 1.2em
+
+      p
+        margin: 0
+        font-size: 1.1em
+        color: #d5d5d5
+        text-align: left
+
+@media (max-width: 768px)
+  .videos
+    grid-template-columns: repeat(2, 1fr)
+    gap: 30px
+
+@media (max-width: 480px)
+  .videos
+    grid-template-columns: 1fr
+    gap: 20px
+
+  .video
+    max-width: 100%
+    aspect-ratio: auto
+
