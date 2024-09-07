@@ -7,14 +7,21 @@
 
       <div class="videoContent">
         <div class="aboutVideo">
-          <button (click)="toggleInvert()">
-            <img class="likeImg" [style.filter]="imageFilter" src="image.png">
-            <p>{{videoLikes}}</p>
-          </button>
+
           <details class="aboutVideoDetails">
             <summary>Описание</summary>
             <p>{{ videoData.description }}</p>
           </details>
+        </div>
+
+        <div class="share">
+          <button (click)="toggleInvert()" class="likeButt">
+            <img class="likeImg" [style.filter]="imageFilter" src="image.png">
+            <p>{{videoLikes}}</p>
+          </button>
+
+          <button (click)="shareInfo()" class="shareButt">Поделиться</button>
+
         </div>
 
         <div class="category">

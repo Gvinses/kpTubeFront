@@ -4,10 +4,10 @@
 
     </div>
     <div class="searchInput" >
-      <div class="form">
+      <label for="inputToSearch" class="form">
         <button (click)="onEnter()">Search</button>
-        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" placeholder="Введите запрос" />
-      </div>
+        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" id="inputToSearch" placeholder="Введите запрос" />
+      </label>
     </div>
     <div class="account">
       <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>

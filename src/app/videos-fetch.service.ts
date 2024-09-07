@@ -25,8 +25,8 @@ export class VideosFetchService {
     return this.http.get<any>(this.apiUrl + '?owner=' + userName)
   }
 
-  getVideo(id: number) {
-    return this.http.get(this.apiUrl + '/' + id)
+  getVideo(Video_Id: string) {
+    return this.http.get(this.apiUrl + '?Video_ID=' + Video_Id)
   }
 
   getCategories(): any {
@@ -92,6 +92,16 @@ export class VideosFetchService {
       "email": email,
       "password": password,
       "liked": liked
+    }
+    return this.http.put(this.account + USID + '/', returnedOBJ)
+  }
+
+  videoInfoToUser(USID: number, name: string, email: string, password: string, videos: string) {
+    let returnedOBJ = {
+      "name": name,
+      "email": email,
+      "password": password,
+      "history": videos
     }
     return this.http.put(this.account + USID + '/', returnedOBJ)
   }

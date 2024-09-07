@@ -8,6 +8,7 @@ import {OtherAccountComponent} from "./other-account/other-account.component";
 import {KpMusicComponent} from "./kp-music/kp-music.component";
 import {MusicCreatingComponent} from "./music-creating/music-creating.component";
 import {SearchResultsComponent} from "./searchResults/searchResults.component";
+import {HistoryComponent} from "./history/history.component";
 
 export const routes: Routes = [
   {
@@ -39,5 +40,9 @@ export const routes: Routes = [
   {
     path: 'search/:userSearch',
     component: SearchResultsComponent
+  },
+  {
+    path: 'history',
+    component: HistoryComponent
   },
 ];

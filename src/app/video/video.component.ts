@@ -39,6 +39,7 @@ export class VideoComponent implements OnInit {
   userEmail: string | null = null
   userPassword: string | null = null
   INUSID: number = 0
+  VideosHistory: string | any = ''
 
   constructor(
     private route: ActivatedRoute,
@@ -64,7 +65,8 @@ export class VideoComponent implements OnInit {
         this.userEmail = data[0].email;
         this.userPassword = data[0].password;
         this.INUSID = data[0].id;
-        console.log(this.userLikes)
+        this.VideosHistory = data[0].videos;
+        this.addToUserHistory()
         if (this.userLikes.includes(this.videoId)) {
           console.log('includes')
           this.imageFilter = 'invert(1)'
@@ -109,6 +111,21 @@ export class VideoComponent implements OnInit {
   }
 
   imageFilter = 'invert(0)'
+
+  addToUserHistory() {
+    let videosArr = this.VideosHistory.split(',')
+    videosArr.push(String(this.videoId))
+    videosArr.join(',')
+
+    console.log(videosArr)
+    console.log(this.INUSID)
+
+    this.VideosFetchService.videoInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(videosArr)).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      }
+    )
+  }
 
   toggleInvert(): void {
     this.imageFilter = this.imageFilter === 'invert(0)' ? 'invert(1)' : 'invert(0)';
@@ -173,5 +190,19 @@ export class VideoComponent implements OnInit {
 
   cleaner() {
     this.userComment = null
+  }
+
+  shareData = {
+    title: "KPtube Video",
+    text: this.videoData.name,
+    url: '',
+  };
+
+  async shareInfo() {
+    try {
+      this.shareData.url = `https://main--imaginative-kheer-6bc042.netlify.app/video/${this.videoId}`
+      await navigator.share(this.shareData);
+    } catch (err) {
+    }
   }
 }
