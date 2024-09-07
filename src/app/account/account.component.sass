@@ -8,7 +8,6 @@
   .HaveAnAccount
     display: flex
     flex-direction: column
-    border: 2px solid black
     width: 100%
     height: 100vh
 
@@ -130,3 +129,41 @@ label
 
 .errorMessage
   position: relative
+
+.userVideos
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  margin-top: 300px
+  margin-left: 20px
+
+  .video
+    width: 100%
+    max-width: 300px
+    height: auto
+    aspect-ratio: 16/9
+    // Сохранение соотношения сторон
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    img
+      width: 100%
+      height: 100%
+      object-fit: scale-down
+      border: 2px solid black
+      padding: 5px
+
+    .info
+      position: relative
+      top: 5px
+      text-align: left
+      h5
+        margin: 10px 0 5px
+        font-size: 1.2em
+
+      p
+        margin: 0
+        font-size: 1.1em
+        color: #d5d5d5
+        text-align: left
+

@@ -14,6 +14,20 @@
             <button (click)="exitAccount()" class="exitAccountButt">Выйти из аккаунта</button>
           </div>
         </div>
+        <div class="userVideos">
+          @for (video of userVideos; track video) {
+            <div class="video" [routerLink]="['/video', video.Video_ID]">
+              <img src="{{video.preview}}" alt="{{video.preview}}">
+              <div class="info">
+                <h5>{{video.name}}</h5>
+              </div>
+            </div>
+          } @empty {
+            <div class="noVideo">
+              <h1>Тут нет видео :(</h1>
+            </div>
+          }
+        </div>
       </div>
       <div class="dontHaveAnAccount" *ngIf="!getUserID()">
         <div class="errorMessage" *ngIf="errorMessage">

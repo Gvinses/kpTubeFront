@@ -3,13 +3,15 @@ import {FormsModule} from "@angular/forms";
 import {VideosFetchService} from "../videos-fetch.service";
 import {NgIf} from "@angular/common";
 import {response} from "express";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-account',
   standalone: true,
   imports: [
     FormsModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './account.component.html',
   styleUrl: './account.component.sass'
@@ -159,7 +161,6 @@ export class AccountComponent implements OnInit {
           if (response[0].header.startsWith('http://127.0.0.1:8000/')) {
             response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
             this.userHeader = response[0].header;
-            console.log(response[0].header)
           }
 
 
@@ -170,7 +171,18 @@ export class AccountComponent implements OnInit {
 
           this.userName = response[0].name
 
-          this.userVideos = response[0].videos
+          this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
+            data.forEach((video: any) => {
+              if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
+                video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+              }
+              if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
+                video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+              }
+            })
+            this.userVideos = data
+            console.log(data)
+          });
         }
       )
   }

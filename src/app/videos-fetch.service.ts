@@ -76,6 +76,29 @@ export class VideosFetchService {
   updateVideo(video: any) {
     return this.http.put(this.apiUrl + '/' + video.id, video);
   }
+
+  likeToVideo(DBID: number, videoName: string, likes: number) {
+    let returnedOBJ = {
+      "name": videoName,
+      "likes": likes
+    }
+    return this.http.put(this.apiUrl + DBID + '/', returnedOBJ)
+  }
+
+  likeInfoToUser(USID: number, name: string, email: string, password: string, liked: string) {
+    let returnedOBJ = {
+      "name": name,
+      "email": email,
+      "password": password,
+      "liked": liked
+    }
+    return this.http.put(this.account + USID + '/', returnedOBJ)
+  }
+
+  // "name": "Gvins",
+  // "email": "timurkhen10@gmail.com",
+  // "password": "QwertyGvins123",
+  // "liked": "1725194085314"
   //
   // updateLikes(likes: number, video: any) {
   //   console.log(video)

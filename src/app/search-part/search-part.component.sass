@@ -1,27 +1,68 @@
 .search
-  display: grid
-  grid-template-columns: 140px 1700px auto
-  margin-bottom: 10px
-  align-items: center
+  background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0)
+  padding: 0px 16px
+  height: 55.9896px
+  display: flex
+  justify-content: center
   .searchInput
     display: flex
-    button
-      padding: 15px 15px
-      border-radius: 20px
-      outline: none
-      border: none
-      background: white
-    input
-      padding: 15px 0
-      border-radius: 20px
-      outline: none
-      background: white
-      border: 2px solid white
-      width: 100%
+    background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0)
+    align-items: center
+    flex: 0 1 732px
+    flex-direction: row
+    min-width: 0px
+    justify-content: normal
+
+    .form
+      background: none 0% 0% / auto repeat scroll padding-box border-box rgb(18, 18, 18)
+      margin: 0px 0px 0px 32px
+      padding: 0px 4px 0px 16px
+      align-items: center
+      border-radius: 40px
+      box-shadow: rgba(0, 0, 0, 0) 0px 1px 2px 0px inset
+      caret-color: rgb(241, 241, 241)
+      color: rgba(255, 255, 255, 0.88)
+      display: flex
+      flex-direction: row
+      position: relative
+      border: 1.1px solid rgb(48, 48, 48)
+      button
+        padding: 15px 15px
+        border-radius: 20px
+        outline: none
+        border: none
+        display: flex
+        float: left
+        justify-content: flex-start
+        color: rgba(255, 255, 255, 0.88)
+        appearance: none
+        background-color: rgba(0, 0, 0, 0)
+        cursor: pointer
+        position: relative
+        right: 7.5px
+      input
+        box-sizing: border-box
+        color: rgba(255, 255, 255, 0.88)
+        border: none
+        appearance: none
+        background-color: rgba(0, 0, 0, 0)
+        flex: 1 1
+        font-family: Roboto, Noto, sans-serif
+        font-size: 16px
+        font-weight: 400
+        line-height: 24px
+        max-width: 100%
+        outline: rgba(255, 255, 255, 0.88) none 0px
+        text-align: start
+        width: 482.847px
+        height: 23.9931px
   .account
     display: flex
-    justify-content: center
+    flex-direction: row
+    justify-content: flex-end
+    padding: 5px
     align-items: center
+    flex: 0 0 auto
     gap: 10px
 
     position: fixed
@@ -40,6 +81,8 @@
         img
           width: 25px
           height: 25px
+        .systemIcons
+          filter: invert(1)
 
 @media (max-width: 950px)
   .search

@@ -3,15 +3,17 @@
     <div class="invisible">
 
     </div>
-    <div class="searchInput">
-      <button (click)="onEnter()">Search</button>
-      <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" placeholder="Введите запрос" />
+    <div class="searchInput" >
+      <div class="form">
+        <button (click)="onEnter()">Search</button>
+        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" placeholder="Введите запрос" />
+      </div>
     </div>
     <div class="account">
-      <button><a routerLink="/creating"><img src="newVideo.svg"></a></button>
-      <button><a routerLink="/KPmusic/Creating"><img src="NewMusic.svg"></a></button>
+      <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
+      <button><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
       @if (isLogin()) {
-        <button class="userAvaterButton"><a routerLink="/account"><img [src]="userAvatar"></a></button>
+        <button class="userAvaterButton" routerLink="/account"><a><img [src]="userAvatar"></a></button>
       } @else {
         <button><a routerLink="/account">Аккаунт</a></button>
       }

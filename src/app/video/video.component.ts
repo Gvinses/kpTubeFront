@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {NgClass, NgOptimizedImage, NgStyle} from "@angular/common";
 import {filter} from "rxjs";
 import {VideosFetchService} from "../videos-fetch.service";
+import {response} from "express";
 
 @Component({
   selector: 'app-video',
@@ -27,6 +28,12 @@ export class VideoComponent implements OnInit {
   videoData: any = {};
   comments: any = [];
   isLiked: string | string[] | Set<string> | { [p: string]: any } | null | undefined;
+  INDBID: number = 0
+  videoLikes: number = 0
+  userLikes: string | any = ''
+  userEmail: string | null = null
+  userPassword: string | null = null
+  INUSID: number = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +44,30 @@ export class VideoComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.videoId = +params.get('Video_ID')!;
       this.loadVideoDetails();
+      this.loadUserDetails()
     });
+  }
+  userName: string | null = null
+
+  loadUserDetails(): void {
+    if (localStorage) {
+      this.userName = localStorage.getItem('UserName')
+    }
+    this.VideosFetchService.enterUser(String(this.userName)).subscribe(
+      (data: any) => {
+        this.userLikes = data[0].liked;
+        this.userEmail = data[0].email;
+        this.userPassword = data[0].password;
+        this.INUSID = data[0].id;
+        console.log(this.userLikes)
+        if (this.userLikes.includes(this.videoId)) {
+          console.log('includes')
+          this.imageFilter = 'invert(1)'
+        } else {
+          console.log('not includes')
+        }
+      }
+    )
   }
 
   VideoData: any | null = null
@@ -55,10 +85,11 @@ export class VideoComponent implements OnInit {
         // })
 
         this.VideoData = data[0]
+        this.INDBID = data[0].id
+        this.videoLikes = data[0].likes
         this.VideosFetchService.enterUser(this.videoData.owner).subscribe(
           (data: any) => {
             this.VideoOwnerId = data[0];
-            console.log(this.VideoOwnerId);
           }
         )
       });
@@ -67,17 +98,53 @@ export class VideoComponent implements OnInit {
 
   imageFilter = 'invert(0)'
 
-  // toggleInvert(): void {
-  //   this.imageFilter = this.imageFilter === 'invert(0)' ? 'invert(1)' : 'invert(0)';
-  //   this.VideosFetchService.updateLikes(this.VideoData.likes+1, this.VideoData).subscribe(
-  //     response => {
-  //       console.log('Upload successful!', response);
-  //       this.loadVideoDetails()
-  //     },
-  //     error => {
-  //       console.error('Upload error:', error);
-  //     }
-  //   )
-  // }
+  toggleInvert(): void {
+    this.imageFilter = this.imageFilter === 'invert(0)' ? 'invert(1)' : 'invert(0)';
+
+
+    if (this.imageFilter === 'invert(1)' && !this.userLikes.includes(this.videoId)) {
+      this.videoLikes++
+
+      this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
+        response => {
+          console.log('Upload successful!', response);
+        },
+        error => {
+          console.error('Upload error:', error);
+        }
+      )
+      let likesArr = this.userLikes.split(',')
+      likesArr.push(String(this.videoId))
+      likesArr.join(',')
+
+      this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+        response => {
+          console.log('Upload successful!', response);
+        }
+      )
+
+    } else {
+      this.videoLikes--
+
+      this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
+        response => {
+          console.log('Upload successful!', response);
+        },
+        error => {
+          console.error('Upload error:', error);
+        }
+      )
+      let likesArr = this.userLikes.split(',')
+      console.log(likesArr)
+      likesArr.slice(likesArr.indexOf(this.videoId), 1)
+      likesArr.join(',')
+
+      this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+        response => {
+          console.log('Upload successful!', response);
+        }
+      )
+    }
+  }
   protected readonly filter = filter;
 }

@@ -7,7 +7,7 @@
   width: 120px
   height: 100%
   z-index: 9999
-  background: #444444
+  background: #0f0f0f
   position: fixed
   left: 0
   top: 0
@@ -26,7 +26,7 @@
     z-index: 2
 
     .bar
-      border: 1.1px solid black
+      border: 1.1px solid #ffffff
       border-radius: 90px
       display: block
       width: 30px
@@ -58,8 +58,6 @@
     position: absolute
     top: 50px
     left: 0
-    background-color: white
-    border: 1px solid #ddd
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
     width: 100%
     transition: opacity 0.3s ease
@@ -69,18 +67,23 @@
       list-style: none
       padding: 0
       margin: 0
+      display: flex
+      flex-direction: column
+      gap: 10px
 
       li
+        border: 2px solid white
         padding: 10px
+        border-radius: 15px
+        cursor: pointer
+        transition: 0.3s ease-out
+
+        &:hover
+          background: #616161
 
         a
           text-decoration: none
-          color: #333
-          transition: color 0.3s ease
-
-          &:hover
-            color: #007bff
-            text-decoration: underline
+          color: #ffffff
 
 @media (max-width: 768px)
   .burger-menu
