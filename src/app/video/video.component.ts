@@ -165,6 +165,7 @@ export class VideoComponent implements OnInit {
     this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
       response => {
         console.log('Successful comment', response)
+        this.userComment = null
         this.getComments()
       }
     )
