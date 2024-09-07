@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import { videos } from "../video-part/video-part.component"
 import {HttpClient} from "@angular/common/http";
-import {NgClass, NgOptimizedImage, NgStyle} from "@angular/common";
+import {NgClass, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {filter} from "rxjs";
 import {VideosFetchService} from "../videos-fetch.service";
 import {response} from "express";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-video',
@@ -18,6 +19,9 @@ import {response} from "express";
     NgOptimizedImage,
     NgStyle,
     NgClass,
+    ReactiveFormsModule,
+    FormsModule,
+    NgIf,
   ],
   styleUrls: ['./video.component.sass']
 })
@@ -27,6 +31,7 @@ export class VideoComponent implements OnInit {
   videoId: number | null = null;
   videoData: any = {};
   comments: any = [];
+  howMuchComments: number = 0
   isLiked: string | string[] | Set<string> | { [p: string]: any } | null | undefined;
   INDBID: number = 0
   videoLikes: number = 0
@@ -79,10 +84,7 @@ export class VideoComponent implements OnInit {
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/')
         this.videoData = data[0];
 
-        // this.http.get<any>(`https://kringeproduction.ru/comments?Video_ID=${this.videoId}`).subscribe(commentsData => {
-        //   console.log(commentsData);
-        //   this.comments = commentsData;
-        // })
+        this.getComments()
 
         this.VideoData = data[0]
         this.INDBID = data[0].id
@@ -96,13 +98,23 @@ export class VideoComponent implements OnInit {
     }
   }
 
+  getComments() {
+    this.http.get<any>(`https://kringeproduction.ru/comments/?Video_ID=${this.videoId}`).subscribe(commentsData => {
+      console.log(commentsData);
+      this.comments = commentsData;
+      commentsData.forEach((comment: any) => {
+        this.howMuchComments++
+      })
+    })
+  }
+
   imageFilter = 'invert(0)'
 
   toggleInvert(): void {
     this.imageFilter = this.imageFilter === 'invert(0)' ? 'invert(1)' : 'invert(0)';
 
 
-    if (this.imageFilter === 'invert(1)' && !this.userLikes.includes(this.videoId)) {
+    if (this.imageFilter === 'invert(1)') {
       this.videoLikes++
 
       this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
@@ -147,4 +159,18 @@ export class VideoComponent implements OnInit {
     }
   }
   protected readonly filter = filter;
+  userComment: string | null = null
+
+  commentOnVideo() {
+    this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
+      response => {
+        console.log('Successful comment', response)
+        this.getComments()
+      }
+    )
+  }
+
+  cleaner() {
+    this.userComment = null
+  }
 }

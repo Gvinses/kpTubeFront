@@ -11,6 +11,7 @@ export class VideosFetchService {
   apiUrl = 'https://kringeproduction.ru/videos/';
   account = 'https://kringeproduction.ru/users/';
   category = 'https://kringeproduction.ru/categories/';
+  comment = 'https://kringeproduction.ru/comments/';
 
   http = inject(HttpClient)
 
@@ -93,6 +94,15 @@ export class VideosFetchService {
       "liked": liked
     }
     return this.http.put(this.account + USID + '/', returnedOBJ)
+  }
+
+  createComment(text: string, Video_ID: string, owner: string) {
+    const formData = new FormData();
+    formData.append('text', String(text));
+    formData.append('Video_ID', Video_ID);
+    formData.append('owner', owner);
+
+    return this.http.post(this.comment, formData)
   }
 
   // "name": "Gvins",

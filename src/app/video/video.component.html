@@ -23,17 +23,27 @@
       </div>
     </div>
     <div class="comments">
-      <h2>Комментарии:</h2>
-      @for (comment of comments; track comment) {
-        <div class="comment">
-          <h3>{{comment.owner}}</h3>
-          <p>{{comment.text}}</p>
-<!--          <button (click)="toggleInvert(comment)">-->
-<!--            <img class="likeImg" [style.filter]="imageFilter" src="image.png" alt="Toggle Image">-->
-<!--            <p>{{comment.likes}} лайков</p>-->
-<!--          </button>-->
+      <h2>{{howMuchComments}} комментариев</h2>
+      <div class="commenter">
+        {{userName}}
+        <input class="commentInput" [(ngModel)]="userComment" (keyup.enter)="commentOnVideo()" placeholder="Введите комментарий">
+        <div *ngIf="userComment" class="buttons">
+          <button (click)="cleaner()">Отмена</button>
+          <button class="submitCommentButton" (click)="commentOnVideo()">Оставить комментарий</button>
         </div>
-      }
+      </div>
+      <div class="allComments">
+        @for (comment of comments; track comment) {
+          <div class="comment">
+            <h3>{{comment.owner}}</h3>
+            <p>{{comment.text}}</p>
+  <!--          <button (click)="toggleInvert(comment)">-->
+  <!--            <img class="likeImg" [style.filter]="imageFilter" src="image.png" alt="Toggle Image">-->
+  <!--            <p>{{comment.likes}} лайков</p>-->
+  <!--          </button>-->
+          </div>
+        }
+      </div>
     </div>
   </div>
 </div>
