@@ -2,10 +2,10 @@
       <div class="HaveAnAccount" *ngIf="getUserID()">
         <div class="userInfo">
           <div class="header">
-            <img src="{{userHeader}}">
+            <img src="{{userHeader}}" loading="eager">
           </div>
           <div class="avatar">
-            <img src="{{userAvatar}}">
+            <img src="{{userAvatar}}" loading="eager">
           </div>
           <div class="userName">
             <h1 class="userName">{{userName}}</h1>
@@ -17,7 +17,7 @@
         <div class="userVideos">
           @for (video of userVideos; track video) {
             <div class="video" [routerLink]="['/video', video.Video_ID]">
-              <img src="{{video.preview}}" alt="{{video.preview}}">
+              <img src="{{video.preview}}"  alt="{{video.preview}}">
               <div class="info">
                 <h5>{{video.name}}</h5>
               </div>

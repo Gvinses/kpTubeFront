@@ -32,7 +32,6 @@ export class VideoComponent implements OnInit {
   videoData: any = {};
   comments: any = [];
   howMuchComments: number = 0
-  isLiked: string | string[] | Set<string> | { [p: string]: any } | null | undefined;
   INDBID: number = 0
   videoLikes: number = 0
   userLikes: string | any = ''
@@ -41,6 +40,14 @@ export class VideoComponent implements OnInit {
   INUSID: number = 0
   VideosHistory: string | any = ''
 
+  VideoData: any | null = null
+  VideoOwnerId: any | null = null
+
+  userName: string | null = null
+
+  imageFilter = 'invert(0)'
+
+  userComment: string | null = null
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient
@@ -53,32 +60,31 @@ export class VideoComponent implements OnInit {
       this.loadUserDetails()
     });
   }
-  userName: string | null = null
 
   loadUserDetails(): void {
     if (localStorage) {
       this.userName = localStorage.getItem('UserName')
-    }
-    this.VideosFetchService.enterUser(String(this.userName)).subscribe(
-      (data: any) => {
-        this.userLikes = data[0].liked;
-        this.userEmail = data[0].email;
-        this.userPassword = data[0].password;
-        this.INUSID = data[0].id;
-        this.VideosHistory = data[0].videos;
-        this.addToUserHistory()
-        if (this.userLikes.includes(this.videoId)) {
-          console.log('includes')
-          this.imageFilter = 'invert(1)'
-        } else {
-          console.log('not includes')
+
+      this.VideosFetchService.enterUser(String(this.userName)).subscribe(
+        (data: any) => {
+          this.userLikes = data[0].liked;
+          this.userEmail = data[0].email;
+          this.userPassword = data[0].password;
+          this.INUSID = data[0].id;
+          this.VideosHistory = data[0].history;
+          console.log(data[0])
+          if (this.userLikes.includes(this.videoId)) {
+            console.log('includes')
+            this.imageFilter = 'invert(1)'
+          } else {
+            console.log('not includes')
+          }
+          this.addToUserHistory()
         }
-      }
-    )
+      )
+    }
   }
 
-  VideoData: any | null = null
-  VideoOwnerId: any | null = null
   loadVideoDetails(): void {
     if (this.videoId !== null) {
       this.http.get<any>(`https://kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
@@ -105,22 +111,21 @@ export class VideoComponent implements OnInit {
       console.log(commentsData);
       this.comments = commentsData;
       commentsData.forEach((comment: any) => {
-        this.howMuchComments++
+        this.howMuchComments = Number(this.howMuchComments) + 1
       })
     })
   }
 
-  imageFilter = 'invert(0)'
-
   addToUserHistory() {
-    let videosArr = this.VideosHistory.split(',')
-    videosArr.push(String(this.videoId))
-    videosArr.join(',')
+    let videosArr = this.VideosHistory.split(',');
+    const videoIdIndex = videosArr.indexOf(String(this.videoId));
+    if (videoIdIndex !== -1) {
+      videosArr.splice(videoIdIndex, 1);
+    }
+    videosArr.push(String(this.videoId));
+    const newHistory = videosArr.join(',');
 
-    console.log(videosArr)
-    console.log(this.INUSID)
-
-    this.VideosFetchService.videoInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(videosArr)).subscribe(
+    this.VideosFetchService.videoInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(newHistory)).subscribe(
       response => {
         console.log('Upload successful!', response);
       }
@@ -130,53 +135,57 @@ export class VideoComponent implements OnInit {
   toggleInvert(): void {
     this.imageFilter = this.imageFilter === 'invert(0)' ? 'invert(1)' : 'invert(0)';
 
-
     if (this.imageFilter === 'invert(1)') {
-      this.videoLikes++
-
-      this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-        response => {
-          console.log('Upload successful!', response);
-        },
-        error => {
-          console.error('Upload error:', error);
-        }
-      )
-      let likesArr = this.userLikes.split(',')
-      likesArr.push(String(this.videoId))
-      likesArr.join(',')
-
-      this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-        response => {
-          console.log('Upload successful!', response);
-        }
-      )
-
+      this.addLikeToVideo()
     } else {
-      this.videoLikes--
-
-      this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-        response => {
-          console.log('Upload successful!', response);
-        },
-        error => {
-          console.error('Upload error:', error);
-        }
-      )
-      let likesArr = this.userLikes.split(',')
-      console.log(likesArr)
-      likesArr.slice(likesArr.indexOf(this.videoId), 1)
-      likesArr.join(',')
-
-      this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-        response => {
-          console.log('Upload successful!', response);
-        }
-      )
+      this.removeLikeFromVideo()
     }
   }
+
+  addLikeToVideo() {
+    this.videoLikes++
+
+    this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      },
+      error => {
+        console.error('Upload error:', error);
+      }
+    )
+    let likesArr = this.userLikes.split(',')
+    likesArr.push(String(this.videoId))
+    likesArr.join(',')
+
+    this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      }
+    )
+  }
+  removeLikeFromVideo() {
+    this.videoLikes--
+
+    this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      },
+      error => {
+        console.error('Upload error:', error);
+      }
+    )
+    let likesArr = this.userLikes.split(',')
+    likesArr.slice(likesArr.indexOf(this.videoId), 1)
+    likesArr.join(',')
+
+    this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      }
+    )
+  }
   protected readonly filter = filter;
-  userComment: string | null = null
+
 
   commentOnVideo() {
     this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
@@ -191,6 +200,8 @@ export class VideoComponent implements OnInit {
   cleaner() {
     this.userComment = null
   }
+
+  /// --- sharing DATA --- ///
 
   shareData = {
     title: "KPtube Video",

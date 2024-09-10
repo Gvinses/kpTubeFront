@@ -4,4 +4,9 @@
 
 <router-outlet></router-outlet>
 
-<h1 class="versionOfService">Beta: 1.3</h1>
+<div (click)="copyEmail()" class="helpersButton">
+  <h3>Почта поддержки</h3>
+</div>
+<div *ngIf="copied" class="CopiedInfo" [ngClass]="{'animate': isAnimating}">
+  <h6>Скопировано в буфер обмена</h6>
+</div>

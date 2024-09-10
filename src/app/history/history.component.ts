@@ -49,7 +49,7 @@ export class HistoryComponent implements OnInit  {
             if (oneVideoData[0].preview && oneVideoData[0].preview.startsWith('http://127.0.0.1:8000/')) {
               oneVideoData[0].preview = oneVideoData[0].preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
             }
-            console.log(oneVideoData[0])
+
             this.videos.push(oneVideoData[0])
           })
         }
