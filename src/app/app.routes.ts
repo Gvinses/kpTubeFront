@@ -9,6 +9,7 @@ import {KpMusicComponent} from "./kp-music/kp-music.component";
 import {MusicCreatingComponent} from "./music-creating/music-creating.component";
 import {SearchResultsComponent} from "./searchResults/searchResults.component";
 import {HistoryComponent} from "./history/history.component";
+import {LikedVideosComponent} from "./liked-videos/liked-videos.component";
 
 export const routes: Routes = [
   {
@@ -44,5 +45,9 @@ export const routes: Routes = [
   {
     path: 'history',
     component: HistoryComponent
+  },
+  {
+    path: 'liked',
+    component: LikedVideosComponent
   },
 ];

@@ -4,7 +4,7 @@
   float: left
   align-items: center
   padding: 10px
-  width: 120px
+  width: 200px
   height: 100%
   z-index: 9999
   background: #0f0f0f
@@ -73,11 +73,34 @@
 
       li
         border: 2px solid white
-        padding: 10px
-        width: 80%
+        //padding: 10px
+        //width: 80%
         border-radius: 15px
-        cursor: pointer
+        //cursor: pointer
         transition: 0.3s ease-out
+
+        white-space: nowrap
+        width: 180px
+        height: 40px
+        min-width: 0px
+        padding: 0px 12px
+        display: flex
+        min-height: 40px
+        position: relative
+        background-color: rgba(0, 0, 0, 0)
+        outline: rgb(241, 241, 241) none 0px
+        align-items: center
+        flex-direction: row
+        font-family: Roboto, Noto, sans-serif
+        font-size: 16px
+        font-weight: 400
+        line-height: 24px
+        color: rgb(241, 241, 241)
+        cursor: pointer
+        text-decoration-color: rgb(241, 241, 241)
+        text-decoration-style: solid
+        text-decoration-thickness: auto
+        visibility: visible
 
         &:hover
           background: #616161
