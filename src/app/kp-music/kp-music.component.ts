@@ -1,4 +1,4 @@
-import {Component, ElementRef, inject, QueryList, ViewChildren} from '@angular/core';
+import {Component, ElementRef, inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {MusicFetchService} from "../music-fetch.service";
@@ -15,15 +15,23 @@ import {MusicFetchService} from "../music-fetch.service";
   templateUrl: './kp-music.component.html',
   styleUrl: './kp-music.component.sass'
 })
-export class KpMusicComponent {
+export class KpMusicComponent implements OnInit {
   musicService = inject(MusicFetchService)
+  @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>;
+  currentTrackIndex = 0;
 
   tracks = [
     {title: 'Трэк', artist: 'Gvins', image: 'gg.png', src: 'kp229SoundTrackv2.mp3', description: 'Track 1 transcript' },
     {title: 'Крутой трек', artist: 'KP229', image: 'Logo.jpg', src: 'musicForKP229.mp3', description: 'Track 2 transcript' },
   ];
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit() {
+    this.getMusic()
+  }
+
+  getMusic() {
     this.musicService.getAllMusic().subscribe((data: any) => {
       data.forEach((music: any) => {
         if (music.src && music.src.startsWith('http://127.0.0.1:8000/')) {
@@ -36,9 +44,6 @@ export class KpMusicComponent {
       this.tracks = data
     });
   }
-
-  currentTrackIndex = 0;
-  @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>;
 
   getTransform() {
     return `translateX(-${this.currentTrackIndex * 100}%)`;
@@ -67,4 +72,5 @@ export class KpMusicComponent {
     this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
     this.audioElements.toArray()[this.currentTrackIndex].nativeElement.play();
   }
+
 }
