@@ -60,10 +60,10 @@ export class VideoPartComponent {
     this.postService.getVideos().subscribe((data: any) => {
       data.forEach((video: any) => {
         if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
-          video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
         if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
-          video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
       })
       this.videos = data.reverse()

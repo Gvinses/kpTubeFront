@@ -31,13 +31,13 @@ export class SearchResultsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.search = params.get('userSearch') || '';
       console.log(this.search)
-      this.http.get(`https://kringeproduction.ru/videos/?search=${this.search}`).subscribe((data: any) => {
+      this.http.get(`https://kptube.kringeproduction.ru/videos/?search=${this.search}`).subscribe((data: any) => {
         data.forEach((video: any) => {
           if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
-            video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+            video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
           }
           if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
-            video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+            video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
           }
         })
         this.results = data

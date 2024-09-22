@@ -43,10 +43,10 @@ export class LikedVideosComponent implements OnInit  {
         if (element !== '') {
           this.postService.getVideo(String(element)).subscribe((oneVideoData: any) => {
             if (oneVideoData[0].video && oneVideoData[0].video.startsWith('http://127.0.0.1:8000/')) {
-              oneVideoData[0].video = oneVideoData[0].video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+              oneVideoData[0].video = oneVideoData[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
             }
             if (oneVideoData[0].preview && oneVideoData[0].preview.startsWith('http://127.0.0.1:8000/')) {
-              oneVideoData[0].preview = oneVideoData[0].preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+              oneVideoData[0].preview = oneVideoData[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
             }
 
             this.videos.push(oneVideoData[0])

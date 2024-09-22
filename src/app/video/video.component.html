@@ -15,11 +15,9 @@
         </div>
 
         <div class="share">
-          <button (click)="toggleInvert()" class="likeButt">
-            <img class="likeImg" [style.filter]="imageFilter" src="image.png">
-            <p>{{videoLikes}}</p>
-          </button>
-
+          <div class="stars" id="stars">
+            <div *ngFor="let star of stars" (click)="rate(star)" [style.background]="star.active ? '#E0C24BFF' : '#C5C4C4FF'" class="star"></div>
+          </div>
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
 
         </div>

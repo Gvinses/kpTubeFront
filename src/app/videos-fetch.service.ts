@@ -8,10 +8,10 @@ import {videos} from "./video-part/video-part.component";
 })
 export class VideosFetchService {
 
-  apiUrl = 'https://kringeproduction.ru/videos/';
-  account = 'https://kringeproduction.ru/users/';
-  category = 'https://kringeproduction.ru/categories/';
-  comment = 'https://kringeproduction.ru/comments/';
+  apiUrl = 'https://kptube.kringeproduction.ru/videos/';
+  account = 'https://kptube.kringeproduction.ru/users/';
+  category = 'https://kptube.kringeproduction.ru/categories/';
+  comment = 'https://kptube.kringeproduction.ru/comments/';
 
   http = inject(HttpClient)
 

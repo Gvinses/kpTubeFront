@@ -1,9 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import { videos } from "../video-part/video-part.component"
+import {items, videos} from "../video-part/video-part.component"
 import {HttpClient} from "@angular/common/http";
-import {NgClass, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {filter} from "rxjs";
 import {VideosFetchService} from "../videos-fetch.service";
 import {response} from "express";
@@ -22,6 +22,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     FormsModule,
     NgIf,
+    NgForOf,
   ],
   styleUrls: ['./video.component.sass']
 })
@@ -39,15 +40,21 @@ export class VideoComponent implements OnInit {
   userPassword: string | null = null
   INUSID: number = 0
   VideosHistory: string | any = ''
-
   VideoData: any | null = null
   VideoOwnerId: any | null = null
-
   userName: string | null = null
-
   imageFilter = 'invert(0)'
-
   userComment: string | null = null
+
+  stars = [
+    { id: 1, active: true },
+    { id: 2, active: false },
+    { id: 3, active: false },
+    { id: 4, active: false },
+    { id: 5, active: false }
+  ];
+
+
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient
@@ -87,9 +94,9 @@ export class VideoComponent implements OnInit {
 
   loadVideoDetails(): void {
     if (this.videoId !== null) {
-      this.http.get<any>(`https://kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
-        data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/')
-        data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/')
+      this.http.get<any>(`https://kptube.kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
+        data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+        data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         this.videoData = data[0];
 
         this.getComments()
@@ -107,7 +114,7 @@ export class VideoComponent implements OnInit {
   }
 
   getComments() {
-    this.http.get<any>(`https://kringeproduction.ru/comments/?Video_ID=${this.videoId}`).subscribe(commentsData => {
+    this.http.get<any>(`https://kptube.kringeproduction.ru/comments/?Video_ID=${this.videoId}`).subscribe(commentsData => {
       console.log(commentsData);
       this.comments = commentsData;
       commentsData.forEach((comment: any) => {
@@ -184,8 +191,9 @@ export class VideoComponent implements OnInit {
       }
     )
   }
-  protected readonly filter = filter;
 
+
+  protected readonly filter = filter;
 
   commentOnVideo() {
     this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
@@ -201,19 +209,80 @@ export class VideoComponent implements OnInit {
     this.userComment = null
   }
 
-  /// --- sharing DATA --- ///
-
   shareData = {
     title: "KPtube Video",
     text: this.videoData.name,
     url: '',
   };
-
   async shareInfo() {
     try {
       this.shareData.url = `https://main--imaginative-kheer-6bc042.netlify.app/video/${this.videoId}`
       await navigator.share(this.shareData);
     } catch (err) {
+      console.log(err)
     }
   }
+
+
+  rate(star: any) {
+    this.stars.forEach(item => {
+      item.active = false
+    })
+    console.log(star.id);
+    console.log(this.stars)
+    star.active = !star.active;
+    this.stars.forEach(item => {
+      if (item.id <= star.id) {
+        item.active = star.active;
+      }
+    });
+  }
+
+
+
+  protected readonly items = items;
 }
+
+// addLikeToVideo() {
+//   this.videoLikes++
+//
+//   this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
+//     response => {
+//       console.log('Upload successful!', response);
+//     },
+//     error => {
+//       console.error('Upload error:', error);
+//     }
+//   )
+//   let likesArr = this.userLikes.split(',')
+//   likesArr.push(String(this.videoId))
+//   likesArr.join(',')
+//
+//   this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+//     response => {
+//       console.log('Upload successful!', response);
+//     }
+//   )
+// }
+// removeLikeFromVideo() {
+//   this.videoLikes--
+//
+//   this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
+//     response => {
+//       console.log('Upload successful!', response);
+//     },
+//     error => {
+//       console.error('Upload error:', error);
+//     }
+//   )
+//   let likesArr = this.userLikes.split(',')
+//   likesArr.slice(likesArr.indexOf(this.videoId), 1)
+//   likesArr.join(',')
+//
+//   this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+//     response => {
+//       console.log('Upload successful!', response);
+//     }
+//   )
+// }
+//

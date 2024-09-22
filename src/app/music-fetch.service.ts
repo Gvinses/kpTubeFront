@@ -8,7 +8,7 @@ import {videos} from "./video-part/video-part.component";
 })
 export class MusicFetchService {
 
-  musicUrl = 'https://kringeproduction.ru/music/';
+  musicUrl = 'https://kptube.kringeproduction.ru/music/';
 
   http = inject(HttpClient)
 

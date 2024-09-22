@@ -7,6 +7,7 @@
     width: 70vw
     height: auto
     video
+      border-radius: 15px
       width: 100%
       height: auto
       object-fit: cover
@@ -76,6 +77,23 @@
         position: relative
         top: -35px
         gap: 10px
+
+        .stars
+          width: 300px
+          text-align: center
+          border: 2px solid black
+          .star
+            display: inline-block
+            vertical-align: top
+            width: 20px
+            height: 20px
+            position: relative
+            border: 2px solid black
+
+
+            &:hover
+              background: rgb(227, 209, 138) 100%
+
         .likeButt
           background: #272727
           display: flex

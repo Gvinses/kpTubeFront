@@ -42,12 +42,12 @@ export class OtherAccountComponent implements OnInit {
       response => {
         this.userData = response[0];
         if (response[0].header && response[0].header.startsWith('http://127.0.0.1:8000/')) {
-          response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
         this.userHeader = response[0].header;
 
         if (response[0].avatar && response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
-          response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
         this.userAvatar = response[0].avatar;
 
@@ -62,10 +62,10 @@ export class OtherAccountComponent implements OnInit {
     this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
       data.forEach((video: any) => {
         if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
-          video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
         if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
-          video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
       })
       this.userVideos = data

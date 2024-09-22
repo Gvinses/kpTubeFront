@@ -35,10 +35,10 @@ export class KpMusicComponent implements OnInit {
     this.musicService.getAllMusic().subscribe((data: any) => {
       data.forEach((music: any) => {
         if (music.src && music.src.startsWith('http://127.0.0.1:8000/')) {
-          music.src = music.src.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          music.src = music.src.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
         if (music.image && music.image.startsWith('http://127.0.0.1:8000/')) {
-          music.image = music.image.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+          music.image = music.image.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
       })
       this.tracks = data

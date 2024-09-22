@@ -35,7 +35,7 @@ export class SearchPartComponent implements OnInit{
         (response): any => {
           console.log(response)
           if (response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
-            response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kringeproduction.ru/files/');
+            response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
             this.userAvatar = response[0].avatar;
             console.log(response[0].avatar)
           }
