@@ -31,6 +31,13 @@
       }
     </select>
 
+    <select (change)="onGlobalStatusChange($event)">
+      <option>Видно всем</option>
+      <option>Доступ по ссылке</option>
+    </select>
+
+
+
     <button type="submit" [disabled]="isButtonDisabled" class="uploadButt" (click)="onSubmit()">Upload</button>
   </div>
 </form>
@@ -48,5 +55,5 @@
   <p>Необходимо верефицировать аккаунт!</p>
   <i>Сейчас это доступно только бета тестерам <br>(т.е вы знаете куда жаловаться!!!)</i>
   <br>
-  <button (click)="close()">Закрыть</button>
+  <button (click)="closePage()">Закрыть</button>
 </div>

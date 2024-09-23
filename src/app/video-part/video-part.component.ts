@@ -1,23 +1,9 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {VideosFetchService} from "../videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
-export let videos = [
-  {
-    "id": 0,
-    "Video_ID": 0,
-    "name": "Test",
-    "description": "Test",
-    "likes": 0,
-    "views": 0,
-    "video": "http://127.0.0.1:8000/videos/1.png",
-    "preview": null,
-    "category": "0",
-    "owner": null
-  },
-
-];
+export let videos = [];
 
 
 export let items = [
@@ -26,14 +12,13 @@ export let items = [
     "Video_ID": "-1",
     "name": "Ой! У нас ошибка!",
     "description": "Простите, возможно мы перезапускаем сервер, или выпускаем обновление",
-    "likes": 0,
-    "views": 0,
+    "likes": -1,
+    "views": -1,
     "video": null,
     "preview": 'https://cs9.pikabu.ru/post_img/big/2017/05/16/5/1494914961183622594.png',
     "category": null,
     "owner": 'KP229'
   }
-  // добавьте остальные элементы
 ];
 
 
@@ -48,25 +33,37 @@ export let items = [
   templateUrl: './video-part.component.html',
   styleUrl: './video-part.component.sass'
 })
-export class VideoPartComponent {
+export class VideoPartComponent implements OnInit{
+
+  ngOnInit() {
+    this.getVideos()
+  }
+
   postService = inject(VideosFetchService)
 
   videos: any = []
 
   items = items
 
-  constructor()
-  {
+  constructor() {}
+  getVideos() {
     this.postService.getVideos().subscribe((data: any) => {
       data.forEach((video: any) => {
-        if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
-          video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
-        }
-        if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
-          video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+        if (video.isGlobal) {
+          this.linksChanger(video)
+          this.videos.push(video)
         }
       })
-      this.videos = data.reverse()
+      this.videos.reverse()
     });
+  }
+
+  linksChanger(video: any) {
+    if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
+      video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+    }
+    if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
+      video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+    }
   }
 }

@@ -20,7 +20,7 @@ export class OtherAccountComponent implements OnInit {
   userHeader: string | ArrayBuffer | null = null;
   userAvatar: string | ArrayBuffer | null = null;
   userName: string | null = null;
-  userVideos: any[] | null = null
+  videos: any[] = []
 
   UserID: number | null = null;
 
@@ -36,8 +36,6 @@ export class OtherAccountComponent implements OnInit {
   }
 
   loadVideoDetails(): void {
-    console.log(this.UserID)
-    console.log(String(this.UserID))
     this.VideosFetchService.getUserByID(String(this.UserID)).subscribe(
       response => {
         this.userData = response[0];
@@ -45,15 +43,12 @@ export class OtherAccountComponent implements OnInit {
           response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
         this.userHeader = response[0].header;
-
         if (response[0].avatar && response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
           response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
         this.userAvatar = response[0].avatar;
-
         this.userName = response[0].name
 
-        console.log(response[0])
         this.loadNameVideos()
       }
     )
@@ -61,15 +56,20 @@ export class OtherAccountComponent implements OnInit {
   loadNameVideos(): void {
     this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
       data.forEach((video: any) => {
-        if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
-          video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
-        }
-        if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
-          video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+        this.linksChanger(video)
+        if (video.isGlobal) {
+          this.videos.push(video)
         }
       })
-      this.userVideos = data
-      console.log(data)
+      this.videos.reverse()
     });
+  }
+  linksChanger(video: any) {
+    if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
+      video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+    }
+    if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
+      video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+    }
   }
 }

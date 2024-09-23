@@ -33,7 +33,7 @@ export class VideosFetchService {
     return this.http.get(this.category)
   }
 
-  uploadVideo(file: File, name: string, description: string, preview: File, owner: string, category: any): Observable<any> {
+  uploadVideo(file: File, name: string, description: string, preview: File, owner: string, category: any, isGlobal: boolean): Observable<any> {
     const formData = new FormData();
     formData.append('Video_ID', String(Number(new Date())));
     formData.append('video', file);
@@ -42,6 +42,7 @@ export class VideosFetchService {
     formData.append('preview', preview);
     formData.append('owner', owner);
     formData.append('category', category);
+    formData.append('isGlobal', String(isGlobal));
 
     const req = new HttpRequest('POST', this.apiUrl, formData, {
       reportProgress: true
@@ -78,10 +79,10 @@ export class VideosFetchService {
     return this.http.put(this.apiUrl + '/' + video.id, video);
   }
 
-  likeToVideo(DBID: number, videoName: string, likes: number) {
+  starsToVideo(DBID: number, videoName: string, stars: number) {
     let returnedOBJ = {
       "name": videoName,
-      "likes": likes
+      "likes": stars
     }
     return this.http.put(this.apiUrl + DBID + '/', returnedOBJ)
   }

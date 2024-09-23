@@ -2,7 +2,7 @@
   <div class="HaveAnAccount">
     <div class="userInfo">
       <div class="header">
-        <img src="{{userHeader}}">
+        <img  src="{{userHeader}}">
       </div>
       <div class="avatar">
         <img src="{{userAvatar}}">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="userVideos">
-      @for (video of userVideos; track video) {
+      @for (video of videos; track video) {
         <div class="video" [routerLink]="['/video', video.Video_ID]">
           <img src="{{video.preview}}" alt="{{video.preview}}">
           <div class="info">

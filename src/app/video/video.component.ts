@@ -34,8 +34,7 @@ export class VideoComponent implements OnInit {
   comments: any = [];
   howMuchComments: number = 0
   INDBID: number = 0
-  videoLikes: number = 0
-  userLikes: string | any = ''
+  videoStars: number = 0
   userEmail: string | null = null
   userPassword: string | null = null
   INUSID: number = 0
@@ -43,8 +42,8 @@ export class VideoComponent implements OnInit {
   VideoData: any | null = null
   VideoOwnerId: any | null = null
   userName: string | null = null
-  imageFilter = 'invert(0)'
   userComment: string | null = null
+  likesAndRating: string = ''
 
   stars = [
     { id: 1, active: true },
@@ -74,18 +73,13 @@ export class VideoComponent implements OnInit {
 
       this.VideosFetchService.enterUser(String(this.userName)).subscribe(
         (data: any) => {
-          this.userLikes = data[0].liked;
+          this.likesAndRating = data[0].liked;
           this.userEmail = data[0].email;
           this.userPassword = data[0].password;
           this.INUSID = data[0].id;
           this.VideosHistory = data[0].history;
           console.log(data[0])
-          if (this.userLikes.includes(this.videoId)) {
-            console.log('includes')
-            this.imageFilter = 'invert(1)'
-          } else {
-            console.log('not includes')
-          }
+          this.loadStars()
           this.addToUserHistory()
         }
       )
@@ -98,12 +92,11 @@ export class VideoComponent implements OnInit {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         this.videoData = data[0];
-
         this.getComments()
-
         this.VideoData = data[0]
         this.INDBID = data[0].id
-        this.videoLikes = data[0].likes
+        this.videoStars = data[0].likes
+
         this.VideosFetchService.enterUser(this.videoData.owner).subscribe(
           (data: any) => {
             this.VideoOwnerId = data[0];
@@ -139,61 +132,9 @@ export class VideoComponent implements OnInit {
     )
   }
 
-  toggleInvert(): void {
-    this.imageFilter = this.imageFilter === 'invert(0)' ? 'invert(1)' : 'invert(0)';
-
-    if (this.imageFilter === 'invert(1)') {
-      this.addLikeToVideo()
-    } else {
-      this.removeLikeFromVideo()
-    }
+  loadStars(){
+    console.log(this.likesAndRating.split(':'))
   }
-
-  addLikeToVideo() {
-    this.videoLikes++
-
-    this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-      response => {
-        console.log('Upload successful!', response);
-      },
-      error => {
-        console.error('Upload error:', error);
-      }
-    )
-    let likesArr = this.userLikes.split(',')
-    likesArr.push(String(this.videoId))
-    likesArr.join(',')
-
-    this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-      response => {
-        console.log('Upload successful!', response);
-      }
-    )
-  }
-  removeLikeFromVideo() {
-    this.videoLikes--
-
-    this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-      response => {
-        console.log('Upload successful!', response);
-      },
-      error => {
-        console.error('Upload error:', error);
-      }
-    )
-    let likesArr = this.userLikes.split(',')
-    likesArr.slice(likesArr.indexOf(this.videoId), 1)
-    likesArr.join(',')
-
-    this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-      response => {
-        console.log('Upload successful!', response);
-      }
-    )
-  }
-
-
-  protected readonly filter = filter;
 
   commentOnVideo() {
     this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
@@ -228,19 +169,50 @@ export class VideoComponent implements OnInit {
     this.stars.forEach(item => {
       item.active = false
     })
-    console.log(star.id);
-    console.log(this.stars)
+    let activeStars: number = 0
     star.active = !star.active;
     this.stars.forEach(item => {
       if (item.id <= star.id) {
         item.active = star.active;
+        activeStars++
       }
     });
+
+    this.starsToVideo(activeStars)
+    this.starsToUser(activeStars)
+  }
+
+  starsToVideo(userStarToVideo: number) {
+    this.VideosFetchService.starsToVideo(this.INDBID, this.videoData.name, Number(this.videoStars+userStarToVideo)).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      },
+      error => {
+        console.error('Upload error:', error);
+      }
+    )
+  }
+
+  starsToUser(userStarToVideo: number) {
+    let likesArr = []
+
+    this.likesAndRating.split(',')
+    likesArr.push(this.likesAndRating)
+    console.log(likesArr)
+    likesArr.push(String(this.videoId) + ':' + userStarToVideo)
+    likesArr.join(',')
+
+    this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      }
+    )
   }
 
 
-
   protected readonly items = items;
+
+
 }
 
 // addLikeToVideo() {
