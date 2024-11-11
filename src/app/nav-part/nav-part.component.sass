@@ -12,7 +12,12 @@
   left: 0
   top: 0
 
-  button
+  .logo_of_kp_tube
+    width: 50px
+    filter: invert(1)
+
+  .bars_icon
+    margin-top: 30px
     background: none
     border: none
     cursor: pointer
@@ -29,7 +34,7 @@
       border: 1.1px solid #ffffff
       border-radius: 90px
       display: block
-      width: 30px
+      width: 35px
       background-color: #333
       margin: 6px 0
       transition: all 0.3s ease
@@ -55,13 +60,12 @@
         opacity: 0
 
   .menu
-    position: absolute
-    top: 50px
-    left: 0
+    position: relative
+    top: 10px
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
     width: 100%
+    z-index: 999
     transition: opacity 0.3s ease
-    z-index: 1
 
     ul
       list-style: none
@@ -73,22 +77,18 @@
 
       li
         border: 2px solid white
-        //padding: 10px
-        //width: 80%
         border-radius: 15px
-        //cursor: pointer
+        cursor: pointer
         transition: 0.3s ease-out
 
         white-space: nowrap
         width: 80%
         height: 40px
-        min-width: 0px
         padding: 0px 12px
         display: flex
         min-height: 40px
         position: relative
         background-color: rgba(0, 0, 0, 0)
-        outline: rgb(241, 241, 241) none 0px
         align-items: center
         flex-direction: row
         font-family: Roboto, Noto, sans-serif
@@ -112,10 +112,15 @@
 @media (max-width: 768px)
   .burger-menu
     padding: 10pxz
-    width: calc(120px / 2)
+    width: 120px
 
-@media (max-width: 480px)
+@media (max-width: 500px)
   .burger-menu
     padding: 10px 3px
-    width: calc(120px / 3)
+    width: calc(120px / 1.3)
     height: 100%
+
+    .menu
+      ul
+        li
+          margin-left: 20px

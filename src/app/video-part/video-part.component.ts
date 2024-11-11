@@ -15,7 +15,7 @@ export let items = [
     "likes": -1,
     "views": -1,
     "video": null,
-    "preview": 'https://cs9.pikabu.ru/post_img/big/2017/05/16/5/1494914961183622594.png',
+    "preview": null,
     "category": null,
     "owner": 'KP229'
   }

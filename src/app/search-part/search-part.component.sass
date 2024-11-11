@@ -4,6 +4,7 @@
   height: 55.9896px
   display: flex
   justify-content: center
+  margin-bottom: 20px
   .searchInput
     display: flex
     background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0)
@@ -54,15 +55,22 @@
         max-width: 100%
         outline: rgba(255, 255, 255, 0.88) none 0px
         text-align: start
-        width: 482.847px
-        height: 23.9931px
+        width: 483px
+        height: 24px
+        transition: opacity 0.3s ease
   .account
     display: flex
     flex-direction: row
     justify-content: flex-end
-    padding: 5px
+
+    padding-top: 7px
+    padding-bottom: 7px
+    padding-left: 14px
+    padding-right: 14px
+
+    transition: 1s
+
     align-items: center
-    flex: 0 0 auto
     gap: 10px
 
     position: fixed
@@ -84,25 +92,60 @@
         .systemIcons
           filter: invert(1)
 
+        #search_button_icon
+          display: none
+
 @media (max-width: 950px)
   .search
     grid-template-columns: 140px 500px auto
 
-    .search
-      input
-        max-width: 500px
+    .account
+      background: #404040
+      border-radius: 90px
+      justify-content: flex-end
+      margin-right: 70px
 
-@media (max-width: 600px)
+    .searchInput
+      .form
+        button
+          display: flex
+          float: left
+          justify-content: flex-end
+          right: 7.5px
+          //input
+          //  position: relative
+          //  left: 300px
+          //  max-width: 300px
+
+@media (max-width: 500px)
   .search
     grid-template-columns: 1fr
-    // Одноколоночный макет
     grid-row-gap: 10px
 
     .account
-      justify-content: flex-start
-    // Выравниваем по левому краю
+      background: #404040
+      border-radius: 90px
+      display: flex
+      justify-content: center
+      float: right
 
-    .search
-      input
-        width: 100%
-// Полная ширина
+      padding-top: 7px
+      padding-bottom: 7px
+      padding-left: 14px
+      padding-right: 14px
+
+      margin-right: 120px
+
+      button
+        a
+          #search_button_icon
+            display: flex
+
+
+    .form
+      //opacity: 0
+      //user-select: none
+      //user-focus: none
+      max-width: 300px
+    input
+      z-index: 9999

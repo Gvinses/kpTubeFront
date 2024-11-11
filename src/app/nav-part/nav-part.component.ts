@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
-import { trigger, transition, style, animate } from '@angular/animations';
-import {RouterLink} from "@angular/router";
+import {trigger, transition, style, animate} from '@angular/animations';
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-nav-part',
@@ -16,11 +16,11 @@ import {RouterLink} from "@angular/router";
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.2s', style({ opacity: 1 }))
+        style({opacity: 0}),
+        animate('0.2s', style({opacity: 1}))
       ]),
       transition(':leave', [
-        animate('0.7s', style({ opacity: 0 }))
+        animate('0.7s', style({opacity: 0}))
       ])
     ])
   ]
@@ -28,7 +28,14 @@ import {RouterLink} from "@angular/router";
 export class NavPartComponent {
   isOpen = false;
 
+  constructor(private router: Router) {
+  }
+
   toggleMenu() {
     this.isOpen = !this.isOpen;
+  }
+
+  set_client_web_pos() {
+    this.router.navigate(['/']);
   }
 }

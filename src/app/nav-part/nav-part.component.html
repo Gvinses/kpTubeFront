@@ -1,11 +1,12 @@
 <div class="burger-menu">
-  <button (click)="toggleMenu()" [ngClass]="{ 'open': isOpen }">
+  <img (click)="set_client_web_pos()" src="KptubeLogo.svg" class="logo_of_kp_tube">
+  <button class="bars_icon" (click)="toggleMenu()" [ngClass]="{ 'open': isOpen }">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
   </button>
 
-  <div class="menu" *ngIf="isOpen" @fadeInOut>
+  <div class="menu" *ngIf="isOpen" @fadeInOut [ngClass]="{ 'open': isOpen }">
     <ul>
       <li routerLink="/"><a>Главная</a></li>
       <li routerLink="/KPmusic"><a>KP - music</a></li>

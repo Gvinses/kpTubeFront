@@ -1,15 +1,23 @@
-<nav>
+<nav (window:resize)="onResize($event)">
   <div class="search">
-    <div class="invisible">
-
-    </div>
-    <div class="searchInput" >
+    <div class="searchInput">
       <label for="inputToSearch" class="form">
         <button (click)="onEnter()">Search</button>
-        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" id="inputToSearch" placeholder="Введите запрос" />
+        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" id="inputToSearch" maxlength="30"
+               placeholder="Введите запрос" autocomplete="off"
+               *ngIf="!isInputDisabled"
+               [ngStyle]="{
+                'opacity': inputOpacity
+               }"
+        />
       </label>
     </div>
     <div class="account">
+      <button *ngIf="isMobile" (click)="toggleInput()" class="system_search_icon">
+        <a>
+          <img id="search_button_icon" class="systemIcons" src="Search.svg">
+        </a>
+      </button>
       <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
       <button><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
       @if (isLogin()) {

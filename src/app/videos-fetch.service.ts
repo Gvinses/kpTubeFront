@@ -116,16 +116,6 @@ export class VideosFetchService {
     return this.http.post(this.comment, formData)
   }
 
-  // "name": "Gvins",
-  // "email": "timurkhen10@gmail.com",
-  // "password": "QwertyGvins123",
-  // "liked": "1725194085314"
-  //
-  // updateLikes(likes: number, video: any) {
-  //   console.log(video)
-  //   return this.http.put(this.apiUrl + '?Video_ID=' + video.Video_ID, video)
-  // }
-
   deleteVideo(id: number) {
     return this.http.delete(this.apiUrl + '/' + id)
   }

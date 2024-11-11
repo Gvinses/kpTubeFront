@@ -38,14 +38,13 @@
 @media (max-width: 768px)
   .videos
     grid-template-columns: repeat(2, 1fr)
-    gap: 30px
 
-@media (max-width: 480px)
+    .video
+      width: 25vw
+
+@media (max-width: 600px)
   .videos
     grid-template-columns: 1fr
-    gap: 20px
 
-  .video
-    max-width: 100%
-    aspect-ratio: auto
-
+    .video
+      width: 50vw
