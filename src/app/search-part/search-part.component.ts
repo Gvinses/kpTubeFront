@@ -4,6 +4,7 @@ import {VideosFetchService} from "../videos-fetch.service";
 import {response} from "express";
 import {FormsModule} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
+import {ViewportRuler} from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-search-part',
@@ -22,18 +23,17 @@ export class SearchPartComponent implements OnInit {
   userAvatar: string | null = null
   userInput: string = ''
   gettedID: any
-  isInputDisabled: boolean = false
-  inputOpacity: number = 1
-  isMobile: boolean = false
+  isButtonEnabled: boolean = false
+  isInputEnabled: boolean = true
+  accountButtons: boolean = true
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private viewportRuler: ViewportRuler) {
   }
 
   VideosFetchService = inject(VideosFetchService)
 
-
   ngOnInit() {
-    this.checkScreenSize(window.innerWidth)
+    this.onViewportResize()
     if (this.isLogin()) {
       if (localStorage) {
         this.gettedID = String(Number(localStorage.getItem('UserID')) / 2)
@@ -48,8 +48,9 @@ export class SearchPartComponent implements OnInit {
             console.log(response[0].avatar)
           }
         },
-      );
+      )
     }
+    this.viewportRuler.change(100).subscribe(() => this.onViewportResize())
   }
 
   isLogin(): boolean {
@@ -62,24 +63,15 @@ export class SearchPartComponent implements OnInit {
     }
   }
 
-  onResize(event: any) {
-    this.checkScreenSize(event.target.innerWidth)
+  onViewportResize() {
+    let tempWidth = this.viewportRuler.getViewportSize().width
+    this.isButtonEnabled = tempWidth < 500
+    this.isInputEnabled = tempWidth > 500
+    this.accountButtons = true
   }
 
-  checkScreenSize(width: number) {
-    this.isMobile = width <= 500;
-  }
-
-  toggleInput() {
-    if (this.isMobile) {
-      this.isInputDisabled = !this.isInputDisabled
-      if (this.isInputDisabled) {
-        this.inputOpacity = 1
-      } else {
-        this.inputOpacity = 0
-      }
-      console.log(this.isInputDisabled)
-      console.log(this.inputOpacity)
-    }
+  enableChange() {
+    this.isInputEnabled = !this.isInputEnabled;
+    this.accountButtons = !this.accountButtons
   }
 }

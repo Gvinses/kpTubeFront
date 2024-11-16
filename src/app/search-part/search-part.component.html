@@ -1,30 +1,33 @@
-<nav (window:resize)="onResize($event)">
+<nav>
   <div class="search">
     <div class="searchInput">
       <label for="inputToSearch" class="form">
-        <button (click)="onEnter()">Search</button>
-        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" id="inputToSearch" maxlength="30"
-               placeholder="Введите запрос" autocomplete="off"
-               *ngIf="!isInputDisabled"
-               [ngStyle]="{
-                'opacity': inputOpacity
-               }"
-        />
+        @if (isInputEnabled) {
+          <button (click)="onEnter()">
+            Search
+          </button>
+          <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" id="inputToSearch" maxlength="30"/>
+        }
       </label>
     </div>
     <div class="account">
-      <button *ngIf="isMobile" (click)="toggleInput()" class="system_search_icon">
+      <button *ngIf="isButtonEnabled" (click)="enableChange()" class="system_search_icon">
         <a>
           <img id="search_button_icon" class="systemIcons" src="Search.svg">
         </a>
       </button>
-      <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
-      <button><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
-      @if (isLogin()) {
-        <button class="userAvaterButton" routerLink="/account"><a><img [src]="userAvatar"></a></button>
-      } @else {
-        <button><a routerLink="/account">Аккаунт</a></button>
-      }
+      <span class="inputs_menu" *ngIf="!accountButtons">
+        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" class="user-mobile-search" maxlength="30">
+      </span>
+      <span class="buttons_menu" *ngIf="accountButtons">
+        <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
+        <button><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
+        @if (isLogin()) {
+          <button class="userAvaterButton" routerLink="/account"><a><img [src]="userAvatar"></a></button>
+        } @else {
+          <button><a routerLink="/account">Аккаунт</a></button>
+        }
+      </span>
     </div>
   </div>
 </nav>
