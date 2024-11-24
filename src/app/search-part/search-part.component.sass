@@ -6,7 +6,7 @@
   justify-content: center
   margin-bottom: 20px
 
-  .searchInput
+  .searchInputDiv
     display: flex
     background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0)
     align-items: center
@@ -15,7 +15,7 @@
     min-width: 0px
     justify-content: normal
 
-    .form
+    .label_input
       background: none 0% 0% / auto repeat scroll padding-box border-box rgb(18, 18, 18)
       margin: 0px 0px 0px 32px
       padding: 0px 4px 0px 16px
@@ -28,6 +28,7 @@
       flex-direction: row
       position: relative
       border: 1.1px solid rgb(48, 48, 48)
+      width: 70%
 
       button
         padding: 15px 15px
@@ -53,12 +54,15 @@
         flex: 1 1
         font-family: Roboto, Noto, sans-serif
         font-size: 16px
+        position: relative
+        top: 0
         font-weight: 400
         line-height: 24px
         max-width: 100%
         outline: rgba(255, 255, 255, 0.88) none 0px
         text-align: start
-        width: 483px
+        width: 80%
+        margin-left: 10px
         height: 24px
         transition: opacity 0.3s ease
 
@@ -125,8 +129,13 @@
           filter: invert(1)
 
 @media (max-width: 950px)
+  .label_input
+    left: 55px
+    width: 30%
+
   .search
     grid-template-columns: 140px 500px auto
+
 
     .account
       background: #404040
