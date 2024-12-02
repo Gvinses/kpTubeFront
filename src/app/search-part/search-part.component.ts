@@ -23,7 +23,6 @@ export class SearchPartComponent implements OnInit {
   userInput: string = ''
   gettedID: any
   isInputDisabled: boolean = false
-  inputOpacity: number = 1
   isMobile: boolean = false
 
   constructor(private router: Router) {
@@ -67,19 +66,10 @@ export class SearchPartComponent implements OnInit {
   }
 
   checkScreenSize(width: number) {
-    this.isMobile = width <= 500;
+    this.isMobile = width <= 650
+    this.isInputDisabled = width > 650
   }
-
-  toggleInput() {
-    if (this.isMobile) {
-      this.isInputDisabled = !this.isInputDisabled
-      if (this.isInputDisabled) {
-        this.inputOpacity = 1
-      } else {
-        this.inputOpacity = 0
-      }
-      console.log(this.isInputDisabled)
-      console.log(this.inputOpacity)
-    }
+  searchIconClick() {
+    this.isInputDisabled = !this.isInputDisabled
   }
 }
