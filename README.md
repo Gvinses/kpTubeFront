@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # video-creating - is video creating page (where you can create new video on KPtube)
 # video - is video page (where you can watch video)
 
+<h6>Link: https://imaginative-kheer-6bc042.netlify.app/</h6>
+
 [//]: # (## Development server)
 
 [//]: # ()
