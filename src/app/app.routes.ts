@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {AppComponent} from "./app.component";
 import {AccountComponent} from "./account/account.component";
 import {VideoCreatingComponent} from "./video-creating/video-creating.component";

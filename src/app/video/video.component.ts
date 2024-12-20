@@ -1,13 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {items, videos} from "../video-part/video-part.component"
 import {HttpClient} from "@angular/common/http";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
-import {filter} from "rxjs";
 import {VideosFetchService} from "../videos-fetch.service";
-import {response} from "express";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TuiRating} from '@taiga-ui/kit';
+import {TuiRoot} from "@taiga-ui/core";
 
 @Component({
   selector: 'app-video',
@@ -23,8 +23,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     NgIf,
     NgForOf,
+    TuiRating,
+    TuiRoot
   ],
-  styleUrls: ['./video.component.sass']
+  styleUrls: ['./video.component.sass', './index.less']
 })
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
@@ -34,7 +36,6 @@ export class VideoComponent implements OnInit {
   comments: any = [];
   howMuchComments: number = 0
   INDBID: number = 0
-  videoStars: number = 0
   userEmail: string | null = null
   userPassword: string | null = null
   INUSID: number = 0
@@ -45,19 +46,13 @@ export class VideoComponent implements OnInit {
   userComment: string | null = null
   likesAndRating: string = ''
 
-  stars = [
-    { id: 1, active: true },
-    { id: 2, active: false },
-    { id: 3, active: false },
-    { id: 4, active: false },
-    { id: 5, active: false }
-  ];
-
+  protected videoStars = 0;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -132,7 +127,7 @@ export class VideoComponent implements OnInit {
     )
   }
 
-  loadStars(){
+  loadStars() {
     console.log(this.likesAndRating.split(':'))
   }
 
@@ -155,6 +150,7 @@ export class VideoComponent implements OnInit {
     text: this.videoData.name,
     url: '',
   };
+
   async shareInfo() {
     try {
       this.shareData.url = `https://main--imaginative-kheer-6bc042.netlify.app/video/${this.videoId}`
@@ -164,26 +160,8 @@ export class VideoComponent implements OnInit {
     }
   }
 
-
-  rate(star: any) {
-    this.stars.forEach(item => {
-      item.active = false
-    })
-    let activeStars: number = 0
-    star.active = !star.active;
-    this.stars.forEach(item => {
-      if (item.id <= star.id) {
-        item.active = star.active;
-        activeStars++
-      }
-    });
-
-    this.starsToVideo(activeStars)
-    this.starsToUser(activeStars)
-  }
-
-  starsToVideo(userStarToVideo: number) {
-    this.VideosFetchService.starsToVideo(this.INDBID, this.videoData.name, Number(this.videoStars+userStarToVideo)).subscribe(
+  starsToVideo() {
+    this.VideosFetchService.starsToVideo(this.INDBID, this.videoData.name, this.videoStars).subscribe(
       response => {
         console.log('Upload successful!', response);
       },

@@ -16,22 +16,26 @@
 
         <div class="share">
           <div class="stars" id="stars">
-            <div *ngFor="let star of stars" (click)="rate(star)" [style.background]="star.active ? '#E0C24BFF' : '#C5C4C4FF'" class="star"></div>
+            <tui-root class="tui-root">
+              <tui-rating class="tui-rating" [(ngModel)]="videoStars" (click)="starsToVideo()"></tui-rating>
+            </tui-root>
           </div>
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
 
         </div>
 
         <div class="category">
-          <p>Категория: <b>{{videoData.category}}</b></p>
+          <p>Категория: <b>{{ videoData.category }}</b></p>
         </div>
       </div>
     </div>
     <div class="comments">
-      <h2>{{howMuchComments}} комментариев</h2>
+      <h2>{{ howMuchComments }} комментариев</h2>
       <div class="commenter">
-        {{userName}}
-        <input class="commentInput" [(ngModel)]="userComment" (keyup.enter)="commentOnVideo()" placeholder="Введите комментарий">
+        {{ userName }}
+        <input class="commentInput" [(ngModel)]="userComment" (keyup.enter)="commentOnVideo()"
+               placeholder="Введите комментарий">
+
         <div *ngIf="userComment" class="buttons">
           <button (click)="cleaner()">Отмена</button>
           <button class="submitCommentButton" (click)="commentOnVideo()">Оставить комментарий</button>
@@ -40,12 +44,12 @@
       <div class="allComments">
         @for (comment of comments; track comment) {
           <div class="comment">
-            <h3>{{comment.owner}}</h3>
-            <p>{{comment.text}}</p>
-  <!--          <button (click)="toggleInvert(comment)">-->
-  <!--            <img class="likeImg" [style.filter]="imageFilter" src="image.png" alt="Toggle Image">-->
-  <!--            <p>{{comment.likes}} лайков</p>-->
-  <!--          </button>-->
+            <h3>{{ comment.owner }}</h3>
+            <p>{{ comment.text }}</p>
+            <!--          <button (click)="toggleInvert(comment)">-->
+            <!--            <img class="likeImg" [style.filter]="imageFilter" src="image.png" alt="Toggle Image">-->
+            <!--            <p>{{comment.likes}} лайков</p>-->
+            <!--          </button>-->
           </div>
         }
       </div>

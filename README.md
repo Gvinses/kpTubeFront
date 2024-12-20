@@ -1,10 +1,12 @@
-# KptubeFront - website is KP229 copy of YouTube
+# KptubeFront - website is KP229 copy of YouTube By KP229
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
 
 # video-part - is all videos page (where you can select video)
 # video-creating - is video creating page (where you can create new video on KPtube)
 # video - is video page (where you can watch video)
+
+# Link: https://imaginative-kheer-6bc042.netlify.app/
 
 [//]: # (## Development server)
 
