@@ -26,7 +26,7 @@ import {TuiRoot} from "@taiga-ui/core";
     TuiRating,
     TuiRoot
   ],
-  styleUrls: ['./video.component.sass']
+  styleUrls: ['./video.component.sass', './index.less']
 })
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
@@ -189,50 +189,4 @@ export class VideoComponent implements OnInit {
 
 
   protected readonly items = items;
-
-
 }
-
-// addLikeToVideo() {
-//   this.videoLikes++
-//
-//   this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     },
-//     error => {
-//       console.error('Upload error:', error);
-//     }
-//   )
-//   let likesArr = this.userLikes.split(',')
-//   likesArr.push(String(this.videoId))
-//   likesArr.join(',')
-//
-//   this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     }
-//   )
-// }
-// removeLikeFromVideo() {
-//   this.videoLikes--
-//
-//   this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     },
-//     error => {
-//       console.error('Upload error:', error);
-//     }
-//   )
-//   let likesArr = this.userLikes.split(',')
-//   likesArr.slice(likesArr.indexOf(this.videoId), 1)
-//   likesArr.join(',')
-//
-//   this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     }
-//   )
-// }
-//

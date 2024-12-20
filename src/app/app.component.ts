@@ -4,13 +4,14 @@ import {CommonModule} from "@angular/common";
 import {VideoPartComponent} from "./video-part/video-part.component";
 import {NavPartComponent} from "./nav-part/nav-part.component";
 import {SearchPartComponent} from "./search-part/search-part.component";
+import {TuiRoot} from "@taiga-ui/core";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,
     VideoPartComponent, NavPartComponent,
-    RouterLink, RouterOutlet, RouterModule, RouterLinkActive, SearchPartComponent],
+    RouterLink, RouterOutlet, RouterModule, RouterLinkActive, SearchPartComponent, TuiRoot],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })

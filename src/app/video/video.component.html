@@ -17,7 +17,10 @@
         <div class="share">
           <div class="stars" id="stars">
             <tui-root>
-              <tui-rating [(ngModel)]="videoStars" (click)="starsToVideo()"></tui-rating>
+              <tui-rating
+                class="rating"
+                [(ngModel)]="videoStars"
+              />
             </tui-root>
           </div>
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>

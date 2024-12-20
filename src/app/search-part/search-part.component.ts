@@ -3,7 +3,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {VideosFetchService} from "../videos-fetch.service";
 import {response} from "express";
 import {FormsModule} from "@angular/forms";
-import {NgIf, NgStyle} from "@angular/common";
+import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {ViewportRuler} from '@angular/cdk/scrolling';
 
 @Component({
@@ -14,7 +14,8 @@ import {ViewportRuler} from '@angular/cdk/scrolling';
     RouterLinkActive,
     FormsModule,
     NgStyle,
-    NgIf
+    NgIf,
+    NgForOf
   ],
   templateUrl: './search-part.component.html',
   styleUrl: './search-part.component.sass'
