@@ -16,8 +16,8 @@
 
         <div class="share">
           <div class="stars" id="stars">
-            <tui-root>
-              <tui-rating [(ngModel)]="videoStars" (click)="starsToVideo()"></tui-rating>
+            <tui-root class="tui-root">
+              <tui-rating class="tui-rating" [(ngModel)]="videoStars" (click)="starsToVideo()"></tui-rating>
             </tui-root>
           </div>
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
@@ -35,6 +35,7 @@
         {{ userName }}
         <input class="commentInput" [(ngModel)]="userComment" (keyup.enter)="commentOnVideo()"
                placeholder="Введите комментарий">
+
         <div *ngIf="userComment" class="buttons">
           <button (click)="cleaner()">Отмена</button>
           <button class="submitCommentButton" (click)="commentOnVideo()">Оставить комментарий</button>

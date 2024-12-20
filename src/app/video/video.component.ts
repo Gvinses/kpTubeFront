@@ -26,7 +26,7 @@ import {TuiRoot} from "@taiga-ui/core";
     TuiRating,
     TuiRoot
   ],
-  styleUrls: ['./video.component.sass']
+  styleUrls: ['./video.component.sass', './index.less']
 })
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
