@@ -1,13 +1,14 @@
 <div class="main">
   <div class="videoPart">
-    <video autoplay="autoplay" controls="controls" [src]="videoData.video"></video>
+    <div class="video_container">
+      <video autoplay="autoplay" controls="controls" [src]="videoData.video"></video>
+    </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ videoData.name }}</h1>
       <h3 [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{ videoData.owner }}</h3>
 
       <div class="videoContent">
         <div class="aboutVideo">
-
           <details class="aboutVideoDetails">
             <summary>Описание</summary>
             <p>{{ videoData.description }}</p>
@@ -29,6 +30,7 @@
         </div>
       </div>
     </div>
+
     <div class="comments">
       <h2>{{ howMuchComments }} комментариев</h2>
       <div class="commenter">
@@ -46,10 +48,6 @@
           <div class="comment">
             <h3>{{ comment.owner }}</h3>
             <p>{{ comment.text }}</p>
-            <!--          <button (click)="toggleInvert(comment)">-->
-            <!--            <img class="likeImg" [style.filter]="imageFilter" src="image.png" alt="Toggle Image">-->
-            <!--            <p>{{comment.likes}} лайков</p>-->
-            <!--          </button>-->
           </div>
         }
       </div>

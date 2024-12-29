@@ -123,6 +123,7 @@ export class AccountComponent implements OnInit {
   onEnter() {
     this.VideosFetchService.enterUser(this.enterName).subscribe(
       response => {
+        console.table(response)
         if (response[0].password === this.enterPass) {
           let userID = response[0].User_ID
           if (typeof localStorage !== 'undefined') {
