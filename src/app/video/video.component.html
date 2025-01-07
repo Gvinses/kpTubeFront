@@ -8,21 +8,20 @@
       <h3 [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{ videoData.owner }}</h3>
 
       <div class="videoContent">
-        <div class="aboutVideo">
-          <details class="aboutVideoDetails">
-            <summary>Описание</summary>
-            <p>{{ videoData.description }}</p>
-          </details>
-        </div>
-
-        <div class="share">
+        <div class="share_and_raiting">
           <div class="stars" id="stars">
             <tui-root class="tui-root">
               <tui-rating class="tui-rating" [(ngModel)]="videoStars" (click)="starsToVideo()"></tui-rating>
             </tui-root>
           </div>
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
+        </div>
 
+        <div class="aboutVideo">
+          <details class="aboutVideoDetails">
+            <summary>Описание</summary>
+            <p>{{ videoData.description }}</p>
+          </details>
         </div>
 
         <div class="category">

@@ -1,7 +1,6 @@
 import {Component, HostListener, inject, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {VideosFetchService} from "../videos-fetch.service";
-import {response} from "express";
 import {FormsModule} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
 
@@ -55,7 +54,7 @@ export class SearchPartComponent implements OnInit {
     return (localStorage.getItem('UserName') !== null) && (localStorage.getItem('UserID') !== null)
   }
 
-  onEnter(): void {
+  onSearch(): void {
     if (this.userInput.trim()) {
       this.router.navigate(['/search', this.userInput])
     }
