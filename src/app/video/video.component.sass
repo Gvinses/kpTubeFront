@@ -2,94 +2,165 @@
   display: grid
   grid-template-columns: 3fr 1fr
   margin-bottom: 60px
+
   .videoPart
     margin-left: 200px
     width: 70vw
     height: auto
-    video
-      border-radius: 15px
-      width: 100%
-      height: auto
-      object-fit: cover
 
-    .comments
-      border-top: 2px solid black
-      padding-left: 40px
-      .commenter
+    .video_container
+      width: 100%
+      max-height: 1000px
+
+      video
+        border-radius: 15px
+        width: auto
+        max-height: 600px
+        object-fit: cover
+
+  .videoInfo
+    .videoName
+      font-size: 50px
+
+    .videoContent
+      display: flex
+      flex-direction: column
+      gap: 10px
+      font-size: 30px
+
+      .share_and_raiting
         width: 100%
+
+      //.aboutVideo
+      //  border: 2px solid indianred
+
+      .category
+        position: relative
+        float: right
+
+
+  .comments
+    border-top: 2px solid black
+
+    .commenter
+      width: 100%
+      display: flex
+      flex-direction: row
+      align-items: baseline
+
+      input
+        width: 100%
+        background: none
+        border: none
+        outline: none
+        padding: 10px
+        border-bottom: 1px solid white
+        transition: padding 0.3s ease-out, border-bottom 0.4s ease-out
+        color: white
+
+        &:focus
+          padding-bottom: 20px
+          border-bottom: 1px solid #2278a4
+
+      .buttons
         display: flex
-        flex-direction: row
-        align-items: baseline
-        input
-          width: 100%
-          background: none
+        position: absolute
+        float: right
+        gap: 10px
+        margin-top: 50px
+
+        button
           border: none
           outline: none
-          padding: 10px
-          border-bottom: 1px solid white
-          transition: padding 0.3s ease-out, border-bottom 0.4s ease-out
-          color: white
-          &:focus
-            padding-bottom: 20px
-            border-bottom: 1px solid #2278a4
-        .buttons
-          display: flex
-          position: absolute
-          float: right
-          gap: 10px
-          margin-top: 50px
-          button
-            border: none
-            outline: none
-            border-radius: 5px
-            height: 30px
-            width: 120px
-            transition: 0.3s ease-out
-            &:hover
-              background: #2278a4
-          .submitCommentButton
-            width: 220px
-      p
-        color: white
-        border-left: 3px solid white
-        padding-left: 30px
+          border-radius: 5px
+          height: 30px
+          width: 120px
+          transition: 0.3s ease-out
+
+          &:hover
+            background: #2278a4
+
+        .submitCommentButton
+          width: 220px
+
+    p
+      color: white
+      border-left: 3px solid white
+      padding-left: 30px
 
   .allComments
     margin-top: 50px
+
+.shareButt
+  background: #272727
+  display: flex
+  justify-content: center
+  align-items: center
+
+  width: calc(112.8px / 1.1)
+  height: 36px
+
+  outline: none
+  border: 1px solid white
+  border-radius: 15px
+  color: rgb(255, 255, 255)
+  line-height: 36px
+  padding: 10px
+
+
+@media (max-width: 800px)
+  .videoPart
+    margin-left: 100px
+    width: 50vw
+    height: auto
+
+    .video_container
+      display: flex
+      flex-direction: column
+
   .videoInfo
-    margin-left: 30px
-    .videoName
-      font-size: 50px
+    display: block
+
     .videoContent
       display: grid
-      grid-template-columns: 1.7fr auto 1fr
+      grid-template-columns: 1.7fr
+      grid-template-rows: 1.7fr 1.2fr 1fr
       align-items: baseline
-      gap: 30px
+      gap: 50px
       font-size: 30px
-      .aboutVideo
-        float: left
-      .category
-        position: relative
-        top: -50px
-        float: right
-      .share
-        display: flex
-        position: relative
-        top: -35px
-        gap: 10px
 
-        .shareButt
-          background: #272727
-          display: flex
-          justify-content: center
-          align-items: center
+  .aboutVideo
 
-          width: calc(112.8px / 1.1)
-          height: 36px
 
-          outline: none
-          border: 1px solid white
-          border-radius: 15px
-          color: rgb(255, 255, 255)
-          line-height: 36px
-          padding: 10px
+@media (max-width: 500px)
+  .main
+    margin-left: -100px
+
+  .video_container
+    width: 90%
+
+    video
+      border-radius: 15px
+      width: 90%
+      height: auto
+      object-fit: cover
+
+  .videoInfo
+    .videoContent
+      display: grid
+      grid-template-columns: 1.7fr
+      grid-template-rows: 1.7fr 1.2fr 1fr
+      align-items: baseline
+      gap: 50px
+      font-size: 30px
+
+  .aboutVideo
+    .aboutVideoDetails
+      summary
+        font-size: 20px
+      p
+        font-size: 14px
+
+  .category
+    p
+      font-size: 14px

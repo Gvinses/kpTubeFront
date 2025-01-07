@@ -2,8 +2,8 @@
   <div class="search">
     <div class="searchInput">
       <label *ngIf="!isMobile" for="inputToSearch" class="form">
-        <button (click)="onEnter()">Search</button>
-        <input [(ngModel)]="userInput" (keyup.enter)="onEnter()" id="inputToSearch" maxlength="30"
+        <button (click)="onSearch()">Search</button>
+        <input [(ngModel)]="userInput" (keyup.enter)="onSearch()" id="inputToSearch" maxlength="30"
                placeholder="Введите запрос" autocomplete="off"
         />
       </label>
@@ -14,7 +14,7 @@
       </button>
       <span *ngIf="!isInputDisabled" class="search_mobile">
         <input class="search_mobile_input"
-               [(ngModel)]="userInput" (keyup.enter)="onEnter()" id="inputToMobileSearch" maxlength="25"
+               [(ngModel)]="userInput" (keyup.enter)="onSearch()" id="inputToMobileSearch" maxlength="25"
                placeholder="Введите запрос" autocomplete="off"
         >
       </span>

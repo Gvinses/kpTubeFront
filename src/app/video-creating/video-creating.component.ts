@@ -141,7 +141,7 @@ export class VideoCreatingComponent implements OnInit {
       previewFile,
       this.nameLS,
       this.choosedCategory,
-      this.isGlobal
+      this.isGlobal,
     ).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.uploadProgress = Math.round(100 * (event.loaded / (event.total || 1)));

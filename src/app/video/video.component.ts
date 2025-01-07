@@ -57,6 +57,7 @@ export class VideoComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.videoId = +params.get('Video_ID')!;
+      console.log(this.videoId)
       this.loadVideoDetails();
       this.loadUserDetails()
     });
@@ -86,7 +87,6 @@ export class VideoComponent implements OnInit {
       this.http.get<any>(`https://kptube.kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
-        this.videoData = data[0];
         this.getComments()
         this.VideoData = data[0]
         this.INDBID = data[0].id
@@ -161,7 +161,7 @@ export class VideoComponent implements OnInit {
   }
 
   starsToVideo() {
-    this.VideosFetchService.starsToVideo(this.INDBID, this.videoData.name, this.videoStars).subscribe(
+    this.VideosFetchService.starsToVideo(this.videoId, this.videoStars).subscribe(
       response => {
         console.log('Upload successful!', response);
       },
@@ -187,52 +187,5 @@ export class VideoComponent implements OnInit {
     )
   }
 
-
   protected readonly items = items;
-
-
 }
-
-// addLikeToVideo() {
-//   this.videoLikes++
-//
-//   this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     },
-//     error => {
-//       console.error('Upload error:', error);
-//     }
-//   )
-//   let likesArr = this.userLikes.split(',')
-//   likesArr.push(String(this.videoId))
-//   likesArr.join(',')
-//
-//   this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     }
-//   )
-// }
-// removeLikeFromVideo() {
-//   this.videoLikes--
-//
-//   this.VideosFetchService.likeToVideo(this.INDBID, this.videoData.name, this.videoLikes).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     },
-//     error => {
-//       console.error('Upload error:', error);
-//     }
-//   )
-//   let likesArr = this.userLikes.split(',')
-//   likesArr.slice(likesArr.indexOf(this.videoId), 1)
-//   likesArr.join(',')
-//
-//   this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-//     response => {
-//       console.log('Upload successful!', response);
-//     }
-//   )
-// }
-//
