@@ -24,7 +24,8 @@ export class SearchPartComponent implements OnInit {
   isInputDisabled: boolean = false
   isMobile: boolean = false
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   VideosFetchService = inject(VideosFetchService)
 

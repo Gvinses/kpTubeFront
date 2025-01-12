@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit {
   enterName: string = ''
   enterPass: string = ''
 
-  errorMessage: string | null = null;
+  errorMessage: string | null = 'Войдите или Зарегистрируйтесь';
 
   http = inject(HttpClient)
   register: boolean = false
@@ -156,6 +156,7 @@ export class AccountComponent implements OnInit {
       }
     );
   }
+
 
 
   starter() {

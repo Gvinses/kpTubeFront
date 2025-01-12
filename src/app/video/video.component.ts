@@ -6,6 +6,8 @@ import {HttpClient} from "@angular/common/http";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {VideosFetchService} from "../videos-fetch.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TuiRating} from '@taiga-ui/kit';
+import {TuiRoot} from "@taiga-ui/core";
 
 @Component({
   selector: 'app-video',
@@ -21,8 +23,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     NgIf,
     NgForOf,
+    TuiRating,
+    TuiRoot
   ],
-  styleUrls: ['./video.component.sass']
+  styleUrls: ['./video.component.sass', './index.less']
 })
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
@@ -53,6 +57,7 @@ export class VideoComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.videoId = +params.get('Video_ID')!;
+      console.log(this.videoId)
       this.loadVideoDetails();
       this.loadUserDetails()
     });
@@ -82,7 +87,6 @@ export class VideoComponent implements OnInit {
       this.http.get<any>(`https://kptube.kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
-        this.videoData = data[0];
         this.getComments()
         this.VideoData = data[0]
         this.INDBID = data[0].id
@@ -124,7 +128,7 @@ export class VideoComponent implements OnInit {
   }
 
   loadStars() {
-    console.log(this.likesAndRating)
+    console.log(this.likesAndRating.split(':'))
   }
 
   commentOnVideo() {
@@ -154,6 +158,33 @@ export class VideoComponent implements OnInit {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  starsToVideo() {
+    this.VideosFetchService.starsToVideo(this.videoId, this.videoStars).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      },
+      error => {
+        console.error('Upload error:', error);
+      }
+    )
+  }
+
+  starsToUser(userStarToVideo: number) {
+    let likesArr = []
+
+    this.likesAndRating.split(',')
+    likesArr.push(this.likesAndRating)
+    console.log(likesArr)
+    likesArr.push(String(this.videoId) + ':' + userStarToVideo)
+    likesArr.join(',')
+
+    this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
+      response => {
+        console.log('Upload successful!', response);
+      }
+    )
   }
 
   protected readonly items = items;

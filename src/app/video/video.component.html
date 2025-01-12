@@ -1,28 +1,31 @@
 <div class="main">
   <div class="videoPart">
     <div class="video_container">
-      <video autoplay="autoplay" controls="controls" src="{{video_link}}"></video>
+      <video autoplay="autoplay" controls="controls" [src]="videoData.video"></video>
     </div>
     <div class="videoInfo">
-      <h1 class="videoName">{{ video_name }}</h1>
-      <h3 [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{ video_owner }}</h3>
+      <h1 class="videoName">{{ videoData.name }}</h1>
+      <h3 [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{ videoData.owner }}</h3>
 
       <div class="videoContent">
         <div class="share_and_raiting">
-          <app-rating class="rating" [videoStars]="videoStars"></app-rating>
-
+          <div class="stars" id="stars">
+            <tui-root class="tui-root">
+              <tui-rating class="tui-rating" [(ngModel)]="videoStars" (click)="starsToVideo()"></tui-rating>
+            </tui-root>
+          </div>
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
         </div>
 
         <div class="aboutVideo">
           <details class="aboutVideoDetails">
             <summary>Описание</summary>
-            <p>{{ VideoData.description }}</p>
+            <p>{{ videoData.description }}</p>
           </details>
         </div>
 
         <div class="category">
-          <p>Категория: <b>{{ VideoData.category }}</b></p>
+          <p>Категория: <b>{{ videoData.category }}</b></p>
         </div>
       </div>
     </div>
@@ -50,3 +53,4 @@
     </div>
   </div>
 </div>
+

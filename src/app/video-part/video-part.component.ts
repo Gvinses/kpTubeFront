@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {VideosFetchService} from "../videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
@@ -9,14 +9,14 @@ export let videos = [];
 export let items = [
   {
     "id": 0,
-    "Video_ID": "1",
+    "Video_ID": "-1",
     "name": "У нас ошибка!",
-    "description": "error",
-    "likes": 1,
-    "views": 1,
-    "video": 'kringeproduction.ru',
-    "preview": 'notFound.jpg',
-    "category": 'error',
+    "description": "Простите, возможно мы перезапускаем сервер, или выпускаем обновление",
+    "likes": -1,
+    "views": -1,
+    "video": null,
+    "preview": null,
+    "category": null,
     "owner": 'KP229'
   }
 ];
@@ -28,14 +28,14 @@ export let items = [
   imports: [
     NgForOf,
     RouterLink,
-    RouterLinkActive,
+    RouterLinkActive
   ],
   templateUrl: './video-part.component.html',
   styleUrl: './video-part.component.sass'
 })
-export class VideoPartComponent implements AfterViewInit {
+export class VideoPartComponent implements OnInit{
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.getVideos()
   }
 
@@ -45,9 +45,7 @@ export class VideoPartComponent implements AfterViewInit {
 
   items = items
 
-  constructor() {
-  }
-
+  constructor() {}
   getVideos() {
     this.postService.getVideos().subscribe((data: any) => {
       data.forEach((video: any) => {
@@ -57,8 +55,7 @@ export class VideoPartComponent implements AfterViewInit {
         }
       })
       this.videos.reverse()
-      console.log(this.videos)
-    })
+    });
   }
 
   linksChanger(video: any) {
