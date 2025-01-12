@@ -1,0 +1,12 @@
+<div class="videos">
+  @for (video of videos; track video) {
+    <div class="video" [routerLink]="['/video', video.Video_ID]">
+      <img [src]="video.preview" alt="{{video.preview}}">
+      <div class="info">
+        <h5>{{video.name}}</h5>
+        <p>{{video.owner}}</p>
+      </div>
+    </div>
+  }
+</div>
+

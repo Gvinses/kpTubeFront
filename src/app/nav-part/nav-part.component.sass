@@ -1,0 +1,129 @@
+.burger-menu
+  display: flex
+  flex-direction: column
+  float: left
+  align-items: center
+  padding: 10px
+  width: 160px
+  height: 100%
+  z-index: 9999
+  background: #0f0f0f
+  position: fixed
+  left: 0
+  top: 0
+
+  .logo_of_kp_tube
+    width: 50px
+    filter: invert(1)
+
+  .bars_icon
+    margin-top: 30px
+    background: none
+    border: none
+    cursor: pointer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    width: 40px
+    height: 40px
+    position: relative
+    z-index: 2
+
+    .bar
+      border: 1.1px solid #ffffff
+      border-radius: 90px
+      display: block
+      width: 35px
+      background-color: #333
+      margin: 6px 0
+      transition: all 0.3s ease
+
+      &:nth-child(1)
+        transition: transform 0.3s ease, opacity 0.3s ease
+
+      &:nth-child(2)
+        transition: transform 0.3s ease
+
+      &:nth-child(3)
+        transition: transform 0.3s ease, opacity 0.3s ease
+
+    &.open
+      .bar:nth-child(1)
+        transform: translate(0, 13px) rotate(45deg)
+
+      .bar:nth-child(2)
+        transform: rotate(135deg)
+
+      .bar:nth-child(3)
+        transform: translate(0, -13px) rotate(45deg)
+        opacity: 0
+
+  .menu
+    position: relative
+    top: 10px
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+    width: 100%
+    z-index: 999
+    transition: opacity 0.3s ease
+
+    ul
+      list-style: none
+      padding: 0
+      margin: 0 0 0 5px
+      display: flex
+      flex-direction: column
+      gap: 10px
+
+      li
+        text-align: center
+        border: 2px solid white
+        border-radius: 15px
+        cursor: pointer
+        transition: 0.3s ease-out
+
+        white-space: nowrap
+        width: 80%
+        height: 40px
+        padding: 0px 16px
+        display: flex
+        min-height: 40px
+        position: relative
+        background-color: rgba(0, 0, 0, 0)
+        align-items: center
+        flex-direction: row
+        font-family: Roboto, Noto, sans-serif
+        font-size: 16px
+        font-weight: 400
+        line-height: 24px
+        color: rgb(241, 241, 241)
+        cursor: pointer
+        text-decoration-color: rgb(241, 241, 241)
+        text-decoration-style: solid
+        text-decoration-thickness: auto
+        visibility: visible
+
+        &:hover
+          background: #616161
+
+        a
+          text-decoration: none
+          color: #ffffff
+
+@media (max-width: 768px)
+  .burger-menu
+    padding: 10pxz
+    width: 120px
+
+@media (max-width: 500px)
+  ul
+    margin: 0 0 0 -20px
+  .burger-menu
+    padding: 10px 3px
+    width: calc(120px / 1.3)
+    height: 100%
+
+    .menu
+      ul
+        li
+          margin-left: 20px

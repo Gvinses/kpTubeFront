@@ -1,0 +1,36 @@
+<div class="audioContent">
+  <div class="playlists">
+    <div class="NewMusic">
+
+    </div>
+    <div class="DayPlaylist">
+
+    </div>
+    <div class="AlreadyListened">
+
+    </div>
+  </div>
+  <div class="carousel">
+    <div class="track" [style.transform]="getTransform()">
+      <div
+        *ngFor="let track of tracks; let i = index"
+        class="track-item"
+        [class.active]="i === currentTrackIndex"
+      >
+        <div class="image_container">
+          <img [src]="track.image" [style.opacity]="i === currentTrackIndex ? 1 : 0.5" />
+        </div>
+        <div class="audio_container">
+          <audio class="audio" #audio controls [src]="track.src" (play)="onPlay(i)"></audio>
+        </div>
+        <div class="description">
+          <p>{{ track.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button (click)="prevTrack()">Previous</button>
+    <button (click)="nextTrack()">Next</button>
+  </div>
+</div>
