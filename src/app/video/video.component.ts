@@ -45,6 +45,7 @@ export class VideoComponent implements OnInit {
   userName: string | null = null
   userComment: string | null = null
   likesAndRating: string = ''
+  video_link: string = ''
 
   protected videoStars = 0;
 
@@ -58,9 +59,9 @@ export class VideoComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.videoId = +params.get('Video_ID')!;
       console.log(this.videoId)
-      this.loadVideoDetails();
-      this.loadUserDetails()
-    });
+    })
+    this.loadVideoDetails();
+    this.loadUserDetails()
   }
 
   loadUserDetails(): void {
@@ -85,7 +86,7 @@ export class VideoComponent implements OnInit {
   loadVideoDetails(): void {
     if (this.videoId !== null) {
       this.http.get<any>(`https://kptube.kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
-        data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+        this.video_link = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         this.getComments()
         this.VideoData = data[0]
