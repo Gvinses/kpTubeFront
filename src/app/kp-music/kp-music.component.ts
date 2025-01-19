@@ -21,11 +21,18 @@ export class KpMusicComponent implements OnInit {
   currentTrackIndex = 0;
 
   tracks = [
-    {title: 'Трэк', artist: 'Gvins', image: 'gg.png', src: 'kp229SoundTrackv2.mp3', description: 'Track 1 transcript' },
-    {title: 'Крутой трек', artist: 'KP229', image: 'Logo.jpg', src: 'musicForKP229.mp3', description: 'Track 2 transcript' },
+    {title: 'Трэк', artist: 'Gvins', image: 'gg.png', src: 'kp229SoundTrackv2.mp3', description: 'Track 1 transcript'},
+    {
+      title: 'Крутой трек',
+      artist: 'KP229',
+      image: 'Logo.jpg',
+      src: 'musicForKP229.mp3',
+      description: 'Track 2 transcript'
+    },
   ];
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
     this.getMusic()
@@ -42,7 +49,8 @@ export class KpMusicComponent implements OnInit {
         }
       })
       this.tracks = data
-    });
+      console.log(data)
+    })
   }
 
   getTransform() {

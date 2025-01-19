@@ -1,8 +1,8 @@
-import {Component, inject, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {VideosFetchService} from "../videos-fetch.service";
 import {NgIf} from "@angular/common";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {Subscription} from "rxjs";
 import {HttpEventType} from "@angular/common/http";
 import {response} from "express";
@@ -28,7 +28,6 @@ export class VideoCreatingComponent implements OnInit {
 
   loading: boolean = false;
   isButtonDisabled: boolean = false;
-  uploadProgress = 0;
   uploadSub: Subscription | null = null;
   errorMessage: string | null = null;
   nameLS: any | null = null
@@ -42,7 +41,8 @@ export class VideoCreatingComponent implements OnInit {
   category: any[] = [];
 
 
-  constructor(private videoUploadService: VideosFetchService, private router: Router) { }
+  constructor(private videoUploadService: VideosFetchService, private router: Router) {
+  }
 
   onFileChange(event: any): void {
     if (event.target.files.length > 0) {
@@ -133,6 +133,7 @@ export class VideoCreatingComponent implements OnInit {
       }
     )
   }
+
   uploadVideo(videoFile: any, previewFile: any) {
     this.uploadSub = this.videoUploadService.uploadVideo(
       videoFile,
@@ -143,13 +144,9 @@ export class VideoCreatingComponent implements OnInit {
       this.choosedCategory,
       this.isGlobal,
     ).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        this.uploadProgress = Math.round(100 * (event.loaded / (event.total || 1)));
-      } else if (event.type === HttpEventType.Response) {
-        this.loading = false;
-        this.closePage()
-        this.isButtonDisabled = false;
-      }
+      this.loading = false;
+      this.closePage()
+      this.isButtonDisabled = false;
     }, error => {
       console.error('Upload error:', error);
       this.loading = false;

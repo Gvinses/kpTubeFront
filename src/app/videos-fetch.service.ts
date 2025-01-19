@@ -18,18 +18,6 @@ export class VideosFetchService {
   constructor() {
   }
 
-  getHeaders() {
-    const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
-
-    let headers = new HttpHeaders()
-
-    headers.set('X-USERNAME', String(username))
-    headers.set('X-PASSWORD', String(password))
-
-    return headers
-  }
-
   getVideos(): any {
     return this.http.get<any>(this.apiUrl)
   }
@@ -57,10 +45,16 @@ export class VideosFetchService {
     formData.append('category', category);
     formData.append('isGlobal', String(isGlobal));
 
-    // https://kptube.kringeproduction.ru/users/?name=Gvins
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
 
-    console.log(this.http.post(this.apiUrl, formData, {headers: this.getHeaders(), reportProgress: true}))
-    return this.http.post(this.apiUrl, formData, {headers: this.getHeaders(), reportProgress: true})
+    let headers = new HttpHeaders()
+
+    headers = headers.set('X-USERNAME', String(username))
+    headers = headers.set('X-PASSWORD', String(password))
+
+
+    return this.http.post(this.apiUrl, formData, {headers: headers})
   }
 
   createUser(userID: number, name: string, email: string, password: string, avatar: File, header: File) {
@@ -88,11 +82,29 @@ export class VideosFetchService {
   }
 
   getUserByID(UserID: string) {
-    return this.http.get<any>(this.account + '?User_ID=' + UserID, {headers: this.getHeaders()})
+
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+
+    let headers = new HttpHeaders()
+
+    headers = headers.set('X-USERNAME', String(username))
+    headers = headers.set('X-PASSWORD', String(password))
+
+    return this.http.get<any>(this.account + '?User_ID=' + UserID, {headers: headers})
   }
 
   getUsers(): Observable<any> {
-    return this.http.get(this.account, {headers: this.getHeaders()})
+
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+
+    let headers = new HttpHeaders()
+
+    headers = headers.set('X-USERNAME', String(username))
+    headers = headers.set('X-PASSWORD', String(password))
+
+    return this.http.get(this.account, {headers: headers})
   }
 
   updateVideo(video: any) {
@@ -104,7 +116,16 @@ export class VideosFetchService {
       "likes": stars
     }
 
-    return this.http.put(this.apiUrl + '?Video_ID=' + Video_ID, returnedOBJ, {headers: this.getHeaders()})
+
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+
+    let headers = new HttpHeaders()
+
+    headers = headers.set('X-USERNAME', String(username))
+    headers = headers.set('X-PASSWORD', String(password))
+
+    return this.http.put(this.apiUrl + '?Video_ID=' + Video_ID, returnedOBJ, {headers: headers})
   }
 
   likeInfoToUser(USID: number, name: string, email: string, password: string, liked: string) {
@@ -135,9 +156,17 @@ export class VideosFetchService {
     formData.append('Video_ID', Video_ID);
     formData.append('owner', owner);
 
-    console.log(this.getHeaders())
 
-    return this.http.post(this.comment, formData, {headers: this.getHeaders()})
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+
+    let headers = new HttpHeaders()
+
+    headers = headers.set('X-USERNAME', String(username))
+    headers = headers.set('X-PASSWORD', String(password))
+
+
+    return this.http.post(this.comment, formData, {headers: headers})
   }
 
   deleteVideo(id: number) {

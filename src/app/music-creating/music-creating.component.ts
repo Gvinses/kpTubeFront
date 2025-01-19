@@ -1,7 +1,7 @@
-import {Component, inject, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {Subscription} from "rxjs";
 import {HttpEvent, HttpEventType} from "@angular/common/http";
 import {response} from "express";
@@ -27,7 +27,8 @@ export class MusicCreatingComponent {
   name: string = '';
   description: string = '';
 
-  constructor(private MusicUploadService: MusicFetchService, VideosUploadService: VideosFetchService, private router: Router) { }
+  constructor(private MusicUploadService: MusicFetchService, VideosUploadService: VideosFetchService, private router: Router) {
+  }
 
   mainLink = 'https://i.ibb.co/wBn5TrS/Loading-File-Img.png'
 
@@ -104,14 +105,10 @@ export class MusicCreatingComponent {
                   this.selectedFile,
                   this.selectedPreview,
                 ).subscribe((event: HttpEvent<any>) => {
-                  if (event.type === HttpEventType.UploadProgress) {
-                    this.uploadProgress = Math.round(100 * (event.loaded / (event.total || 1)));
-                  } else if (event.type === HttpEventType.Response) {
-                    console.log('Upload successful!', event.body);
-                    this.loading = false;
-                    this.router.navigate(['/']);
-                    this.isButtonDisabled = false;
-                  }
+                  console.log('Upload successful!', event);
+                  this.loading = false;
+                  this.router.navigate(['/']);
+                  this.isButtonDisabled = false;
                 }, (error: HttpEvent<any>) => {
                   console.error('Upload error:', error);
                   this.loading = false;
