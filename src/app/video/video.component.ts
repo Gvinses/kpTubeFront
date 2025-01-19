@@ -33,7 +33,7 @@ import {RatingComponent} from "../rating/rating.component";
   ],
   styleUrls: ['./video.component.sass']
 })
-export class VideoComponent implements AfterViewInit {
+export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
 
   videoId: number | null = null
@@ -51,6 +51,11 @@ export class VideoComponent implements AfterViewInit {
   userComment: string | null = null
   likesAndRating: string = ''
 
+  video_name: string = ''
+  video_owner: string = ''
+  video_category: string = ''
+  video_description: string = ''
+
   videoStars = 0
 
 
@@ -62,7 +67,7 @@ export class VideoComponent implements AfterViewInit {
   ) {
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.videoId = +params.get('Video_ID')!
     })
@@ -73,8 +78,9 @@ export class VideoComponent implements AfterViewInit {
   loadUserDetails(): void {
     if (localStorage) {
       this.userName = localStorage.getItem('UserName')
+      let userId = Number(localStorage.getItem('UserID')) / 2
 
-      this.VideosFetchService.enterUser(String(this.userName)).subscribe(
+      this.VideosFetchService.getUserByID(String(userId)).subscribe(
         (data: any) => {
           this.likesAndRating = data[0].liked
           this.userEmail = data[0].email
@@ -90,6 +96,7 @@ export class VideoComponent implements AfterViewInit {
 
   loadVideoDetails(): void {
     if (this.videoId !== null) {
+      console.log('STARTED!')
       this.http.get<any>(`https://kptube.kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         this.getComments()
@@ -97,6 +104,12 @@ export class VideoComponent implements AfterViewInit {
         this.INDBID = data[0].id
         this.videoStars = data[0].likes
         this.video_link = data[0].video
+        this.video_name = data[0].name
+        this.video_owner = data[0].owner
+        this.video_category = data[0].category
+        this.video_description = data[0].description
+
+        console.log(this.VideoData)
 
         this.VideosFetchService.enterUser(this.videoData.owner).subscribe(
           (data: any) => {
@@ -159,7 +172,7 @@ export class VideoComponent implements AfterViewInit {
 
   async shareInfo() {
     try {
-      this.shareData.url = `https://main--imaginative-kheer-6bc042.netlify.app/video/${this.videoId}`
+      this.shareData.url = `https://kptube.netlify.app/video/${this.videoId}`
       await navigator.share(this.shareData)
     } catch (err) {
       console.log(err)
