@@ -1,7 +1,7 @@
 <div class="main">
   <div class="videoPart">
     <div class="video_container">
-      <video autoplay="autoplay" controls="controls" [src]="videoData.video"></video>
+      <video autoplay="autoplay" controls="controls" [src]="video_link"></video>
     </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ videoData.name }}</h1>
@@ -9,11 +9,8 @@
 
       <div class="videoContent">
         <div class="share_and_raiting">
-          <div class="stars" id="stars">
-            <tui-root class="tui-root">
-              <tui-rating class="tui-rating" [(ngModel)]="videoStars" (click)="starsToVideo()"></tui-rating>
-            </tui-root>
-          </div>
+          <app-rating class="rating" [videoStars]="videoStars"></app-rating>
+
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
         </div>
 
