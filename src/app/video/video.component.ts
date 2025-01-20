@@ -6,8 +6,6 @@ import {HttpClient} from "@angular/common/http"
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common"
 import {VideosFetchService} from "../videos-fetch.service"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
-import {RatingComponent} from "../rating/rating.component";
-
 
 @Component({
   selector: 'app-video',
@@ -23,8 +21,7 @@ import {RatingComponent} from "../rating/rating.component";
     ReactiveFormsModule,
     FormsModule,
     NgIf,
-    NgForOf,
-    RatingComponent
+    NgForOf
   ],
   styleUrls: ['./video.component.sass']
 })
