@@ -1,6 +1,6 @@
 <div class="main">
   <div class="videoPart">
-    <video autoplay="autoplay" controls="controls" [src]="videoData.video"></video>
+    <video autoplay="autoplay" controls="controls" [src]="videoData.video" loop></video>
     <div class="videoInfo">
       <h1 class="videoName">{{ videoData.name }}</h1>
       <h3 [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{ videoData.owner }}</h3>
