@@ -1,7 +1,7 @@
 <div class="main">
   <div class="videoPart">
     <div class="video_container">
-      <video autoplay="autoplay" controls="controls" src="{{video_link}}"></video>
+      <video autoplay="autoplay" controls="controls" src="{{ video_link }}"></video>
     </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ video_name }}</h1>
@@ -9,7 +9,6 @@
 
       <div class="videoContent">
         <div class="share_and_raiting">
-          <app-rating class="rating" [videoStars]="videoStars"></app-rating>
 
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
         </div>

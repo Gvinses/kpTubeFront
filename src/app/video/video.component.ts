@@ -6,9 +6,6 @@ import {HttpClient} from "@angular/common/http"
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common"
 import {VideosFetchService} from "../videos-fetch.service"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
-import {TuiRating} from '@taiga-ui/kit';
-import {TuiRoot} from "@taiga-ui/core";
-import {RatingComponent} from "../rating/rating.component";
 
 
 @Component({
@@ -17,7 +14,6 @@ import {RatingComponent} from "../rating/rating.component";
   standalone: true,
   imports: [
     FormsModule,
-    TuiRating,
     RouterLink,
     RouterLinkActive,
     NgOptimizedImage,
@@ -27,9 +23,6 @@ import {RatingComponent} from "../rating/rating.component";
     FormsModule,
     NgIf,
     NgForOf,
-    TuiRating,
-    TuiRoot,
-    RatingComponent
   ],
   styleUrls: ['./video.component.sass']
 })
