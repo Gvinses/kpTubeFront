@@ -2,7 +2,6 @@ import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
 import {VideosFetchService} from "../videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {RatingComponent} from "../rating/rating.component";
 
 export let videos = [];
 
@@ -30,7 +29,6 @@ export let items = [
     NgForOf,
     RouterLink,
     RouterLinkActive,
-    RatingComponent
   ],
   templateUrl: './video-part.component.html',
   styleUrl: './video-part.component.sass'

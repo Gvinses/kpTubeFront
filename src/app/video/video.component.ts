@@ -6,8 +6,6 @@ import {HttpClient} from "@angular/common/http";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {VideosFetchService} from "../videos-fetch.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TuiRating} from '@taiga-ui/kit';
-import {TuiRoot} from "@taiga-ui/core";
 
 @Component({
   selector: 'app-video',
@@ -23,8 +21,6 @@ import {TuiRoot} from "@taiga-ui/core";
     FormsModule,
     NgIf,
     NgForOf,
-    TuiRating,
-    TuiRoot
   ],
   styleUrls: ['./video.component.sass']
 })
