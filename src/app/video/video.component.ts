@@ -54,7 +54,7 @@ export class VideoComponent implements OnInit {
   videoStars = 0
 
 
-  protected video_link: any
+  video_link: any
 
   constructor(
     private route: ActivatedRoute,
