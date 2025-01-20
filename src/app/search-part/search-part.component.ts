@@ -31,7 +31,9 @@ export class SearchPartComponent implements OnInit {
 
 
   ngOnInit() {
-    this.checkScreenSize(window.innerWidth)
+    if (window) {
+      this.checkScreenSize(window.innerWidth)
+    }
     if (this.isLogin()) {
       if (localStorage) {
         this.gettedID = String(Number(localStorage.getItem('UserID')) / 2)
@@ -68,6 +70,7 @@ export class SearchPartComponent implements OnInit {
     this.isMobile = width <= 650
     this.isInputDisabled = width > 650
   }
+
   searchIconClick() {
     this.isInputDisabled = !this.isInputDisabled
   }
