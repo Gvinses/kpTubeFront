@@ -44,10 +44,10 @@ export class VideoComponent implements OnInit {
   userComment: string | null = null
   likesAndRating: string = ''
 
-  video_name: string = ''
-  video_owner: string = ''
-  video_category: string = ''
-  video_description: string = ''
+  video_name: string | null = null
+  video_owner: string | null = null
+  video_category: string | null = null
+  video_description: string | null = null
 
   videoStars = 0
 
