@@ -103,10 +103,15 @@ export class VideoComponent implements OnInit {
         this.video_description = data[0].description
 
         console.log(this.VideoData)
+        console.log('-----------------')
+        console.log(this.video_owner)
+        console.log(this.video_category)
+        console.log(this.video_description)
 
-        this.VideosFetchService.enterUser(this.videoData.owner).subscribe(
+
+        this.VideosFetchService.enterUser(this.video_owner).subscribe(
           (data: any) => {
-            this.VideoOwnerId = data[0]
+            this.VideoOwnerId = data[0].User_ID
           }
         )
       })
@@ -115,11 +120,11 @@ export class VideoComponent implements OnInit {
 
   getComments() {
     this.http.get<any>(`https://kptube.kringeproduction.ru/comments/?Video_ID=${this.videoId}`).subscribe(commentsData => {
-      console.log(commentsData)
       this.comments = commentsData
       commentsData.forEach((comment: any) => {
         this.howMuchComments = Number(this.howMuchComments) + 1
       })
+      console.log(this.comments)
     })
   }
 

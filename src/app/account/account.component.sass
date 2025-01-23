@@ -34,15 +34,17 @@
           object-fit: cover
 
       .avatar_and_username
-        display: flex
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr
         justify-content: center
         align-items: center
-        gap: 55px
 
         .avatar
           display: flex
-          width: 200px
-          height: 200px
+          justify-content: center
+          align-items: center
+          width: 70px
+          height: 70px
           position: relative
 
           img
@@ -51,14 +53,14 @@
             object-fit: contain
 
         .userName
+          margin-left: 25px
           position: relative
           left: -25px
 
         .exitAccount
           float: right
           display: flex
-          width: 100%
-          justify-content: flex-end
+          width: 40%
 
           button
             padding: 13px

@@ -3,79 +3,159 @@
   flex-direction: column
   align-items: center
   justify-content: center
-  margin-left: 200px
+  margin-left: 140px
 
-  .HaveAnAccount
+  .userAccount
     display: flex
     flex-direction: column
     width: 100%
     height: 100vh
+
     .userInfo
       width: 100%
-      height: 30vh
-      .header
-        display: flex
-        width: 100%
-        height: 130%
-        position: relative
-        overflow: hidden
-        justify-content: center
-        img
-          border-radius: 15px
-          min-width: 100%
-          min-height: 100%
-          object-fit: revert
-      .avatar
-        display: flex
-        width: 160px
-        height: 160px
-        position: relative
-        bottom: 50px
-        left: 50px
-        border-radius: 50%
-        img
-          width: 100%
-          height: 100%
-          object-fit: contain
-      .userName
-        display: flex
-        position: relative
-        top: -30px
-        left: 25px
-
-  .userVideos
-    display: grid
-    grid-template-columns: repeat(4, 1fr)
-    margin-top: 300px
-    margin-left: 20px
-
-    .video
-      width: 100%
-      max-width: 300px
-      height: auto
-      aspect-ratio: 16/9
-      // Сохранение соотношения сторон
       display: flex
       flex-direction: column
       align-items: center
       justify-content: center
-      img
-        width: 100%
-        height: 100%
-        object-fit: scale-down
-        border: 2px solid black
-        padding: 5px
 
-      .info
+      .header
+        display: flex
+        justify-content: center
+        width: 50vw
+        height: auto
+        aspect-ratio: 16/9
         position: relative
-        top: 5px
+        overflow: hidden
+
+        img
+          border-radius: 15px
+          width: 100%
+          height: 100%
+          object-fit: cover
+
+      .avatar_and_username
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr
+        justify-content: center
+        align-items: center
+
+        .avatar
+          display: flex
+          justify-content: center
+          align-items: center
+          width: 70px
+          height: 70px
+          position: relative
+
+          img
+            width: 100%
+            height: 100%
+            object-fit: contain
+
+        .userName
+          margin-left: 25px
+          position: relative
+          left: -25px
+
+        .exitAccount
+          float: right
+          display: flex
+          width: 40%
+
+          button
+            padding: 13px
+            border-radius: 15px
+            outline: none
+            border: none
+            margin-right: 70px
+
+
+.userVideos
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  margin-top: 10vw
+  margin-left: 50px
+
+  .noVideo
+    width: 100%
+    height: 40vh
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+
+    img
+      height: 30%
+      width: auto
+
+
+  .video
+    width: 100%
+    max-width: 300px
+    height: auto
+    aspect-ratio: 16/9
+    // Сохранение соотношения сторон
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+    img
+      width: 100%
+      height: 100%
+      object-fit: scale-down
+      border: 2px solid black
+      padding: 5px
+
+    .info
+      position: relative
+      top: 5px
+      text-align: left
+
+      h5
+        margin: 10px 0 5px
+        font-size: 1.2em
+
+      p
+        margin: 0
+        font-size: 1.1em
+        color: #d5d5d5
         text-align: left
-        h5
-          margin: 10px 0 5px
-          font-size: 1.2em
 
-        p
-          margin: 0
-          font-size: 1.1em
-          color: #d5d5d5
 
+@media (max-width: 768px)
+  .dontHaveAnAccount
+    .interactive
+      margin-left: -120px
+
+  .avatar_and_username
+    margin-left: 40px
+    width: 90%
+
+    .avatar
+      display: none
+
+  .userVideos
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: 20px
+
+    .video
+      width: 25vw
+
+@media (max-width: 600px)
+  .dontHaveAnAccount
+    .interactive
+      margin-left: -50px
+
+  .avatar_and_username
+    margin-left: 40px
+    width: 90%
+
+
+  .userVideos
+    grid-template-columns: 1fr
+    gap: 20px
+
+    .video
+      width: 40vw

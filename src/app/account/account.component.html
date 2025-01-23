@@ -1,99 +1,102 @@
 <div class="container">
-      <div class="HaveAnAccount" *ngIf="getUserID()">
-        <div class="userInfo">
-          <div class="header">
-            <img src="{{userHeader}}" loading="eager">
-          </div>
-          <span class="avatar_and_username">
-            <div class="avatar">
-              <img src="{{userAvatar}}" loading="eager">
-            </div>
-            <div class="userName">
-              <h1 class="userName">{{userName}}</h1>
-            </div>
-            <div class="exitAccount">
-              <button (click)="exitAccount()" class="exitAccountButt">Выйти</button>
-            </div>
-          </span>
-        </div>
-        <div class="userVideos">
-          @for (video of userVideos; track video) {
-            <div class="video" [routerLink]="['/video', video.Video_ID]">
-              <img src="{{video.preview}}"  alt="{{video.preview}}">
-              <div class="info">
-                <h5>{{video.name}}</h5>
-              </div>
-            </div>
-          } @empty {
-            <div class="noVideo">
-              <h1>Тут нет видео :(</h1>
-            </div>
-          }
-        </div>
+  <div class="HaveAnAccount" *ngIf="getUserID()">
+    <div class="userInfo">
+      <div class="header">
+        <img src="{{ userHeader }}" loading="eager">
       </div>
-
-      <div class="dontHaveAnAccount" *ngIf="!getUserID()">
-        <div class="errorMessage" *ngIf="errorMessage">
-          <h1>{{errorMessage}}</h1>
+      <span class="avatar_and_username">
+        <div class="avatar">
+          <img src="{{ userAvatar }}" loading="eager">
         </div>
-        <div class="interactive">
-          <div class="enter" *ngIf="!register">
-            <form class="enterForm" (ngSubmit)="onEnter()" #emailForm="ngForm">
-              <label for="enterName">Имя:</label>
-              <input id="enterName" name="name" required="required" [(ngModel)]="enterName">
-              <label for="enterPass">Пароль:</label>
-              <input id="enterPass" name="password" required="required" [(ngModel)]="enterPass">
-              <button type="submit" class="enterSubmit">Отправить</button>
-            </form>
-            <p class="go_to_register" (click)="change_method()">Нет аккаунта? <i>Зарегистрироваться</i></p>
-          </div>
-          <div class="register" *ngIf="register">
-            <form class="registerForm" (ngSubmit)="onRegister()" #emailForm="ngForm">
-              <div class="avatarPart">
-                <div class="haveAvatar" *ngIf="avatarUrl">
-                  <div class="avatar">
-                    <img width="100" [src]="avatarUrl">
-                  </div>
-                </div>
-                <div class="dontHaveAvatar">
-                  <label for="avatar">Аватар:
-                    <span>Выберите файл</span>
-                  </label>
-                  <input type="file" id="avatar" required name="avatar" hidden="hidden" (change)="avatarCreate($event)" [(ngModel)]="avatar">
-                </div>
-              </div>
-              <div class="namePart">
-                <label for="name">Имя:</label>
-                <input type="text" id="name" required name="name" [(ngModel)]="name">
-              </div>
-
-              <div class="passPart">
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" required name="password" [(ngModel)]="password">
-              </div>
-
-              <div class="emailPart">
-                <label for="email">Почта:</label>
-                <input type="email" id="email" required name="email" [(ngModel)]="email">
-              </div>
-
-              <div class="headerPart">
-                <div class="haveHeader" *ngIf="headerUrl">
-                  <div class="avatar">
-                    <img width="200" [src]="headerUrl">
-                  </div>
-                </div>
-                <div class="dontHaveHeader">
-                  <label for="header">Шапка профиля:
-                    <span>Выберите файл</span>
-                  </label>
-                  <input type="file" id="header" required name="header" hidden="hidden" (change)="headerCreate($event)" [(ngModel)]="header">
-                </div>
-              </div>
-              <button type="submit" class="submitButton">Отправить</button>
-            </form>
-            <p class="go_to_authorization" (click)="change_method()">Есть аккаунт? <i>Войти</i></p>
+        <div class="userName">
+          <h1 class="userName">{{ userName }}</h1>
+        </div>
+        <div class="exitAccount">
+          <button (click)="exitAccount()" class="exitAccountButt">Выйти</button>
+        </div>
+      </span>
+    </div>
+    <div class="userVideos">
+      @for (video of userVideos; track video) {
+        <div class="video" [routerLink]="['/video', video.Video_ID]">
+          <img src="{{video.preview}}" alt="{{video.preview}}">
+          <div class="info">
+            <h5>{{ video.name }}</h5>
           </div>
         </div>
+      } @empty {
+        <div class="noVideo">
+          <img src="notFound.jpg">
+          <h1>Тут нет видео.</h1>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="dontHaveAnAccount" *ngIf="!getUserID()">
+    <div class="errorMessage" *ngIf="errorMessage">
+      <h1>{{ errorMessage }}</h1>
+    </div>
+    <div class="interactive">
+      <div class="enter" *ngIf="!register">
+        <form class="enterForm" (ngSubmit)="onEnter()" #emailForm="ngForm">
+          <label for="enterName">Имя:</label>
+          <input id="enterName" name="name" required="required" [(ngModel)]="enterName">
+          <label for="enterPass">Пароль:</label>
+          <input id="enterPass" name="password" required="required" [(ngModel)]="enterPass">
+          <button type="submit" class="enterSubmit">Отправить</button>
+        </form>
+        <p class="go_to_register" (click)="change_method()">Нет аккаунта? <i>Зарегистрироваться</i></p>
       </div>
+      <div class="register" *ngIf="register">
+        <form class="registerForm" (ngSubmit)="onRegister()" #emailForm="ngForm">
+          <div class="avatarPart">
+            <div class="haveAvatar" *ngIf="avatarUrl">
+              <div class="avatar">
+                <img width="100" [src]="avatarUrl">
+              </div>
+            </div>
+            <div class="dontHaveAvatar">
+              <label for="avatar">Аватар:
+                <span>Выберите файл</span>
+              </label>
+              <input type="file" id="avatar" required name="avatar" hidden="hidden" (change)="avatarCreate($event)"
+                     [(ngModel)]="avatar">
+            </div>
+          </div>
+          <div class="namePart">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" required name="name" [(ngModel)]="name">
+          </div>
+
+          <div class="passPart">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" required name="password" [(ngModel)]="password">
+          </div>
+
+          <div class="emailPart">
+            <label for="email">Почта:</label>
+            <input type="email" id="email" required name="email" [(ngModel)]="email">
+          </div>
+
+          <div class="headerPart">
+            <div class="haveHeader" *ngIf="headerUrl">
+              <div class="avatar">
+                <img width="200" [src]="headerUrl">
+              </div>
+            </div>
+            <div class="dontHaveHeader">
+              <label for="header">Шапка профиля:
+                <span>Выберите файл</span>
+              </label>
+              <input type="file" id="header" required name="header" hidden="hidden" (change)="headerCreate($event)"
+                     [(ngModel)]="header">
+            </div>
+          </div>
+          <button type="submit" class="submitButton">Отправить</button>
+        </form>
+        <p class="go_to_authorization" (click)="change_method()">Есть аккаунт? <i>Войти</i></p>
+      </div>
+    </div>
+  </div>
 </div>

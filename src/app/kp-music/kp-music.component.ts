@@ -1,4 +1,4 @@
-import {Component, ElementRef, inject, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, ElementRef, inject, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {MusicFetchService} from "../music-fetch.service";
@@ -13,12 +13,13 @@ import {MusicFetchService} from "../music-fetch.service";
     NgIf
   ],
   templateUrl: './kp-music.component.html',
-  styleUrl: './kp-music.component.sass'
+  styleUrls: ['./kp-music.component.sass']
 })
 export class KpMusicComponent implements OnInit {
   musicService = inject(MusicFetchService)
-  @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>;
-  currentTrackIndex = 0;
+  @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>
+  currentTrackIndex = 0
+  isPlaying = false
 
   tracks = [
     {title: 'Трэк', artist: 'Gvins', image: 'gg.png', src: 'kp229SoundTrackv2.mp3', description: 'Track 1 transcript'},
@@ -29,7 +30,7 @@ export class KpMusicComponent implements OnInit {
       src: 'musicForKP229.mp3',
       description: 'Track 2 transcript'
     },
-  ];
+  ]
 
   constructor() {
   }
@@ -62,23 +63,34 @@ export class KpMusicComponent implements OnInit {
       this.stopAll();
       this.currentTrackIndex = index;
       this.audioElements.toArray()[index].nativeElement.play();
+      this.isPlaying = true; // Устанавливаем флаг воспроизведения
+    } else {
+      const audio = this.audioElements.toArray()[index].nativeElement;
+      if (this.isPlaying) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+      this.isPlaying = !this.isPlaying; // Переключаем флаг
     }
   }
 
   stopAll() {
     this.audioElements.forEach(audio => audio.nativeElement.pause());
+    this.isPlaying = false; // Сбрасываем флаг
   }
 
   prevTrack() {
     this.stopAll();
     this.currentTrackIndex = (this.currentTrackIndex - 1 + this.tracks.length) % this.tracks.length;
     this.audioElements.toArray()[this.currentTrackIndex].nativeElement.play();
+    this.isPlaying = true; // Устанавливаем флаг воспроизведения
   }
 
   nextTrack() {
     this.stopAll();
     this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
     this.audioElements.toArray()[this.currentTrackIndex].nativeElement.play();
+    this.isPlaying = true; // Устанавливаем флаг воспроизведения
   }
-
 }
