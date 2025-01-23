@@ -1,5 +1,4 @@
 <div class="main">
-  <h1>{{videoData}}</h1>
   <div class="videoPart">
     <div class="video_container">
       <video autoplay="autoplay" controls="controls" src="{{ video_link }}"></video>
@@ -7,6 +6,7 @@
     <div class="videoInfo">
       <h1 class="videoName">{{ video_name }}</h1>
       <h3 [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{video_owner}}</h3>
+      <h1>{{videoData}}</h1>
 
       <div class="videoContent">
         <div class="share_and_raiting">
