@@ -5,7 +5,7 @@
     </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ video_name }}</h1>
-      <h3 class="videoAuthor" [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{video_owner}}</h3>
+      <h3 class="videoAuthor" [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{ video_owner }}</h3>
 
       <div class="videoContent">
         <div class="share_and_raiting">
@@ -51,3 +51,5 @@
   </div>
 </div>
 
+<!-- TODO-->
+<!--  Размер коментариев адаптивным + сами комменты крутые сделать (Это можно и к beta 2 думаю)-->

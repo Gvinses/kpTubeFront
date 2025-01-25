@@ -127,6 +127,9 @@
   .videoInfo
     display: block
 
+    h1
+      font-size: 20px
+
     .videoContent
       display: grid
       grid-template-columns: 1.7fr
@@ -135,8 +138,9 @@
       gap: 50px
       font-size: 30px
 
-  .aboutVideo
-
+  .share_and_raiting
+    display: flex
+    flex-direction: column
 
 @media (max-width: 500px)
   .main
@@ -152,6 +156,9 @@
       object-fit: cover
 
   .videoInfo
+    h1
+      font-size: 17px
+
     .videoContent
       display: grid
       grid-template-columns: 1.7fr
@@ -170,3 +177,7 @@
   .category
     p
       font-size: 14px
+
+  .share_and_raiting
+    display: flex
+    flex-direction: column
