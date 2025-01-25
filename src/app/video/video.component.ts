@@ -42,12 +42,14 @@ export class VideoComponent implements OnInit {
   userEmail: string | null = null
   userPassword: string | null = null
   likesAndRating: string = ''
+  VideosHistory: string | any = ''
 
   video_name: string | null = null
   video_owner: string | null = null
   video_category: string | null = null
   video_description: string | null = null
-  VideosHistory: string | any = ''
+  video_preview_link: string | null = null
+
   VideoData: any | null = null
   VideoOwnerId: any | null = null
 
@@ -97,11 +99,13 @@ export class VideoComponent implements OnInit {
       console.log('STARTED!')
       this.http.get<any>(`https://kptube.kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+        data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         this.getComments()
         this.VideoData = data[0]
         this.INDB_video_ID = data[0].Video_ID
         this.videoStars = data[0].likes
         this.video_link = data[0].video
+        this.video_preview_link = data[0].preview
         this.video_name = data[0].name
         this.video_owner = data[0].owner
         this.video_category = data[0].category
@@ -164,12 +168,18 @@ export class VideoComponent implements OnInit {
 
   async shareInfo() {
     try {
-      this.shareData.url = `https://kptube.netlify.app/video/${this.videoId}`
+      this.shareData = {
+        title: String(this.video_name),
+        text: this.video_description,
+        url: `https://kptube.netlify.app/video/${this.videoId}`,
+      };
+
       await navigator.share(this.shareData)
     } catch (err) {
       console.log(err)
     }
   }
+
 
   protected readonly items = items
   protected readonly Number = Number;

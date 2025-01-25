@@ -27,17 +27,16 @@ let tracks = [
   styleUrls: ['./kp-music.component.sass']
 })
 export class KpMusicComponent implements OnInit {
-  musicService = inject(MusicFetchService)
-  @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>
-  currentTrackIndex = 0
-  isPlaying = false
-  tracks = tracks
+  musicService = inject(MusicFetchService);
+  @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>;
+  currentTrackIndex = 0;
+  isPlaying = false;
+  tracks: any[] = []; // Инициализируем массив треков
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.getMusic()
+    this.getMusic();
   }
 
   getMusic() {
@@ -49,32 +48,20 @@ export class KpMusicComponent implements OnInit {
         if (music.image && music.image.startsWith('http://127.0.0.1:8000/')) {
           music.image = music.image.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
         }
-      })
-      this.tracks = data
-      console.log(data)
-    })
+      });
+      this.tracks = data;
+      console.log(data);
+    });
   }
 
-  getTransform() {
-    return `translateX(-${this.currentTrackIndex * 100}%)`;
-  }
-
-  onPlay(index: number) {
-    if (this.currentTrackIndex !== index) {
-      this.stopAll();
-      this.currentTrackIndex = index;
-      this.audioElements.toArray()[index].nativeElement.play();
-      this.isPlaying = true; // Устанавливаем флаг воспроизведения
-    } else {
-      const audio = this.audioElements.toArray()[index].nativeElement;
-      if (this.isPlaying) {
-        audio.pause();
-      } else {
-        audio.play();
-      }
-      this.isPlaying = !this.isPlaying; // Переключаем флаг
-    }
-  }
+  // setCurrentMusic() {
+  //   const currentAudio = this.audioElements.toArray()[this.currentTrackIndex]
+  //   if (currentAudio) {
+  //     console.log(currentAudio)
+  //     currentAudio.nativeElement.play();
+  //     this.isPlaying = true; // Устанавливаем флаг воспроизведения
+  //   }
+  // }
 
   stopAll() {
     this.audioElements.forEach(audio => audio.nativeElement.pause());
@@ -82,16 +69,14 @@ export class KpMusicComponent implements OnInit {
   }
 
   prevTrack() {
-    this.stopAll();
+    this.stopAll()
     this.currentTrackIndex = (this.currentTrackIndex - 1 + this.tracks.length) % this.tracks.length;
-    this.audioElements.toArray()[this.currentTrackIndex].nativeElement.play();
-    this.isPlaying = true; // Устанавливаем флаг воспроизведения
+    // this.setCurrentMusic(); // Автоматически начинаем воспроизведение текущего трека
   }
 
   nextTrack() {
-    this.stopAll();
+    this.stopAll()
     this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
-    this.audioElements.toArray()[this.currentTrackIndex].nativeElement.play();
-    this.isPlaying = true; // Устанавливаем флаг воспроизведения
+    // this.setCurrentMusic(); // Автоматически начинаем воспроизведение текущего трека
   }
 }
