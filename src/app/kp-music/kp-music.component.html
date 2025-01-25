@@ -8,7 +8,8 @@
           <img [src]="tracks[currentTrackIndex].image"/>
         </div>
         <div class="audio_container">
-          <audio class="audio" #audio controls [src]="tracks[currentTrackIndex].src" autoplay></audio>
+          <audio class="audio" #audio controls [src]="tracks[currentTrackIndex].src" (ended)="nextTrack()"
+                 autoplay></audio>
         </div>
         <div class="description">
           <p>{{ tracks[currentTrackIndex].description }}</p>
@@ -17,8 +18,12 @@
     </div>
   </div>
   <div class="controls">
-    <button (click)="prevTrack()">Previous</button>
-    <button (click)="nextTrack()">Next</button>
+    <button (click)="prevTrack()">
+      <img src="Previous_music.svg">
+    </button>
+    <button (click)="nextTrack()">
+      <img src="Next_music.svg">
+    </button>
   </div>
 </div>
 
