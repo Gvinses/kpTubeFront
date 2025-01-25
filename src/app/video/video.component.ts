@@ -32,23 +32,27 @@ export class VideoComponent implements OnInit {
 
   videoId: number | null = null
   videoData: any = {}
+
   comments: any = []
   howMuchComments: number = 0
-  INDBID: number = 0
+
+  userComment: string | null = null
+  userName: string | null = null
+  userLikes: any;
   userEmail: string | null = null
   userPassword: string | null = null
-  INUSID: number = 0
-  VideosHistory: string | any = ''
-  VideoData: any | null = null
-  VideoOwnerId: any | null = null
-  userName: string | null = null
-  userComment: string | null = null
   likesAndRating: string = ''
 
   video_name: string | null = null
   video_owner: string | null = null
   video_category: string | null = null
   video_description: string | null = null
+  VideosHistory: string | any = ''
+  VideoData: any | null = null
+  VideoOwnerId: any | null = null
+
+  INDB_video_ID: any
+  INDB_UsernameID: any
 
   videoStars = 0
 
@@ -78,10 +82,11 @@ export class VideoComponent implements OnInit {
           this.likesAndRating = data[0].liked
           this.userEmail = data[0].email
           this.userPassword = data[0].password
-          this.INUSID = data[0].id
+          this.INDB_UsernameID = String(data[0].User_ID)
           this.VideosHistory = data[0].history
+          this.userLikes = data[0].liked
+
           this.loadStars()
-          this.addToUserHistory()
         }
       )
     }
@@ -94,7 +99,7 @@ export class VideoComponent implements OnInit {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         this.getComments()
         this.VideoData = data[0]
-        this.INDBID = data[0].id
+        this.INDB_video_ID = data[0].Video_ID
         this.videoStars = data[0].likes
         this.video_link = data[0].video
         this.video_name = data[0].name
@@ -102,18 +107,12 @@ export class VideoComponent implements OnInit {
         this.video_category = data[0].category
         this.video_description = data[0].description
 
-        console.log(this.VideoData)
-        console.log('-----------------')
-        console.log(this.video_owner)
-        console.log(this.video_category)
-        console.log(this.video_description)
-
-
         this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
           (data: any) => {
             this.VideoOwnerId = data[0].User_ID
           }
         )
+        this.addToUserHistory()
       })
     }
   }
@@ -129,29 +128,24 @@ export class VideoComponent implements OnInit {
   }
 
   addToUserHistory() {
-    let videosArr = this.VideosHistory.split(',')
-    const videoIdIndex = videosArr.indexOf(String(this.videoId))
-    if (videoIdIndex !== -1) {
-      videosArr.splice(videoIdIndex, 1)
-    }
-    videosArr.push(String(this.videoId))
-    const newHistory = videosArr.join(',')
-
-    this.VideosFetchService.videoInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(newHistory)).subscribe(
-      response => {
-        console.log('Upload successful!', response)
-      }
-    )
+    let userId = String(Number(localStorage.getItem('UserID')) / 2)
+    this.VideosFetchService.addView(userId, this.INDB_video_ID).subscribe(data => {
+      console.log(data)
+    })
   }
 
   loadStars() {
-    console.log(this.likesAndRating.split(':'))
+    let getted_data_of_likes_value = this.userLikes[String(this.videoId)]
+
+    if (getted_data_of_likes_value !== undefined) {
+      this.videoStars = Number(getted_data_of_likes_value)
+    }
+
   }
 
   commentOnVideo() {
     this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
       response => {
-        console.log('Successful comment', response)
         this.userComment = null
         this.getComments()
       }
@@ -175,10 +169,6 @@ export class VideoComponent implements OnInit {
     } catch (err) {
       console.log(err)
     }
-  }
-
-  starsToVideo(stars: number) {
-    this.videoStars = stars
   }
 
   protected readonly items = items

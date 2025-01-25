@@ -1,19 +1,20 @@
 <div class="main">
   <div class="videoPart">
     <div class="video_container">
-      <video autoplay="autoplay" controls="controls" loop src="{{ video_link }}"></video>
+      <video autoplay="autoplay" controls="controls" src="{{ video_link }}"></video>
     </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ video_name }}</h1>
-      <h3>Автор - {{video_owner}}</h3>
+      <h3 class="videoAuthor" [routerLink]="['/account', VideoOwnerId.User_ID]">Автор - {{video_owner}}</h3>
+
       <div class="videoContent">
         <div class="share_and_raiting">
-          <app-rating [current_star]="videoStars"></app-rating>
+          <app-rating class="video_stars" [current_star]="videoStars" [video_id]="INDB_video_ID"></app-rating>
 
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
         </div>
 
-        <div class="aboutVideo" *ngIf="VideoData.description != ''">
+        <div class="aboutVideo">
           <details class="aboutVideoDetails">
             <summary>Описание</summary>
             <p>{{ VideoData.description }}</p>
