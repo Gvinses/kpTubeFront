@@ -3,6 +3,17 @@ import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {MusicFetchService} from "../music-fetch.service";
 
+let tracks = [
+  {title: 'Трэк', artist: 'Gvins', image: 'gg.png', src: 'kp229SoundTrackv2.mp3', description: 'Track 1 transcript'},
+  {
+    title: 'Крутой трек',
+    artist: 'KP229',
+    image: 'Logo.jpg',
+    src: 'musicForKP229.mp3',
+    description: 'Track 2 transcript'
+  },
+]
+
 @Component({
   selector: 'app-music-part',
   standalone: true,
@@ -20,17 +31,7 @@ export class KpMusicComponent implements OnInit {
   @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>
   currentTrackIndex = 0
   isPlaying = false
-
-  tracks = [
-    {title: 'Трэк', artist: 'Gvins', image: 'gg.png', src: 'kp229SoundTrackv2.mp3', description: 'Track 1 transcript'},
-    {
-      title: 'Крутой трек',
-      artist: 'KP229',
-      image: 'Logo.jpg',
-      src: 'musicForKP229.mp3',
-      description: 'Track 2 transcript'
-    },
-  ]
+  tracks = tracks
 
   constructor() {
   }

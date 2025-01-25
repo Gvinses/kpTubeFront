@@ -6,7 +6,7 @@ import {HttpClient} from "@angular/common/http"
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common"
 import {VideosFetchService} from "../videos-fetch.service"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
-
+import {RatingComponent} from "../rating/rating.component";
 
 @Component({
   selector: 'app-video',
@@ -23,6 +23,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms"
     FormsModule,
     NgIf,
     NgForOf,
+    RatingComponent,
   ],
   styleUrls: ['./video.component.sass']
 })
@@ -50,7 +51,6 @@ export class VideoComponent implements OnInit {
   video_description: string | null = null
 
   videoStars = 0
-
 
   protected video_link: any
 
@@ -109,7 +109,7 @@ export class VideoComponent implements OnInit {
         console.log(this.video_description)
 
 
-        this.VideosFetchService.enterUser(this.video_owner).subscribe(
+        this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
           (data: any) => {
             this.VideoOwnerId = data[0].User_ID
           }
@@ -177,32 +177,8 @@ export class VideoComponent implements OnInit {
     }
   }
 
-  starsToVideo() {
-    console.log(this.videoStars)
-    this.VideosFetchService.starsToVideo(this.videoId, this.videoStars).subscribe(
-      response => {
-        console.log('Upload successful!', response)
-      },
-      error => {
-        console.error('Upload error:', error)
-      }
-    )
-  }
-
-  starsToUser(userStarToVideo: number) {
-    let likesArr = []
-
-    this.likesAndRating.split(',')
-    likesArr.push(this.likesAndRating)
-    console.log(likesArr)
-    likesArr.push(String(this.videoId) + ':' + userStarToVideo)
-    likesArr.join(',')
-
-    this.VideosFetchService.likeInfoToUser(this.INUSID, String(this.userName), String(this.userEmail), String(this.userPassword), String(likesArr)).subscribe(
-      response => {
-        console.log('Upload successful!', response)
-      }
-    )
+  starsToVideo(stars: number) {
+    this.videoStars = stars
   }
 
   protected readonly items = items

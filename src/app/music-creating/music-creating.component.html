@@ -9,7 +9,10 @@
   </div>
   <div class="info">
     <label id="nameTextlabel" for="nameText">Название аудио: </label>
-    <textarea type="text" rows="2" cols="35" id="nameText" [(ngModel)]="name" name="name" required></textarea>
+    <textarea type="text" rows="2" cols="35" id="nameText" [(ngModel)]="music_name" name="name" required></textarea>
+
+    <label id="artistTextlabel" for="nameText">Артист: </label>
+    <textarea type="text" rows="2" cols="35" id="artistText" [(ngModel)]="artist" name="artist" required></textarea>
 
     <label id="descriptionTextlabel" for="descriptionText">Описание аудио: </label>
     <textarea type="text" rows="8" cols="35" id="descriptionText" [(ngModel)]="description" name="description" required></textarea>
@@ -21,6 +24,7 @@
         <span *ngIf="!imageSrc"></span>
       </div>
     </label>
+
     <input id="file-input" name="preview" type="file" accept="image/jpeg" (change)="previewChange($event)" hidden="hidden">
 
     <button type="submit" [disabled]="isButtonDisabled" class="uploadButt" (click)="onSubmit()">Upload</button>
@@ -30,7 +34,6 @@
 <div *ngIf="loading" class="popup">
   <h1>Загрузка</h1>
   <p>не закрывайте это окно</p>
-  <p>Прогресс: {{ uploadProgress }}%</p>
   <button (click)="cancelUpload()">Отменить загрузку</button>
 </div>
 

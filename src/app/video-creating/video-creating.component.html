@@ -3,7 +3,8 @@
     <label id="fileUploadLabel" for="fileUpload">
       <h1>Видео</h1>
       <img *ngIf="!videoSrc" src="{{mainLink}}" width="80">
-      <video loop="loop" autoplay controls="controls" muted="muted" [src]="videoSrc" *ngIf="videoSrc" id="previewVideo"></video>
+      <video loop="loop" autoplay controls="controls" muted="muted" [src]="videoSrc" *ngIf="videoSrc"
+             id="previewVideo"></video>
     </label>
     <input id="fileUpload" type="file" (change)="onFileChange($event)" name="video" hidden="hidden" required>
   </div>
@@ -12,7 +13,18 @@
     <textarea type="text" rows="2" cols="35" id="nameText" [(ngModel)]="name" name="name" required></textarea>
 
     <label id="descriptionTextlabel" for="descriptionText">Описание видео: </label>
-    <textarea type="text" rows="8" cols="35" id="descriptionText" [(ngModel)]="description" name="description" required></textarea>
+    <textarea type="text" rows="8" cols="35" id="descriptionText" [(ngModel)]="description" name="description"
+              required></textarea>
+
+    <span class="category_choose" (click)="OpenCloseCategory()" [ngClass]="{open_category:categoryIsOpen}">
+      <select (change)="onCategoryChange($event)">
+        @for (item of categories; track item) {
+          <option>
+            {{ item.name }}
+          </option>
+        }
+      </select>
+    </span>
 
     <label for="file-input" class="upload-label">
       <p>превью:</p>
@@ -21,21 +33,15 @@
         <span *ngIf="!imageSrc"></span>
       </div>
     </label>
-    <input id="file-input" name="preview" type="file" accept="image/jpeg" (change)="previewChange($event)" hidden="hidden">
+    <input id="file-input" name="preview" type="file" accept="image/jpeg" (change)="previewChange($event)"
+           hidden="hidden" required>
 
-    <select (change)="onCategoryChange($event)">
-      @for (item of category; track item) {
-        <option>
-          {{item.name}}
-        </option>
-      }
-    </select>
-
-    <select (change)="onGlobalStatusChange($event)">
-      <option>Видно всем</option>
-      <option>Доступ по ссылке</option>
-    </select>
-
+    <span class="status_choose">
+      <select (change)="onGlobalStatusChange($event)">
+        <option>Видно всем</option>
+        <option>Доступ по ссылке</option>
+      </select>
+    </span>
 
 
     <button type="submit" [disabled]="isButtonDisabled" class="uploadButt" (click)="onSubmit()">Upload</button>
@@ -45,7 +51,7 @@
 <div *ngIf="loading" class="popup">
   <h1>Загрузка</h1>
   <p>не закрывайте это окно</p>
-<!--  <p>Прогресс: {{ uploadProgress }}%</p>-->
+  <!--  <p>Прогресс: {{ uploadProgress }}%</p>-->
   <button (click)="cancelUpload()">Отменить загрузку</button>
 </div>
 

@@ -10,11 +10,12 @@
 
       <div class="videoContent">
         <div class="share_and_raiting">
+          <app-rating [current_star]="videoStars"></app-rating>
 
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
         </div>
 
-        <div class="aboutVideo">
+        <div class="aboutVideo" *ngIf="VideoData.description != ''">
           <details class="aboutVideoDetails">
             <summary>Описание</summary>
             <p>{{ VideoData.description }}</p>

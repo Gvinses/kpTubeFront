@@ -29,8 +29,10 @@
 
   textarea
     resize: none
-    width: 273px
-    padding-left: 10px
+    width: 17vw
+    padding: 10px
+    border-radius: 15px
+    margin: 5px
 
   .info
     display: flex
@@ -88,9 +90,23 @@
       padding: 10px 0
       width: 300px
 
-  select
-    padding: 10px 0
-    width: 273px
+  .category_choose
+    height: 5vh
+    select
+      width: 90%
+      height: 5vh
+      border-radius: 15px
+      padding: 10px 0
+      margin: 5px
+
+  .status_choose
+    height: 5vh
+    select
+      width: 90%
+      height: 5vh
+      border-radius: 15px
+      padding: 10px 0
+      margin: 5px
 
 .popup
   color: black
@@ -111,6 +127,7 @@
 
 @media (max-width: 768px)
   .form
+    margin-left: 50px
     padding: 10px
     display: flex
     flex-direction: column
