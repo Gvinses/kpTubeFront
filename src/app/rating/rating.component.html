@@ -1,0 +1,7 @@
+<div class="rating_container">
+  @for (item of stars; track item) {
+    <span class="star" (click)="change_current_star(item)">
+      <img [src]="item <= current_star ? 'Star_checked.svg' : 'Star_unchecked.svg'" width="40" height="40">
+    </span>
+  }
+</div>
