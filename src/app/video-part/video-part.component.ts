@@ -6,20 +6,19 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 export let videos = [];
 
 
-export let items = [
+export interface video_type    // make as file
   {
-    "id": 0,
-    "Video_ID": "1",
-    "name": "У нас ошибка!",
-    "description": "error",
-    "likes": 1,
-    "views": 1,
-    "video": 'kringeproduction.ru',
-    "preview": 'notFound.jpg',
-    "category": 'error',
-    "owner": 'KP229'
+    "id": Number,
+    "Video_ID": String,
+    "name": String,
+    "description": String,
+    "likes": Number,
+    "views": Number,
+    "video": String,
+    "preview": String,
+    "category": String,
+    "owner": String
   }
-];
 
 
 @Component({
@@ -43,7 +42,7 @@ export class VideoPartComponent implements AfterViewInit {
 
   videos: any = []
 
-  items = items
+  items: video_type[] = []
 
   constructor() {
   }
@@ -57,7 +56,6 @@ export class VideoPartComponent implements AfterViewInit {
         }
       })
       this.videos.reverse()
-      console.log(this.videos)
     })
   }
 
