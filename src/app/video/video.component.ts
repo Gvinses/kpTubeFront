@@ -1,7 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core'
 import {ActivatedRoute} from '@angular/router'
 import {RouterLink, RouterLinkActive} from "@angular/router"
-import {items} from "../video-part/video-part.component"
 import {HttpClient} from "@angular/common/http"
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common"
 import {VideosFetchService} from "../videos-fetch.service"
@@ -181,6 +180,5 @@ export class VideoComponent implements OnInit {
   }
 
 
-  protected readonly items = items
   protected readonly Number = Number;
 }
