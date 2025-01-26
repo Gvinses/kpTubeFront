@@ -3,7 +3,7 @@
     <label id="fileUploadLabel" for="fileUpload">
       <h1>Видео</h1>
       <img *ngIf="!videoSrc" src="{{mainLink}}" width="80">
-      <video loop="loop" autoplay controls="controls" muted="muted" [src]="videoSrc" *ngIf="videoSrc"
+      <video loop="loop" controls="controls" [src]="videoSrc" *ngIf="videoSrc"
              id="previewVideo"></video>
     </label>
     <input id="fileUpload" type="file" (change)="onFileChange($event)" name="video" hidden="hidden" required>
