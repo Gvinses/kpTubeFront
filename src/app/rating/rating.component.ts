@@ -37,8 +37,6 @@ export class RatingComponent {
   post_stars_data() {
     let userId = String(Number(localStorage.getItem('UserID')) / 2)
 
-    this.VideosFetchService.PostStars(userId, this.video_id, this.current_star).subscribe(data => {
-      console.log(data)
-    })
+    this.VideosFetchService.PostStars(userId, this.video_id, this.current_star)
   }
 }

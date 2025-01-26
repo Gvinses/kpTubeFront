@@ -49,11 +49,11 @@ export class OtherAccountComponent implements OnInit {
         this.userAvatar = response[0].avatar;
         this.userName = response[0].name
 
-        this.loadNameVideos()
+        this.loadOtherUserVideos()
       }
     )
   }
-  loadNameVideos(): void {
+  loadOtherUserVideos(): void {
     this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
       data.forEach((video: any) => {
         this.linksChanger(video)

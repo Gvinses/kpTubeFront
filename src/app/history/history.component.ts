@@ -15,17 +15,18 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: './history.component.html',
   styleUrl: './history.component.sass'
 })
-export class HistoryComponent implements OnInit  {
+export class HistoryComponent implements OnInit {
   postService = inject(VideosFetchService)
 
   videos: any = []
 
   userID: any
+  private historyArr: any
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -35,30 +36,36 @@ export class HistoryComponent implements OnInit  {
 
   userHistory() {
     if (localStorage) {
-      this.userID = String(Number(localStorage.getItem('UserID'))/2)
+      this.userID = String(Number(localStorage.getItem('UserID')) / 2)
 
       this.postService.getUserByID(this.userID).subscribe((data: any) => {
-        let historyArr = data[0].history
-        console.log('=====================')
-        console.log(historyArr)
-        console.log('=====================')
+        this.historyArr = data[0].history
 
-        historyArr.forEach((element: any) => {
-          if (element !== '') {
-            this.postService.getVideo(String(element)).subscribe((oneVideoData: any) => {
-              if (oneVideoData[0].video && oneVideoData[0].video.startsWith('http://127.0.0.1:8000/')) {
-                oneVideoData[0].video = oneVideoData[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
-              }
-              if (oneVideoData[0].preview && oneVideoData[0].preview.startsWith('http://127.0.0.1:8000/')) {
-                oneVideoData[0].preview = oneVideoData[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
-              }
-
-              this.videos.push(oneVideoData[0])
-            })
-          }
-        })
+        this.history_video_id_setter()
+        this.history_urls_setter()
       })
 
     }
+  }
+
+  history_video_id_setter() {
+    let splited_history = this.historyArr.split(',')
+    splited_history.pop()
+    this.historyArr = splited_history
+  }
+
+  history_urls_setter() {
+    this.historyArr.forEach((element: any) => {
+      this.postService.getVideo(String(element)).subscribe((oneVideoData: any) => {
+        if (oneVideoData[0].video && oneVideoData[0].video.startsWith('http://127.0.0.1:8000/')) {
+          oneVideoData[0].video = oneVideoData[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+        }
+        if (oneVideoData[0].preview && oneVideoData[0].preview.startsWith('http://127.0.0.1:8000/')) {
+          oneVideoData[0].preview = oneVideoData[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+        }
+
+        this.videos.push(oneVideoData[0])
+      })
+    })
   }
 }

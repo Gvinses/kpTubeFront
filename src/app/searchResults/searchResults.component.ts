@@ -30,7 +30,6 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.search = params.get('userSearch') || '';
-      console.log(this.search)
       this.http.get(`https://kptube.kringeproduction.ru/videos/?search=${this.search}`).subscribe((data: any) => {
         data.forEach((video: any) => {
           if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
@@ -44,17 +43,6 @@ export class SearchResultsComponent implements OnInit {
       })
     });
   }
-  // toggleInvert(): void {
-  //   this.imageFilter = this.imageFilter === 'invert(0)' ? 'invert(1)' : 'invert(0)';
-  //   this.VideosFetchService.updateLikes(this.VideoData.likes+1, this.VideoData).subscribe(
-  //     response => {
-  //       console.log('Upload successful!', response);
-  //       this.loadVideoDetails()
-  //     },
-  //     error => {
-  //       console.error('Upload error:', error);
-  //     }
-  //   )
-  // }
+
   protected readonly filter = filter;
 }

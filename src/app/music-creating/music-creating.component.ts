@@ -54,7 +54,7 @@ export class MusicCreatingComponent {
         }
         reader.readAsDataURL(file)
       } else {
-        alert('Please select a audio. Your type === ' + file.type)
+        this.errorMessage = 'Загрузите аудио .mp3'
       }
     }
   }
@@ -70,15 +70,12 @@ export class MusicCreatingComponent {
         }
         reader.readAsDataURL(file)
       } else {
-        alert('Please select a jpg or jpeg image.')
+        this.errorMessage = 'Загрузите картинку.'
       }
     }
   }
 
   onSubmit(): void {
-    const videoID = Number(new Date())
-    console.log(videoID)
-
     if (typeof localStorage !== 'undefined') {
       this.nameLS = localStorage.getItem('UserName')
     }
@@ -124,6 +121,7 @@ export class MusicCreatingComponent {
       this.isButtonDisabled = false
     }, (error: HttpEvent<any>) => {
       console.error(error)
+
       this.errorMessage = 'Ошибка сервера'
       this.loading = false
       this.isButtonDisabled = false
@@ -135,7 +133,6 @@ export class MusicCreatingComponent {
       this.uploadSub.unsubscribe()
       this.loading = false
       this.isButtonDisabled = false
-      console.log('Upload cancelled')
     }
   }
 

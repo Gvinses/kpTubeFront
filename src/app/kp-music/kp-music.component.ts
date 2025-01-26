@@ -50,7 +50,6 @@ export class KpMusicComponent implements OnInit {
         }
       })
       this.tracks = data
-      console.log(data)
     })
   }
 

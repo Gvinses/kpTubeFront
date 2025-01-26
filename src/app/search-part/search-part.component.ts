@@ -37,15 +37,12 @@ export class SearchPartComponent implements OnInit {
     if (this.isLogin()) {
       if (localStorage) {
         this.gettedID = String(Number(localStorage.getItem('UserID')) / 2)
-        console.log(this.gettedID)
       }
       this.VideosFetchService.getUserByID(this.gettedID).subscribe(
         (response): any => {
-          console.log(response)
           if (response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
             response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             this.userAvatar = response[0].avatar
-            console.log(response[0].avatar)
           }
         },
       );

@@ -126,15 +126,12 @@ export class VideoComponent implements OnInit {
       commentsData.forEach((comment: any) => {
         this.howMuchComments = Number(this.howMuchComments) + 1
       })
-      console.log(this.comments)
     })
   }
 
   addToUserHistory() {
     let userId = String(Number(localStorage.getItem('UserID')) / 2)
-    this.VideosFetchService.addView(userId, this.INDB_video_ID).subscribe(data => {
-      console.log(data)
-    })
+    this.VideosFetchService.addView(userId, this.INDB_video_ID)
   }
 
   loadStars() {
@@ -143,7 +140,6 @@ export class VideoComponent implements OnInit {
     if (getted_data_of_likes_value !== undefined) {
       this.videoStars = Number(getted_data_of_likes_value)
     }
-
   }
 
   commentOnVideo() {

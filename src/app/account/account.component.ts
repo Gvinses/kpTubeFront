@@ -22,8 +22,8 @@ export class AccountComponent implements OnInit {
   name: string = ''
   email: string = ''
   password: string = ''
-  avatar: File | null = null
-  header: File | null = null
+  avatar: File | any
+  header: File | any
   avatarUrl: string | ArrayBuffer | null = null
   headerUrl: string | ArrayBuffer | null = null
 
@@ -43,7 +43,7 @@ export class AccountComponent implements OnInit {
   usNa: any | null = null
 
   ngOnInit(): void {
-    this.starter()
+    this.url_setter()
   }
 
   avatarCreate(event: any): void {
@@ -57,7 +57,7 @@ export class AccountComponent implements OnInit {
         };
         reader.readAsDataURL(file);
       } else {
-        alert('Please select a image.');
+        this.errorMessage = 'Выберите изображение.'
       }
     }
   }
@@ -73,7 +73,7 @@ export class AccountComponent implements OnInit {
         };
         reader.readAsDataURL(file);
       } else {
-        alert('Please select a image.');
+        this.errorMessage = 'Выберите изображение.'
       }
     }
   }
@@ -86,40 +86,50 @@ export class AccountComponent implements OnInit {
 
     if (this.avatar && this.header) {
       let userID = Number(new Date);
-
-      console.log(userID);
-      this.VideosFetchService.getUsers().subscribe((response => {
-          for (let i = 0; i < response.length; i++) {
-            this.AlluserNames.push(response[i].name);
-          }
-          response = null
-          console.log(this.AlluserNames)
-          if (this.AlluserNames.includes(this.name)) {
-            this.errorMessage = 'Не может быть двух одинаковых имён!'
-            setTimeout(() => {
-              this.errorMessage = null;
-            }, 3500)
-          } else {
-            if (this.avatar && this.header) {
-              this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
-                response => {
-                  console.log('Upload successful!', response);
-                  if (typeof localStorage !== undefined) {
-                    localStorage.setItem('UserID', String(userID));
-                    localStorage.setItem('UserName', String(this.name));
-                    location.reload()
-                  }
-                },
-                error => {
-                  console.error('Upload error:', error);
-                }
-              );
-            }
-          }
-        })
-      )
+      try {
+        this.get_all_users(userID)
+      } catch (e) {
+        this.errorMessage = String(e)
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 3500)
+      }
     }
   }
+
+  get_all_users(userID: number) {
+    this.VideosFetchService.getUsers().subscribe((response) => {
+      for (let i = 0; i < response.length; i++) {
+        if (response[i].name == this.name) {
+          throw new Error('Не может быть двух одинаковых имён!')
+        }
+      }
+
+      if (this.avatar && this.header) {
+        this.create_user(userID, this.avatar, this.header)
+      }
+    })
+  }
+
+  create_user(userID: number, avatar: File, header: File) {
+    this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
+      response => {
+        if (localStorage) {
+          localStorage.setItem('UserID', String(userID))
+          localStorage.setItem('UserName', String(this.name))
+          location.reload()
+        }
+      },
+      (e) => {
+        this.errorMessage = String(e.message)
+        setTimeout(() => {
+          this.errorMessage = null
+        }, 3500)
+        console.error('Upload error:', e)
+      }
+    )
+  }
+
 
   usID: any | null = null;
   UsNa: any | null = null;
@@ -139,7 +149,6 @@ export class AccountComponent implements OnInit {
 
     this.VideosFetchService.enterUser(this.enterName).subscribe(
       response => {
-        // console.log(response)
         let userID = response[0].User_ID
         if (typeof localStorage !== 'undefined') {
           localStorage.setItem('UserID', String(userID * 2));
@@ -158,8 +167,7 @@ export class AccountComponent implements OnInit {
   }
 
 
-
-  starter() {
+  url_setter() {
     if (typeof localStorage !== 'undefined') {
       this.usNa = localStorage.getItem('UserName')
     }
@@ -180,7 +188,6 @@ export class AccountComponent implements OnInit {
         this.userData = response[0]
 
         this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
-          console.log(data)
           data.forEach((video: any) => {
             if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
               video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
@@ -190,8 +197,7 @@ export class AccountComponent implements OnInit {
             }
           })
           this.userVideos = data
-          console.log(data)
-        });
+        })
       }
     )
   }

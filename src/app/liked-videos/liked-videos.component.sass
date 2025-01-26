@@ -1,8 +1,11 @@
+$grid-columns: 4
+$grid-gap: 70px
+
 .videos
-  margin-left: 200px
+  margin-left: 180px
   display: grid
-  grid-template-columns: repeat(4, auto)
-  gap: 70px
+  grid-template-columns: repeat($grid-columns, 1fr)
+  gap: $grid-gap
 
   .video
     width: 15vw
@@ -13,21 +16,40 @@
     flex-direction: column
     align-items: center
     justify-content: center
+
     img
       width: 100%
       height: 100%
       object-fit: scale-down
       border: 2px solid black
       padding: 5px
+      position: relative
+
+      &::after
+        content: " "
+        display: block
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        background-color: #1A1A1D
+        opacity: 1
 
     .info
+      display: block
       position: relative
       top: 5px
-      text-align: left
+      box-sizing: border-box
 
       h5
         margin: 10px 0 5px
         font-size: 1.2em
+        text-align: left
+        max-width: 100%
+        overflow: hidden
+        text-overflow: ellipsis
+        display: block
 
       p
         margin: 0
@@ -35,16 +57,18 @@
         color: #d5d5d5
         text-align: left
 
+
 @media (max-width: 768px)
   .videos
     grid-template-columns: repeat(2, 1fr)
-    gap: 30px
 
-@media (max-width: 480px)
+    .video
+      width: 25vw
+
+@media (max-width: 600px)
   .videos
+    margin-left: 150px
     grid-template-columns: 1fr
-    gap: 20px
 
-  .video
-    max-width: 100%
-    aspect-ratio: auto
+    .video
+      width: 40vw

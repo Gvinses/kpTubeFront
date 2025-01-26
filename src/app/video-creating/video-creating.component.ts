@@ -57,7 +57,7 @@ export class VideoCreatingComponent implements OnInit {
         }
         reader.readAsDataURL(file)
       } else {
-        alert('Please select a mp4 image.')
+        this.errorMessage = 'Выберите видео mp4'
       }
     }
   }
@@ -85,7 +85,7 @@ export class VideoCreatingComponent implements OnInit {
         }
         reader.readAsDataURL(file)
       } else {
-        alert('Please select a jpg or jpeg image.')
+        this.errorMessage = 'Выберите картинку'
       }
     }
   }
@@ -101,9 +101,6 @@ export class VideoCreatingComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const videoID = Number(new Date())
-    console.log(videoID)
-
     if (this.selectedFile && this.selectedPreview) {
       if (typeof localStorage !== 'undefined') {
         this.nameLS = localStorage.getItem('UserName')
@@ -114,7 +111,7 @@ export class VideoCreatingComponent implements OnInit {
         this.errorMessage = 'Необходимо создать аккаунт!'
       }
     } else {
-      console.error('No file selected')
+      this.errorMessage = 'Нужные файлы не выбраны'
     }
   }
 
@@ -128,7 +125,7 @@ export class VideoCreatingComponent implements OnInit {
           if (this.selectedFile && this.selectedPreview) {
             this.uploadVideo(this.selectedFile, this.selectedPreview)
           } else {
-            console.error('No file selected')
+            this.errorMessage = 'Нужные файлы не выбраны'
           }
         } else {
           this.errorMessage = 'Необходимо верефицировать аккаунт'
