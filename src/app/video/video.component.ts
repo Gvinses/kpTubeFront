@@ -131,7 +131,7 @@ export class VideoComponent implements OnInit {
 
   addToUserHistory() {
     let userId = String(Number(localStorage.getItem('UserID')) / 2)
-    this.VideosFetchService.addView(userId, this.INDB_video_ID)
+    this.VideosFetchService.addView(userId, this.INDB_video_ID).subscribe()
   }
 
   loadStars() {
