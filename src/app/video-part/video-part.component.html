@@ -8,15 +8,8 @@
       </div>
     </div>
   } @empty {
-    <div *ngFor="let item of items">
-      <button>
-        <div class="video">
-          <img src="{{item.preview}}" alt="{{item.preview}}">
-          <div class="info">
-            <h5>{{item.name}}</h5>
-          </div>
-        </div>
-      </button>
+    <div class="loading">
+      <h1>Loading....</h1>
     </div>
   }
 </div>
