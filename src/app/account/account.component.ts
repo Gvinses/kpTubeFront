@@ -78,40 +78,7 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  AlluserNames: any[] = []
-
-  onRegister() {
-    localStorage.setItem('username', this.enterName)
-    localStorage.setItem('password', this.enterPass)
-
-    if (this.avatar && this.header) {
-      let userID = Number(new Date);
-      try {
-        this.get_all_users(userID)
-      } catch (e) {
-        this.errorMessage = String(e)
-        setTimeout(() => {
-          this.errorMessage = null;
-        }, 3500)
-      }
-    }
-  }
-
-  get_all_users(userID: number) {
-    this.VideosFetchService.getUsers().subscribe((response) => {
-      for (let i = 0; i < response.length; i++) {
-        if (response[i].name == this.name) {
-          throw new Error('Не может быть двух одинаковых имён!')
-        }
-      }
-
-      if (this.avatar && this.header) {
-        this.create_user(userID, this.avatar, this.header)
-      }
-    })
-  }
-
-  create_user(userID: number, avatar: File, header: File) {
+  onRegister(userID: number, avatar: File, header: File) {
     this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
       response => {
         if (localStorage) {
