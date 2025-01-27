@@ -78,7 +78,9 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  onRegister(userID: number, avatar: File, header: File) {
+  onRegister() {
+
+let userID = Number(new Date)
     this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
       response => {
         if (localStorage) {
