@@ -29,7 +29,7 @@ import {RatingComponent} from "../rating/rating.component";
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
 
-  videoId: number | string = ''
+  videoId: string = ''
   videoData: any = {}
 
   comments: any = []
