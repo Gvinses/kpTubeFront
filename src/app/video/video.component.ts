@@ -29,7 +29,7 @@ import {RatingComponent} from "../rating/rating.component";
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
 
-  videoId: number | null = null
+  videoId: number | string = ''
   videoData: any = {}
 
   comments: any = []
@@ -145,6 +145,9 @@ export class VideoComponent implements OnInit {
     if (this.userName !== null && this.videoId !== null) {
       this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
         response => {
+          // console.log(this.videoId)
+          // console.log(this.userName)
+          // console.log(response)
           this.userComment = null
           this.getComments()
         }
