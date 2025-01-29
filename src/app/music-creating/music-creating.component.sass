@@ -1,9 +1,9 @@
 .form
   display: grid
-  grid-template-columns: 3fr auto
-  justify-content: center
+  grid-template-columns: 5fr 1fr
+  gap: 20px
+  justify-content: space-between
   align-items: center
-  flex-direction: column
 
   .file
     display: flex
@@ -22,8 +22,9 @@
       width: 100%
       cursor: pointer
 
-      audio
+      video
         max-width: 70%
+        max-height: 70%
         object-fit: contain
 
   textarea
@@ -40,7 +41,7 @@
     align-items: center
     gap: 10px
     overflow: hidden
-    width: 270px
+    width: 20vw
 
     label
       position: relative
@@ -89,10 +90,6 @@
       padding: 10px 0
       width: 300px
 
-  select
-    padding: 10px 0
-    width: 273px
-
 .popup
   color: black
   display: flex
@@ -108,10 +105,11 @@
   background-color: white
   border: 1px solid #ccc
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+  z-index: 9999
 
 @media (max-width: 768px)
   .form
-    margin-left: 50px
+    margin-left: 100px
     padding: 10px
     display: flex
     flex-direction: column
@@ -136,10 +134,14 @@
 
 @media (max-width: 480px)
   .form
+    margin-left: 100px
     .file #fileUploadLabel
       padding: 20px 0
 
-    .info label,
-    .upload-label p
+    .info label
       left: 0
+      text-align: center
+
+    .upload-label p
+      margin-left: 30px
       text-align: center

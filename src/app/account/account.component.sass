@@ -3,7 +3,7 @@
   flex-direction: column
   align-items: center
   justify-content: center
-  margin-left: 140px
+  margin-left: 200px
 
   .HaveAnAccount
     display: flex
@@ -79,7 +79,8 @@
       flex-direction: column
       gap: 20px
 
-      .enter,  // header
+      .enter,
+        // header
       .register
         display: flex
         flex-direction: column
@@ -141,7 +142,11 @@ label
     background: black
 
 .errorMessage
+  width: 100%
   position: relative
+
+  h1
+    font-size: 17px
 
 .userVideos
   display: grid
@@ -159,6 +164,7 @@ label
     flex-direction: column
     align-items: center
     justify-content: center
+
     img
       width: 100%
       height: 100%
@@ -170,6 +176,7 @@ label
       position: relative
       top: 5px
       text-align: left
+
       h5
         margin: 10px 0 5px
         font-size: 1.2em
@@ -180,6 +187,41 @@ label
         color: #d5d5d5
         text-align: left
 
+input
+  padding: 10px
+  background: #333333
+  border-radius: 75px
+  color: white
+  border: none
+  outline: none
+
+
+button
+  margin-top: 10px
+  padding: 10px
+  background: #272727
+  border-radius: 75px
+  color: white
+  border: none
+  outline: none
+
+.popup
+  color: black
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  padding: 20px
+  background-color: white
+  border: 1px solid #ccc
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+  z-index: 9999
+
 @media (max-width: 768px)
   .dontHaveAnAccount
     .interactive
@@ -188,6 +230,7 @@ label
   .avatar_and_username
     margin-left: 40px
     width: 90%
+
     .avatar
       display: none
 

@@ -29,10 +29,10 @@ export interface video_type    // make as file
     RouterLink,
     RouterLinkActive,
   ],
-  templateUrl: './video-part.component.html',
-  styleUrl: './video-part.component.sass'
+  templateUrl: './videos-part.component.html',
+  styleUrl: './videos-part.component.sass'
 })
-export class VideoPartComponent implements AfterViewInit {
+export class VideosPartComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.getVideos()

@@ -18,6 +18,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class AccountComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
+  http = inject(HttpClient)
 
   name: string = ''
   email: string = ''
@@ -30,9 +31,8 @@ export class AccountComponent implements OnInit {
   enterName: string = ''
   enterPass: string = ''
 
-  errorMessage: string | null = 'Войдите или Зарегистрируйтесь';
+  errorMessage: string | null = null
 
-  http = inject(HttpClient)
   register: boolean = false
 
   userData: any[] = []
@@ -40,7 +40,15 @@ export class AccountComponent implements OnInit {
   userAvatar: string | ArrayBuffer | null = null
   userName: string | null = null
   userVideos: any[] = []
-  usNa: any | null = null
+  usName: any | null = null
+
+  usID: any | null = null
+  UsNa: any | null = null
+  is_registration_request_now: boolean = false
+  popup_open: boolean = false
+  is_error: boolean = false
+  timeout: any | null = null
+
 
   ngOnInit(): void {
     this.url_setter()
@@ -58,6 +66,8 @@ export class AccountComponent implements OnInit {
         reader.readAsDataURL(file);
       } else {
         this.errorMessage = 'Выберите изображение.'
+        this.popup_open = true
+        this.is_error = true
       }
     }
   }
@@ -74,34 +84,36 @@ export class AccountComponent implements OnInit {
         reader.readAsDataURL(file);
       } else {
         this.errorMessage = 'Выберите изображение.'
+        this.popup_open = true
+        this.is_error = true
       }
     }
   }
 
   onRegister() {
+    let userID = Number(new Date)
+    this.is_registration_request_now = true
 
-let userID = Number(new Date)
     this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
       response => {
         if (localStorage) {
           localStorage.setItem('UserID', String(userID))
           localStorage.setItem('UserName', String(this.name))
-          location.reload()
+          this.popup_open = true
+          this.VideosFetchService.send_email(this.email).subscribe()
+          this.timeout = setTimeout(() => {
+            location.reload()
+          }, 60000)
         }
       },
       (e) => {
         this.errorMessage = String(e.message)
-        setTimeout(() => {
-          this.errorMessage = null
-        }, 3500)
-        console.error('Upload error:', e)
+        this.popup_open = true
+        this.is_error = true
       }
     )
   }
 
-
-  usID: any | null = null;
-  UsNa: any | null = null;
 
   getUserID() {
     if (typeof localStorage !== 'undefined') {
@@ -127,10 +139,8 @@ let userID = Number(new Date)
       },
       error => {
         this.errorMessage = 'Неверный логин или пароль'
-        console.error(error)
-        setTimeout(() => {
-          this.errorMessage = null;
-        }, 3500)
+        this.popup_open = true
+        this.is_error = true
       }
     );
   }
@@ -138,9 +148,9 @@ let userID = Number(new Date)
 
   url_setter() {
     if (typeof localStorage !== 'undefined') {
-      this.usNa = localStorage.getItem('UserName')
+      this.usName = localStorage.getItem('UserName')
     }
-    this.VideosFetchService.enterUser(String(this.usNa)).subscribe(
+    this.VideosFetchService.enterUser(String(this.usName)).subscribe(
       response => {
         if (response[0].header.startsWith('http://127.0.0.1:8000/')) {
           response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
@@ -180,5 +190,15 @@ let userID = Number(new Date)
 
   change_method() {
     this.register = !this.register
+  }
+
+  close_pop_up() {
+    this.popup_open = false
+    this.is_error = false
+    if (this.timeout != null) {
+      clearTimeout(this.timeout)
+      location.reload()
+    }
+    this.timeout = null
   }
 }

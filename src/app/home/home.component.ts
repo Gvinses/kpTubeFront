@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import {NavPartComponent} from "../nav-part/nav-part.component";
-import {VideoPartComponent} from "../video-part/video-part.component";
+import {VideosPartComponent} from "../video-part/videos-part.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
     imports: [
         NavPartComponent,
-        VideoPartComponent
+        VideosPartComponent
     ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

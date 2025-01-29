@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import { videos } from "../video-part/video-part.component"
+import { videos } from "../video-part/videos-part.component"
 import {HttpClient} from "@angular/common/http";
 import {NgClass, NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {filter, forkJoin} from "rxjs";

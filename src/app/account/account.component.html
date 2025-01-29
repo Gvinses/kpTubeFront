@@ -35,7 +35,7 @@
 
   <div class="dontHaveAnAccount" *ngIf="!getUserID()">
     <div class="errorMessage" *ngIf="errorMessage">
-      <h1>{{ errorMessage }}</h1>
+      <h1>Войдите или Зарегистрируйтесь</h1>
     </div>
     <div class="interactive">
       <div class="enter" *ngIf="!register">
@@ -93,10 +93,15 @@
                      [(ngModel)]="header">
             </div>
           </div>
-          <button type="submit" class="submitButton">Отправить</button>
+          <button [disabled]="is_registration_request_now" type="submit" class="submitButton">Отправить</button>
         </form>
         <p class="go_to_authorization" (click)="change_method()">Есть аккаунт? <i>Войти</i></p>
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="popup_open" class="popup">
+  <h1 *ngIf="!is_error">Проверьте Email</h1>
+  <p *ngIf="is_error">{{this.errorMessage}}</p>
+  <button (click)="close_pop_up()">Закрыть</button>
 </div>

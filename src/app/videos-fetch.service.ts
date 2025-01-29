@@ -14,6 +14,7 @@ export class VideosFetchService {
   create_user = 'https://kptube.kringeproduction.ru/create_user/'
   watch_video = 'https://kptube.kringeproduction.ru/watch_video/'
   like = 'https://kptube.kringeproduction.ru/like/'
+  send_mail = 'https://kptube.kringeproduction.ru/send_mail/?email='
 
   http = inject(HttpClient)
 
@@ -71,6 +72,10 @@ export class VideosFetchService {
     return this.http.post(this.create_user, formData)
   }
 
+  send_email(mail: string): Observable<any> {
+    return this.http.get((this.send_mail + mail))
+  }
+
   enterUser(name: string) {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
@@ -82,6 +87,8 @@ export class VideosFetchService {
 
     return this.http.get<any>(`${this.account}?name=${name}`, {headers: headers})
   }
+
+
 
   getUserByID(UserID: string) {
 
