@@ -29,7 +29,7 @@ import {RatingComponent} from "../rating/rating.component";
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
 
-  videoId: number | null = null
+  videoId: string | null = null
   videoData: any = {}
 
   comments: any = []
@@ -67,7 +67,7 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.videoId = +params.get('Video_ID')!
+      this.videoId = String(+params.get('Video_ID')!)
     })
     this.loadUserDetails()
     this.loadVideoDetails()
@@ -143,7 +143,7 @@ export class VideoComponent implements OnInit {
   }
 
   commentOnVideo() {
-    this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
+    this.VideosFetchService.createComment(String(this.userComment),String(this.videoId), this.userName).subscribe(
       response => {
         this.userComment = null
         this.getComments()
