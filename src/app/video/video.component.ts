@@ -29,14 +29,14 @@ import {RatingComponent} from "../rating/rating.component";
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
 
-  videoId: string | null = null
+  videoId: number | null = null
   videoData: any = {}
 
   comments: any = []
   howMuchComments: number = 0
 
   userComment: string | null = null
-  userName: string | null = null
+  userName: string = ''
   userLikes: any;
   userEmail: string | null = null
   userPassword: string | null = null
@@ -67,7 +67,7 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.videoId = String(+params.get('Video_ID')!)
+      this.videoId = +params.get('Video_ID')!
     })
     this.loadUserDetails()
     this.loadVideoDetails()
@@ -75,7 +75,7 @@ export class VideoComponent implements OnInit {
 
   loadUserDetails(): void {
     if (localStorage) {
-      this.userName = localStorage.getItem('UserName')
+      this.userName = String(localStorage.getItem('UserName'))
       let userId = Number(localStorage.getItem('UserID')) / 2
 
       this.VideosFetchService.getUserByID(String(userId)).subscribe(
@@ -143,7 +143,7 @@ export class VideoComponent implements OnInit {
   }
 
   commentOnVideo() {
-    this.VideosFetchService.createComment(String(this.userComment),String(this.videoId), this.userName).subscribe(
+    this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), this.userName).subscribe(
       response => {
         this.userComment = null
         this.getComments()
