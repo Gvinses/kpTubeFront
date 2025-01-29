@@ -36,7 +36,7 @@ export class VideoComponent implements OnInit {
   howMuchComments: number = 0
 
   userComment: string | null = null
-  userName: string = ''
+  userName: string | null = null
   userLikes: any;
   userEmail: string | null = null
   userPassword: string | null = null
@@ -142,12 +142,14 @@ export class VideoComponent implements OnInit {
   }
 
   commentOnVideo() {
-    this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
-      response => {
-        this.userComment = null
-        this.getComments()
-      }
-    )
+    if (this.userName !== null && this.videoId !== null) {
+      this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
+        response => {
+          this.userComment = null
+          this.getComments()
+        }
+      )
+    }
   }
 
   cleaner() {
