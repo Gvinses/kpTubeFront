@@ -67,7 +67,7 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.videoId = +params.get('Video_ID')!
+      this.videoId = String(+params.get('Video_ID')!)
     })
     this.loadUserDetails()
     this.loadVideoDetails()
