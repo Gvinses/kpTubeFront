@@ -95,7 +95,6 @@ export class VideoComponent implements OnInit {
 
   loadVideoDetails(): void {
     if (this.videoId !== null) {
-      console.log('STARTED!')
       this.http.get<any>(`https://kptube.kringeproduction.ru/videos/?Video_ID=${this.videoId}`).subscribe(data => {
         data[0].video = data[0].video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
@@ -143,7 +142,7 @@ export class VideoComponent implements OnInit {
   }
 
   commentOnVideo() {
-    this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), this.userName).subscribe(
+    this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
       response => {
         this.userComment = null
         this.getComments()
