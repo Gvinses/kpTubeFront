@@ -67,7 +67,7 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.videoId = +params.get('Video_ID')!
+      this.videoId = String(+params.get('Video_ID')!)
     })
     this.loadUserDetails()
     this.loadVideoDetails()
@@ -135,7 +135,7 @@ export class VideoComponent implements OnInit {
   }
 
   loadStars() {
-    let getted_data_of_likes_value = this.userLikes[this.videoId]
+    let getted_data_of_likes_value = this.userLikes[String(this.videoId)]
 
     if (getted_data_of_likes_value !== undefined) {
       this.videoStars = Number(getted_data_of_likes_value)
@@ -143,7 +143,7 @@ export class VideoComponent implements OnInit {
   }
 
   commentOnVideo() {
-    this.VideosFetchService.createComment(String(this.userComment), this.videoId, this.userName).subscribe(
+    this.VideosFetchService.createComment(String(this.userComment),String(this.videoId), this.userName).subscribe(
       response => {
         this.userComment = null
         this.getComments()
