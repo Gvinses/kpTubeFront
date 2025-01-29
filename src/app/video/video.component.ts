@@ -121,11 +121,11 @@ export class VideoComponent implements OnInit {
   }
 
   addToUserHistory() {
-    this.VideosFetchService.addView(this.userId, this.videoid).subscribe()
+    this.VideosFetchService.addView(this.INDB_UsernameID, this.videoId).subscribe()
   }
 
   loadStars() {
-    let getted_data_of_likes_value = this.userLikes[String(this.videoId)]
+    let getted_data_of_likes_value = this.userLikes[this.videoId]
 
     if (getted_data_of_likes_value !== undefined) {
       this.videoStars = Number(getted_data_of_likes_value)
