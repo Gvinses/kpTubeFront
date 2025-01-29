@@ -49,7 +49,7 @@ export class VideoComponent implements OnInit {
   VideoData: any | null = null
   VideoOwnerId: any | null = null
 
-  INDB_UsernameID: string
+  INDB_UsernameID: string = ''
 
   videoStars = 0
 
@@ -77,7 +77,6 @@ export class VideoComponent implements OnInit {
       this.VideosFetchService.getUserByID(String(userId)).subscribe(
         (data: any) => {
           this.likesAndRating = data[0].liked
-          this.userEmail = data[0].email
     	  this.INDB_UsernameID = String(data[0].User_ID)
           this.userLikes = data[0].liked
 
@@ -122,8 +121,7 @@ export class VideoComponent implements OnInit {
   }
 
   addToUserHistory() {
-    let userId = String(Number(localStorage.getItem('UserID')) / 2)
-    this.VideosFetchService.addView(userId, this.videoid).subscribe()
+    this.VideosFetchService.addView(this.userId, this.videoid).subscribe()
   }
 
   loadStars() {
