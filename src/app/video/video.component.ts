@@ -36,24 +36,20 @@ export class VideoComponent implements OnInit {
   howMuchComments: number = 0
 
   userComment: string | null = null
-  userName: string | null = null
+  userName: string  = ''
   userLikes: any;
-  userEmail: string | null = null
-  userPassword: string | null = null
   likesAndRating: string = ''
-  VideosHistory: string | any = ''
 
-  video_name: string | null = null
-  video_owner: string | null = null
-  video_category: string | null = null
-  video_description: string | null = null
-  video_preview_link: string | null = null
+  video_name: string  = ''
+  video_owner: string  = ''
+  video_category: string  = ''
+  video_description: string  = ''
+  video_preview_link: string  = ''
 
   VideoData: any | null = null
   VideoOwnerId: any | null = null
 
-  INDB_video_ID: any
-  INDB_UsernameID: any
+  INDB_UsernameID: string = ''
 
   videoStars = 0
 
@@ -81,10 +77,7 @@ export class VideoComponent implements OnInit {
       this.VideosFetchService.getUserByID(String(userId)).subscribe(
         (data: any) => {
           this.likesAndRating = data[0].liked
-          this.userEmail = data[0].email
-          this.userPassword = data[0].password
-          this.INDB_UsernameID = String(data[0].User_ID)
-          this.VideosHistory = data[0].history
+    	  this.INDB_UsernameID = String(data[0].User_ID)
           this.userLikes = data[0].liked
 
           this.loadStars()
@@ -100,7 +93,6 @@ export class VideoComponent implements OnInit {
         data[0].preview = data[0].preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
         this.getComments()
         this.VideoData = data[0]
-        this.INDB_video_ID = data[0].Video_ID
         this.videoStars = data[0].likes
         this.video_link = data[0].video
         this.video_preview_link = data[0].preview
@@ -129,12 +121,11 @@ export class VideoComponent implements OnInit {
   }
 
   addToUserHistory() {
-    let userId = String(Number(localStorage.getItem('UserID')) / 2)
-    this.VideosFetchService.addView(userId, this.INDB_video_ID).subscribe()
+    this.VideosFetchService.addView(this.INDB_UsernameID, this.videoId).subscribe()
   }
 
   loadStars() {
-    let getted_data_of_likes_value = this.userLikes[String(this.videoId)]
+    let getted_data_of_likes_value = this.userLikes[this.videoId]
 
     if (getted_data_of_likes_value !== undefined) {
       this.videoStars = Number(getted_data_of_likes_value)
@@ -142,12 +133,9 @@ export class VideoComponent implements OnInit {
   }
 
   commentOnVideo() {
-    if (this.userName !== null && this.videoId !== null) {
-      this.VideosFetchService.createComment(String(this.userComment), String(this.videoId), String(this.userName)).subscribe(
+    if (this.userName !== '' && this.videoId !== '') {
+      this.VideosFetchService.createComment(String(this.userComment), this.videoId, this.userName).subscribe(
         response => {
-          // console.log(this.videoId)
-          // console.log(this.userName)
-          // console.log(response)
           this.userComment = null
           this.getComments()
         }
@@ -175,7 +163,6 @@ export class VideoComponent implements OnInit {
 
       await navigator.share(this.shareData)
     } catch (err) {
-      console.log(err)
     }
   }
 
