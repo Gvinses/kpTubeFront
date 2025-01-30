@@ -1,9 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {VideosFetchService} from "../videos-fetch.service";
-import {NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Component, inject, OnInit} from '@angular/core'
+import {FormsModule} from "@angular/forms"
+import {VideosFetchService} from "../videos-fetch.service"
+import {NgIf} from "@angular/common"
+import {RouterLink} from "@angular/router"
+import {HttpClient, HttpHeaders} from "@angular/common/http"
 
 @Component({
   selector: 'app-account',
@@ -56,14 +56,14 @@ export class AccountComponent implements OnInit {
 
   avatarCreate(event: any): void {
     if (event.target.files.length > 0) {
-      this.avatar = event.target.files[0];
-      const file = event.target.files[0];
+      this.avatar = event.target.files[0]
+      const file = event.target.files[0]
       if (file && file.type === 'picture/jpg' || file.type === 'image/jpeg' || file.type === 'image/png') {
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onload = () => {
-          this.avatarUrl = reader.result;
-        };
-        reader.readAsDataURL(file);
+          this.avatarUrl = reader.result
+        }
+        reader.readAsDataURL(file)
       } else {
         this.errorMessage = 'Выберите изображение.'
         this.popup_open = true
@@ -74,14 +74,14 @@ export class AccountComponent implements OnInit {
 
   headerCreate(event: any): void {
     if (event.target.files.length > 0) {
-      this.header = event.target.files[0];
-      const file = event.target.files[0];
+      this.header = event.target.files[0]
+      const file = event.target.files[0]
       if (file && file.type === 'picture/jpg' || file.type === 'image/jpeg' || file.type === 'image/png') {
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onload = () => {
-          this.headerUrl = reader.result;
-        };
-        reader.readAsDataURL(file);
+          this.headerUrl = reader.result
+        }
+        reader.readAsDataURL(file)
       } else {
         this.errorMessage = 'Выберите изображение.'
         this.popup_open = true
@@ -118,10 +118,10 @@ export class AccountComponent implements OnInit {
   getUserID() {
     if (typeof localStorage !== 'undefined') {
       this.usID = localStorage.getItem('UserID')
-      this.UsNa = localStorage.getItem('UserName')
+      this.UsNa = localStorage.getItem('username')
     }
 
-    return this.usID !== null && this.UsNa !== null;
+    return this.usID !== null && this.UsNa !== null
   }
 
   onEnter() {
@@ -132,8 +132,8 @@ export class AccountComponent implements OnInit {
       response => {
         let userID = response[0].User_ID
         if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('UserID', String(userID * 2));
-          localStorage.setItem('UserName', String(this.enterName));
+          localStorage.setItem('UserID', String(userID * 2))
+
           location.reload()
         }
       },
@@ -142,25 +142,25 @@ export class AccountComponent implements OnInit {
         this.popup_open = true
         this.is_error = true
       }
-    );
+    )
   }
 
 
   url_setter() {
     if (typeof localStorage !== 'undefined') {
-      this.usName = localStorage.getItem('UserName')
+      this.usName = localStorage.getItem('username')
     }
     this.VideosFetchService.enterUser(String(this.usName)).subscribe(
       response => {
         if (response[0].header.startsWith('http://127.0.0.1:8000/')) {
-          response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
-          this.userHeader = response[0].header;
+          response[0].header = response[0].header.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+          this.userHeader = response[0].header
         }
 
 
         if (response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
-          response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
-          this.userAvatar = response[0].avatar;
+          response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+          this.userAvatar = response[0].avatar
         }
 
         this.userName = response[0].name
@@ -169,10 +169,10 @@ export class AccountComponent implements OnInit {
         this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
           data.forEach((video: any) => {
             if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
-              video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+              video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             }
             if (video.preview && video.preview.startsWith('http://127.0.0.1:8000/')) {
-              video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
+              video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             }
           })
           this.userVideos = data

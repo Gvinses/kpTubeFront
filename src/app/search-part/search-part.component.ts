@@ -50,7 +50,7 @@ export class SearchPartComponent implements OnInit {
   }
 
   isLogin(): boolean {
-    return (localStorage.getItem('UserName') !== null) && (localStorage.getItem('UserID') !== null)
+    return (localStorage.getItem('username') !== null) && (localStorage.getItem('UserID') !== null)
   }
 
   onSearch(): void {

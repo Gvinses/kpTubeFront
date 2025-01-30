@@ -77,7 +77,7 @@ export class MusicCreatingComponent {
 
   onSubmit(): void {
     if (typeof localStorage !== 'undefined') {
-      this.nameLS = localStorage.getItem('UserName')
+      this.nameLS = localStorage.getItem('username')
     }
     if (this.nameLS !== null) {
       this.getUserData()
@@ -92,7 +92,7 @@ export class MusicCreatingComponent {
         if (userResponse[0].isEmailVerified === true) {
           this.loading = true
           if (typeof localStorage !== 'undefined') {
-            this.ownerLS = String(localStorage.getItem('UserName'))
+            this.ownerLS = String(localStorage.getItem('username'))
           }
           this.isButtonDisabled = true
 

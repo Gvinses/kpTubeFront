@@ -9,7 +9,7 @@
 
       <div class="videoContent">
         <div class="share_and_raiting">
-          <app-rating class="video_stars" [current_star]="videoStars" [video_id]="videoId"></app-rating>
+          <app-rating *ngIf="userName != 'null'" class="video_stars" [current_star]="videoStars" [video_id]="videoId"></app-rating>
 
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
         </div>
@@ -30,14 +30,22 @@
     <div class="comments">
       <h2>{{ howMuchComments }} комментариев</h2>
       <div class="commenter">
-        {{ userName }}
-        <input class="commentInput" [(ngModel)]="userComment" (keyup.enter)="commentOnVideo()"
-               placeholder="Введите комментарий">
+        <span *ngIf="userName != 'null'">
+          {{ userName }}
+          <input class="commentInput" [(ngModel)]="userComment" (keyup.enter)="commentOnVideo()"
+                 placeholder="Введите комментарий">
 
-        <div *ngIf="userComment" class="buttons">
-          <button (click)="cleaner()">Отмена</button>
-          <button class="submitCommentButton" (click)="commentOnVideo()">Оставить комментарий</button>
-        </div>
+          <div *ngIf="userComment" class="buttons">
+            <button (click)="cleaner()">Отмена</button>
+            <button class="submitCommentButton" (click)="commentOnVideo()">Оставить комментарий</button>
+          </div>
+        </span>
+
+        <span *ngIf="userName === 'null'">
+          <div class="buttons">
+            <button class="dontHaveAccount_button" [routerLink]="'/account'">Войдите или создайте аккаунт для коментариев!</button>
+          </div>
+        </span>
       </div>
       <div class="allComments">
         @for (comment of comments; track comment) {
