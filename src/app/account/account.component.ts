@@ -132,7 +132,7 @@ export class AccountComponent implements OnInit {
       response => {
         let userID = response[0].User_ID
         if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('UserID', String(userID * 2))
+          localStorage.setItem('UserID', userID)
 
           location.reload()
         }
