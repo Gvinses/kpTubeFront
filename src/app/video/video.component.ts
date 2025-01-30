@@ -73,7 +73,7 @@ export class VideoComponent implements OnInit {
       this.userName = String(localStorage.getItem('username'))
       let userId = localStorage.getItem('UserID')
 
-      this.VideosFetchService.getUserByID(userId).subscribe(
+      this.VideosFetchService.getUserByID(String(userId)).subscribe(
         (data: any) => {
           this.INDB_UsernameID = data[0].User_ID
           this.userLikes = data[0].liked
