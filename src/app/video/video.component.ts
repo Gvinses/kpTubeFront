@@ -71,7 +71,7 @@ export class VideoComponent implements OnInit {
   loadUserDetails(): void {
     if (localStorage) {
       this.userName = String(localStorage.getItem('username'))
-      let userId = Number(localStorage.getItem('UserID')) / 2
+      let userId = localStorage.getItem('UserID')
 
       this.VideosFetchService.getUserByID(String(userId)).subscribe(
         (data: any) => {
