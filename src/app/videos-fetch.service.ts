@@ -116,7 +116,7 @@ export class VideosFetchService {
     return this.http.get(this.account, {headers: headers})
   }
 
-  addView(USID: any, VIDEOID: any): Observable<any> {
+  addView(USID: string, VIDEOID: string): Observable<any> {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
 
