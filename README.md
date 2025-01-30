@@ -1,44 +1,52 @@
-# KptubeFront - website is KP229 copy of YouTube By KP229
+<div align="center">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+  <img src="https://github.com/user-attachments/assets/755ab2ab-ba87-43d6-be85-8bb8a1fdfdfb">
+  <br>
+  <h1>KPtube - website is KP229 copy of YouTube By KP229</h1>
 
-# video-part - is all videos page (where you can select video)
-# video-creating - is video creating page (where you can create new video on KPtube)
-# video - is video page (where you can watch video)
+  <hr>
+  <div display="inline-flex" align-items="center">
+    
+  <img src="https://houseofangular.io/wp-content/uploads/2023/11/AngularLogoGradient.png" width=40 height=40>
+  <p>KPTube was generated with Angular version 18.1.1.</p>
+  
+  </div>
 
-# Link: https://imaginative-kheer-6bc042.netlify.app/
+  <hr>
 
-[//]: # (## Development server)
+  <h2>Links:</h2>
+  
+  KPTube: https://kptube.netlify.app/
 
-[//]: # ()
-[//]: # (Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.)
+  <hr>
 
-[//]: # ()
-[//]: # (## Code scaffolding)
-
-[//]: # ()
-[//]: # (Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.)
-
-[//]: # ()
-[//]: # (## Build)
-
-[//]: # ()
-[//]: # (Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.)
-
-[//]: # ()
-[//]: # (## Running unit tests)
-
-[//]: # ()
-[//]: # (Run `ng test` to execute the unit tests via [Karma]&#40;https://karma-runner.github.io&#41;.)
-
-[//]: # ()
-[//]: # (## Running end-to-end tests)
-
-[//]: # ()
-[//]: # (Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.)
-
-[//]: # ()
-[//]: # (## Further help)
-
-[//]: # ()
-[//]: # (To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference]&#40;https://angular.dev/tools/cli&#41; page.)
+  <div>
+    <h3>Components:</h3>
+    <ul>
+      <li>account: Page for user to manage his account or enter/register</li>
+      <hr>
+      <li>other-account: Page for viewing other account</li>
+      <hr>
+      <li>history: Page for user to view what videos he ever watch</li>
+      <hr>
+      <li>nav-part: left part of website, were user can navigate to KPtube services</li>
+      <hr>
+      <li>search-part: search line in top of website</li>
+      <hr>
+      <li>search-results: page of search results</li>
+      <hr>                                        
+      <li>video: page to watch a single video</li>
+      <hr>
+      <li>videos-part: page to find a video</li>
+      <hr>
+      <li>video-creating: page to create a video by user</li>
+      <hr>
+      <li>rating: component using for rating current video</li>
+      <hr>
+      <li>kp-music: Page for listening music</li>
+      <hr>
+      <li>music-creating: page to create a music by user</li>
+    </ul>
+  </div>
+    
+  </div>
