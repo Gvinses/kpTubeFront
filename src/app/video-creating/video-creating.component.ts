@@ -103,7 +103,7 @@ export class VideoCreatingComponent implements OnInit {
   onSubmit(): void {
     if (this.selectedFile && this.selectedPreview) {
       if (typeof localStorage !== 'undefined') {
-        this.nameLS = localStorage.getItem('UserName')
+        this.nameLS = localStorage.getItem('username')
       }
       if (this.nameLS !== null) {
         this.enterAccount()
