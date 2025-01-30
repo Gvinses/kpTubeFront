@@ -38,7 +38,6 @@ export class VideoComponent implements OnInit {
   userComment: string | null = null
   userName: string  = ''
   userLikes: any;
-  likesAndRating: string = ''
 
   video_name: string  = ''
   video_owner: string  = ''
@@ -76,8 +75,7 @@ export class VideoComponent implements OnInit {
 
       this.VideosFetchService.getUserByID(String(userId)).subscribe(
         (data: any) => {
-          this.likesAndRating = data[0].liked
-    	  this.INDB_UsernameID = String(data[0].User_ID)
+          this.INDB_UsernameID = data[0].User_ID
           this.userLikes = data[0].liked
 
           this.loadStars()
