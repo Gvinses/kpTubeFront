@@ -38,6 +38,8 @@ export class HistoryComponent implements OnInit {
     if (localStorage) {
       this.userID = String(localStorage.getItem('UserID'))
 
+      console.log(this.userID)
+
       this.postService.getUserByID(this.userID).subscribe((data: any) => {
         this.historyArr = data[0].history
 
