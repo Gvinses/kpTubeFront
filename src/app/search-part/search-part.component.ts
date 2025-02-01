@@ -36,7 +36,7 @@ export class SearchPartComponent implements OnInit {
     }
     if (this.isLogin()) {
       if (localStorage) {
-        this.gettedID = String(Number(localStorage.getItem('UserID')) / 2)
+        this.gettedID = String(localStorage.getItem('UserID'))
       }
       this.VideosFetchService.getUserByID(this.gettedID).subscribe(
         (response): any => {

@@ -1,15 +1,15 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import { videos } from "../video-part/videos-part.component"
+import { videos } from "../videos-part/videos-part.component"
 import {HttpClient} from "@angular/common/http";
 import {NgClass, NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {filter, forkJoin} from "rxjs";
 import {VideosFetchService} from "../videos-fetch.service";
 
 @Component({
-  selector: 'app-searchResults',
-  templateUrl: './searchResults.component.html',
+  selector: 'app-search-results',
+  templateUrl: './search-results.component.html',
   standalone: true,
   imports: [
     RouterLink,
@@ -19,7 +19,7 @@ import {VideosFetchService} from "../videos-fetch.service";
     NgClass,
     NgForOf,
   ],
-  styleUrls: ['./searchResults.component.sass']
+  styleUrls: ['./search-results.component.sass']
 })
 export class SearchResultsComponent implements OnInit {
   search: string = '';

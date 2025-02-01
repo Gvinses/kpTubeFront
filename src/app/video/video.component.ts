@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http"
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common"
 import {VideosFetchService} from "../videos-fetch.service"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
-import {RatingComponent} from "../rating/rating.component";
+import {KpRatingComponent} from "../KP-UI/kp-rating/kp-rating.component";
 
 @Component({
   selector: 'app-video',
@@ -22,7 +22,7 @@ import {RatingComponent} from "../rating/rating.component";
     FormsModule,
     NgIf,
     NgForOf,
-    RatingComponent,
+    KpRatingComponent,
   ],
   styleUrls: ['./video.component.sass']
 })
@@ -75,7 +75,6 @@ export class VideoComponent implements OnInit {
 
       this.VideosFetchService.getUserByID(String(userId)).subscribe(
         (data: any) => {
-          this.INDB_UsernameID = data[0].User_ID
           this.userLikes = data[0].liked
 
           this.loadStars()
@@ -119,7 +118,9 @@ export class VideoComponent implements OnInit {
   }
 
   addToUserHistory() {
-    this.VideosFetchService.addView(this.INDB_UsernameID, this.videoId).subscribe()
+    let userId = String(localStorage.getItem('UserID'))
+    console.log(userId, this.videoId)
+    this.VideosFetchService.addView(userId, this.videoId).subscribe()
   }
 
   loadStars() {

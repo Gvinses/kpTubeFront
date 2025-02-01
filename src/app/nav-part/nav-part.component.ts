@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {trigger, transition, style, animate} from '@angular/animations';
 import {Router, RouterLink} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-nav-part',
@@ -9,7 +10,8 @@ import {Router, RouterLink} from "@angular/router";
   imports: [
     NgIf,
     NgClass,
-    RouterLink
+    RouterLink,
+    FormsModule
   ],
   templateUrl: './nav-part.component.html',
   styleUrl: './nav-part.component.sass',
@@ -26,16 +28,19 @@ import {Router, RouterLink} from "@angular/router";
   ]
 })
 export class NavPartComponent {
-  isOpen = false;
+  isSlav = false
+
+  isOpen = false
+
 
   constructor(private router: Router) {
   }
 
   toggleMenu() {
-    this.isOpen = !this.isOpen;
+    this.isOpen = !this.isOpen
   }
 
   set_client_web_pos() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/'])
   }
 }

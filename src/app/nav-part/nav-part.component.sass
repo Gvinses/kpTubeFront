@@ -64,14 +64,13 @@
     position: relative
     top: 10px
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
-    width: 100%
+    width: 80%
     z-index: 999
     transition: opacity 0.3s ease
 
     ul
       list-style: none
       padding: 0
-      margin: 0 0 0 5px
       display: flex
       flex-direction: column
       gap: 10px
@@ -84,27 +83,33 @@
         transition: 0.3s ease-out
 
         white-space: nowrap
-        width: 80%
-        height: 40px
-        padding: 0px 16px
-        display: flex
+        width: 100%
+        height: 100%
         min-height: 40px
-        position: relative
+        display: flex
         align-items: center
+        justify-content: center
+        position: relative
         flex-direction: row
+
+        // TODO
+        //  сделать иконки
+
         font-family: Roboto, Noto, sans-serif
         font-size: 16px
         font-weight: 400
         line-height: 24px
         color: rgb(241, 241, 241)
         text-decoration-color: rgb(241, 241, 241)
-        text-decoration-style: solid
-        text-decoration-thickness: auto
-        visibility: visible
 
         a
           text-decoration: none
           color: #ffffff
+
+      .slav_checkbox
+        margin-left: 50px
+        display: flex
+
 
 @media (max-width: 768px)
   .burger-menu
@@ -123,4 +128,4 @@
       ul
         li
           margin-left: 20px
-          background: #616161
+          background: #515151

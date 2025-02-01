@@ -38,7 +38,7 @@ export class LikedVideosComponent implements OnInit {
 
   userLikes() {
     if (localStorage) {
-      this.userID = String(Number(localStorage.getItem('UserID')) / 2)
+      this.userID = String(localStorage.getItem('UserID'))
     }
     this.postService.getUserByID(this.userID).subscribe((data: any) => {
       this.likedVideosArr = data[0].liked

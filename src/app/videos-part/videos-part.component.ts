@@ -22,7 +22,7 @@ export interface video_type    // make as file
 
 
 @Component({
-  selector: 'app-video-part',
+  selector: 'app-videos-part',
   standalone: true,
   imports: [
     NgForOf,

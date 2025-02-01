@@ -9,7 +9,7 @@
 
       <div class="videoContent">
         <div class="share_and_raiting">
-          <app-rating *ngIf="userName != 'null'" class="video_stars" [current_star]="videoStars" [video_id]="videoId"></app-rating>
+          <app-kp-rating *ngIf="userName != 'null'" class="video_stars" [current_star]="videoStars" [video_id]="videoId"></app-kp-rating>
 
           <button (click)="shareInfo()" class="shareButt">Поделиться</button>
         </div>

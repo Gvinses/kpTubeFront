@@ -23,10 +23,10 @@ let tracks = [
     RouterLinkActive,
     NgIf
   ],
-  templateUrl: './kp-music.component.html',
-  styleUrls: ['./kp-music.component.sass']
+  templateUrl: './music-part.component.html',
+  styleUrls: ['./music-part.component.sass']
 })
-export class KpMusicComponent implements OnInit {
+export class MusicPartComponent implements OnInit {
   musicService = inject(MusicFetchService)
   @ViewChildren('audio') audioElements!: QueryList<ElementRef<HTMLAudioElement>>
   currentTrackIndex = 0
