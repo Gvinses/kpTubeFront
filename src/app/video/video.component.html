@@ -1,14 +1,29 @@
 <div class="main">
   <div class="videoPart">
     <div class="video_container">
-      <video class="video" rel=preload autoplay="autoplay" controls="controls" src="{{ video_link }}" loop></video>
+      <video class="video" rel=preload autoplay="autoplay" preload="metadata" controls="controls" poster="{{video_preview_link}}" src="{{ video_link }}" loop></video>
     </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ video_name }}</h1>
-      <h3 class="videoAuthor" [routerLink]="['/account', VideoOwnerId]">Автор - {{ video_owner }}</h3>
 
       <div class="videoContent">
-        <div class="share_and_raiting">
+        <div class="first_info_and_share_raiting">
+          <span class="author">
+            <span class="non_interactive_author_data" [routerLink]="['/account', VideoOwnerId]">
+              <span class="avatar_of_author">
+                <img src="{{author_photo_link}}" alt="">
+              </span>
+              <span class="data_of_author">
+                <h3 class="video_author_name">{{ video_owner }}</h3>
+                <h6 class="author_subscribers">0 Подписчиков</h6>
+              </span>
+            </span>
+<!--            <span class="subscribe">-->
+<!--              <button>-->
+<!--                Подписаться-->
+<!--              </button>-->
+<!--            </span>-->
+          </span>
           <app-kp-rating *ngIf="userName != 'null'" class="video_stars" [current_star]="videoStars"
                          [video_id]="videoId"></app-kp-rating>
 
@@ -16,14 +31,29 @@
         </div>
 
         <div class="aboutVideo">
+          <span class="video_info">
+            <span class="views">
+              <img src="Views_Icon.svg">
+              <p>{{video_views}}</p>
+            </span>
+            <span class="when_created">
+              <p>{{get_created_date()}}</p>
+            </span>
+          </span>
           <details class="aboutVideoDetails">
-            <summary>Описание</summary>
-            <p>{{ VideoData.description }}</p>
+            <summary (click)="change_description_status()">
+              @if (is_description_open) {
+                Закрыть описание
+              } @else {
+                Открыть описание
+              }
+            </summary>
+            <p>{{ video_description }}</p>
           </details>
         </div>
 
         <div class="category">
-          <p>Категория: <b>{{ VideoData.category }}</b></p>
+          <p>Категория: <b>{{ video_category }}</b></p>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common
 import {VideosFetchService} from "../videos-fetch.service"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
 import {KpRatingComponent} from "../KP-UI/kp-rating/kp-rating.component";
+import {DateService} from "../date.service";
 
 @Component({
   selector: 'app-video',
@@ -28,6 +29,7 @@ import {KpRatingComponent} from "../KP-UI/kp-rating/kp-rating.component";
 })
 export class VideoComponent implements OnInit {
   VideosFetchService = inject(VideosFetchService)
+  DateFetchService = inject(DateService)
 
   videoId: string = ''
   videoData: any = {}
@@ -36,23 +38,26 @@ export class VideoComponent implements OnInit {
   howMuchComments: number = 0
 
   userComment: string | null = null
-  userName: string  = ''
+  userName: string = ''
   userLikes: any;
 
-  video_name: string  = ''
-  video_owner: string  = ''
-  video_category: string  = ''
-  video_description: string  = ''
-  video_preview_link: string  = ''
+  video_name: string = ''
+  video_owner: string = ''
+  video_category: string = ''
+  video_description: string = ''
+  video_preview_link: string = ''
+  video_views: number = 0
 
   VideoData: any | null = null
   VideoOwnerId: any | null = null
 
-  INDB_UsernameID: string = ''
+  author_photo_link: string = ''
 
   videoStars = 0
+  video_link: string = ''
 
-  protected video_link: any
+  is_description_open: boolean = false
+  created_date: Date = new Date()
 
   constructor(
     private route: ActivatedRoute,
@@ -73,13 +78,16 @@ export class VideoComponent implements OnInit {
       this.userName = String(localStorage.getItem('username'))
       let userId = localStorage.getItem('UserID')
 
-      this.VideosFetchService.getUserByID(String(userId)).subscribe(
-        (data: any) => {
-          this.userLikes = data[0].liked
+      if (this.userName !== null && userId !== null) {
+        this.VideosFetchService.getUserByID(String(userId)).subscribe(
+          (data: any) => {
+            this.userLikes = data[0].liked
 
-          this.loadStars()
-        }
-      )
+            this.loadStars()
+            this.addToUserHistory()
+          }
+        )
+      }
     }
   }
 
@@ -97,13 +105,17 @@ export class VideoComponent implements OnInit {
         this.video_owner = data[0].owner
         this.video_category = data[0].category
         this.video_description = data[0].description
+        this.video_views = data[0].views
+
+        this.created_date = new Date(Number(this.videoId))
 
         this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
           (data: any) => {
             this.VideoOwnerId = data[0].User_ID
+            data[0].avatar = data[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+            this.author_photo_link = data[0].avatar
           }
         )
-        this.addToUserHistory()
       })
     }
   }
@@ -146,6 +158,18 @@ export class VideoComponent implements OnInit {
     this.userComment = null
   }
 
+
+  get_created_date() {
+    let current_date = new Date()
+
+    return this.DateFetchService.getDateDifference(this.created_date, current_date)
+  }
+
+  change_description_status() {
+    this.is_description_open = !this.is_description_open
+  }
+
+
   shareData = {
     title: "KPtube Video",
     text: this.videoData.name,
@@ -164,7 +188,4 @@ export class VideoComponent implements OnInit {
     } catch (err) {
     }
   }
-
-
-  protected readonly Number = Number;
 }
