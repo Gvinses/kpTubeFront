@@ -45,7 +45,7 @@
           <input id="enterPass" name="password" required="required" [(ngModel)]="enterPass">
           <button type="submit" class="enterSubmit">Отправить</button>
         </form>
-        <p class="go_to_register" (click)="change_method()">Нет аккаунта? <i>Зарегистрироваться</i></p>
+        <p class="go_to_register" (click)="change_method()"> <i>Зарегистрироваться</i></p>
       </div>
       <div class="register" *ngIf="register">
         <form class="registerForm" (ngSubmit)="onRegister()" #emailForm="ngForm">
