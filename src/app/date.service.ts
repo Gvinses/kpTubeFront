@@ -10,10 +10,6 @@ export class DateService {
     const monthsDiff = currentDate.getMonth() - createdAt.getMonth();
     const daysDiff = currentDate.getDate() - createdAt.getDate();
 
-    console.log(yearsDiff)
-    console.log(monthsDiff)
-    console.log(daysDiff)
-
     // Если разница в годах больше 0
     if (yearsDiff > 0) {
       return `${yearsDiff} год${yearsDiff > 1 ? 'а' : ''} назад`;

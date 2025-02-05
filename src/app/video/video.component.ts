@@ -49,7 +49,7 @@ export class VideoComponent implements OnInit {
   video_views: number = 0
 
   VideoData: any | null = null
-  VideoOwnerId: any | null = null
+  VideoOwnerId: string = ''
 
   author_photo_link: string = ''
 
@@ -58,6 +58,7 @@ export class VideoComponent implements OnInit {
 
   is_description_open: boolean = false
   created_date: Date = new Date()
+  isSubscribe: boolean = false
 
   constructor(
     private route: ActivatedRoute,
@@ -81,9 +82,12 @@ export class VideoComponent implements OnInit {
       if (this.userName !== null && userId !== null) {
         this.VideosFetchService.getUserByID(String(userId)).subscribe(
           (data: any) => {
+            console.log(data)
+
             this.userLikes = data[0].liked
 
             this.loadStars()
+            this.loadSubscribes()
             this.addToUserHistory()
           }
         )
@@ -131,7 +135,7 @@ export class VideoComponent implements OnInit {
 
   addToUserHistory() {
     let userId = String(localStorage.getItem('UserID'))
-    console.log(userId, this.videoId)
+
     this.VideosFetchService.addView(userId, this.videoId).subscribe()
   }
 
@@ -142,6 +146,15 @@ export class VideoComponent implements OnInit {
       this.videoStars = Number(getted_data_of_likes_value)
     }
   }
+
+  loadSubscribes() {
+    let getted_data_of_subscribes = this.userLikes[this.videoId]
+
+    if (getted_data_of_subscribes !== undefined) {
+      this.isSubscribe = true
+    }
+  }
+
 
   commentOnVideo() {
     if (this.userName !== '' && this.videoId !== '') {
@@ -168,6 +181,18 @@ export class VideoComponent implements OnInit {
   change_description_status() {
     this.is_description_open = !this.is_description_open
   }
+
+
+  subscribe_to_blogger() {
+    if (!this.isSubscribe) {
+      let userId = String(localStorage.getItem('UserID'))
+
+      this.VideosFetchService.subscribe_to_blogger(userId, this.VideoOwnerId).subscribe((data) => {
+        this.isSubscribe = true
+      })
+    }
+  }
+
 
 
   shareData = {

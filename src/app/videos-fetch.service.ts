@@ -15,6 +15,7 @@ export class VideosFetchService {
   watch_video = 'https://kptube.kringeproduction.ru/watch_video/'
   like = 'https://kptube.kringeproduction.ru/like/'
   send_mail = 'https://kptube.kringeproduction.ru/send_mail/?email='
+  subscribe = 'https://kptube.kringeproduction.ru/subscribe/'
 
   http = inject(HttpClient)
 
@@ -173,6 +174,23 @@ export class VideosFetchService {
 
 
     return this.http.post(this.comment, formData, {headers: headers})
+  }
+
+  subscribe_to_blogger(User_ID: string, Blogger_ID: string) {
+    const formData = new FormData()
+    formData.append('User_ID', User_ID)
+    formData.append('Blogger_ID', Blogger_ID)
+
+    const username = localStorage.getItem('username')
+    const password = localStorage.getItem('password')
+
+    let headers = new HttpHeaders()
+
+    headers = headers.set('X-USERNAME', String(username))
+    headers = headers.set('X-PASSWORD', String(password))
+
+
+    return this.http.post(this.subscribe, formData, {headers: headers})
   }
 
   deleteVideo(id: number) {

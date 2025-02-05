@@ -18,11 +18,15 @@
                 <h6 class="author_subscribers">0 Подписчиков</h6>
               </span>
             </span>
-<!--            <span class="subscribe">-->
-<!--              <button>-->
-<!--                Подписаться-->
-<!--              </button>-->
-<!--            </span>-->
+            <span class="subscribe">
+              <button (click)="subscribe_to_blogger()" [ngClass]="{'subscribed': !isSubscribe, 'not_subscribed': isSubscribe}">
+                @if (!isSubscribe) {
+                  Подписаться
+                } @else {
+                  Вы подписаны
+                }
+              </button>
+            </span>
           </span>
           <app-kp-rating *ngIf="userName != 'null'" class="video_stars" [current_star]="videoStars"
                          [video_id]="videoId"></app-kp-rating>
