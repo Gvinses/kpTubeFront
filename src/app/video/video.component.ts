@@ -82,8 +82,6 @@ export class VideoComponent implements OnInit {
       if (this.userName !== null && userId !== null) {
         this.VideosFetchService.getUserByID(String(userId)).subscribe(
           (data: any) => {
-            console.log(data)
-
             this.userLikes = data[0].liked
 
             this.loadStars()
@@ -115,6 +113,7 @@ export class VideoComponent implements OnInit {
 
         this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
           (data: any) => {
+            console.log(data)
             this.VideoOwnerId = data[0].User_ID
             data[0].avatar = data[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             this.author_photo_link = data[0].avatar
