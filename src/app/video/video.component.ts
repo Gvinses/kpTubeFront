@@ -40,7 +40,6 @@ export class VideoComponent implements OnInit {
   userComment: string | null = null
   userName: string = ''
   userLikes: any;
-  userSubscribes: any;
 
   video_name: string = ''
   video_owner: string = ''
@@ -60,6 +59,7 @@ export class VideoComponent implements OnInit {
   is_description_open: boolean = false
   created_date: Date = new Date()
   isSubscribe: boolean = false
+  author_subscribers: number = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +84,6 @@ export class VideoComponent implements OnInit {
         this.VideosFetchService.getUserByID(String(userId)).subscribe(
           (data: any) => {
             this.userLikes = data[0].liked
-	    this.userSubscribes = data[0].subscribes
 
             this.loadStars()
             this.loadSubscribes()
@@ -115,10 +114,12 @@ export class VideoComponent implements OnInit {
 
         this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
           (data: any) => {
+            console.log('-------------')
             console.log(data)
-            this.VideoOwnerId = data[0].User_ID
+            this.VideoOwnerId = String(data[0].User_ID)
             data[0].avatar = data[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             this.author_photo_link = data[0].avatar
+            this.author_subscribers = data[0].subscribers
           }
         )
       })
@@ -149,7 +150,7 @@ export class VideoComponent implements OnInit {
   }
 
   loadSubscribes() {
-    let getted_data_of_subscribes = this.userSubscribes[String(this.VideoOwnerId)]  
+    let getted_data_of_subscribes = this.userLikes[this.videoId]
 
     if (getted_data_of_subscribes !== undefined) {
       this.isSubscribe = true
@@ -186,9 +187,7 @@ export class VideoComponent implements OnInit {
 
   subscribe_to_blogger() {
     if (!this.isSubscribe) {
-      let userId = String(localStorage.getItem('UserID'))
-
-      this.VideosFetchService.subscribe_to_blogger(userId, this.VideoOwnerId).subscribe((data) => {
+      this.VideosFetchService.subscribe_to_blogger(this.VideoOwnerId).subscribe((data) => {
         this.isSubscribe = true
       })
     }

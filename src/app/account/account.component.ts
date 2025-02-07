@@ -38,7 +38,7 @@ export class AccountComponent implements OnInit {
   userData: any[] = []
   userHeader: string | ArrayBuffer | null = null
   userAvatar: string | ArrayBuffer | null = null
-  userName: string | null = null
+  userName: string = ''
   userVideos: any[] = []
   usName: any | null = null
 
@@ -128,14 +128,12 @@ export class AccountComponent implements OnInit {
     localStorage.setItem('username', this.enterName)
     localStorage.setItem('password', this.enterPass)
 
-    this.VideosFetchService.enterUser(this.enterName).subscribe(
+    this.VideosFetchService.enterUser(String(this.enterName)).subscribe(
       response => {
         let userID = response[0].User_ID
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('UserID', userID)
+        localStorage.setItem('UserID', userID)
 
-          location.reload()
-        }
+         location.reload()
       },
       error => {
         this.errorMessage = 'Неверный логин или пароль'

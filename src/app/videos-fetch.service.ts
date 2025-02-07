@@ -104,19 +104,6 @@ export class VideosFetchService {
     return this.http.get<any>(this.account + '?User_ID=' + UserID, {headers: headers})
   }
 
-  getUsers(): Observable<any> {
-
-    const username = localStorage.getItem('username')
-    const password = localStorage.getItem('password')
-
-    let headers = new HttpHeaders()
-
-    headers = headers.set('X-USERNAME', String(username))
-    headers = headers.set('X-PASSWORD', String(password))
-
-    return this.http.get(this.account, {headers: headers})
-  }
-
   addView(USID: string, VIDEOID: string): Observable<any> {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
@@ -132,10 +119,6 @@ export class VideosFetchService {
     }
 
     return this.http.post(this.watch_video, post_data, {headers: headers})
-  }
-
-  updateVideo(video: any) {
-    return this.http.put(this.apiUrl + '/' + video.id, video)
   }
 
   PostStars(USID: any, VIDEOID: any, likes: any) {
@@ -176,18 +159,20 @@ export class VideosFetchService {
     return this.http.post(this.comment, formData, {headers: headers})
   }
 
-  subscribe_to_blogger(User_ID: string, Blogger_ID: string) {
-    const formData = new FormData()
-    formData.append('User_ID', User_ID)
-    formData.append('Blogger_ID', Blogger_ID)
+  subscribe_to_blogger(Blogger_ID: string) {
 
-    const username = localStorage.getItem('username')
-    const password = localStorage.getItem('password')
+    const username = String(localStorage.getItem('username'))
+    const password = String(localStorage.getItem('password'))
+
+    const formData = new FormData()
+
+    formData.append('User_ID', username)
+    formData.append('Blogger_ID', Blogger_ID)
 
     let headers = new HttpHeaders()
 
-    headers = headers.set('X-USERNAME', String(username))
-    headers = headers.set('X-PASSWORD', String(password))
+    headers = headers.set('X-USERNAME', username)
+    headers = headers.set('X-PASSWORD', password)
 
 
     return this.http.post(this.subscribe, formData, {headers: headers})
