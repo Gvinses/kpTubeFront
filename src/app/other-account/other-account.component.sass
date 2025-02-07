@@ -1,9 +1,12 @@
+$grid-columns: 4
+$grid-gap: 30px
+
+
 .container
   display: flex
   flex-direction: column
   align-items: center
   justify-content: center
-  margin-left: 140px
 
   .userAccount
     display: flex
@@ -70,57 +73,66 @@
             margin-right: 70px
 
 
-.userVideos
+.videos
+  margin-left: 200px
   display: grid
-  grid-template-columns: repeat(4, 1fr)
-  margin-top: 10vw
-  margin-left: 50px
-
-  .noVideo
-    width: 100%
-    height: 40vh
-    display: flex
-    justify-content: center
-    align-items: center
-    flex-direction: column
-
-    img
-      height: 30%
-      width: auto
-
+  grid-template-columns: repeat($grid-columns, 1fr)
+  gap: $grid-gap
 
   .video
-    width: 100%
-    max-width: 300px
+    width: 20vw
     height: auto
     aspect-ratio: 16/9
-    // Сохранение соотношения сторон
+
     display: flex
     flex-direction: column
-    align-items: center
-    justify-content: center
+    align-items: flex-start
+    justify-content: flex-start
 
     img
       width: 100%
       height: 100%
-      object-fit: scale-down
-      border: 2px solid black
+      border-radius: 15px
+      object-fit: cover
       padding: 5px
+      position: relative
+
+      &::after
+        content: " "
+        display: block
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        background-color: #1A1A1D
+        opacity: 1
 
     .info
+      display: block
       position: relative
       top: 5px
-      text-align: left
+      box-sizing: border-box
 
-      h5
+      .video_name
         margin: 10px 0 5px
         font-size: 1.2em
-
-      p
-        margin: 0
-        font-size: 1.1em
-        color: #d5d5d5
         text-align: left
+        max-width: 100%
+        overflow: hidden
+        text-overflow: ellipsis
+        display: block
+
+      .author_and_views
+        display: flex
+        flex-direction: column
+        gap: 10px
+
+        p
+          margin: 0
+          font-size: 1.1em
+          color: #d5d5d5
+          text-align: left
 
 
 @media (max-width: 768px)
@@ -135,7 +147,7 @@
     .avatar
       display: none
 
-  .userVideos
+  .videos
     display: grid
     grid-template-columns: repeat(2, 1fr)
     gap: 20px
@@ -153,7 +165,7 @@
     width: 90%
 
 
-  .userVideos
+  .videos
     grid-template-columns: 1fr
     gap: 20px
 
