@@ -31,7 +31,6 @@ export interface video_type    // make as file
   ],
   templateUrl: './videos-part.component.html',
   styleUrl: './videos-part.component.sass',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideosPartComponent implements AfterViewInit {
 
