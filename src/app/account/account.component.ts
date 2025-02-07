@@ -91,14 +91,15 @@ export class AccountComponent implements OnInit {
   }
 
   onRegister() {
-    let userID = Number(new Date)
+    let userID = String(Number(new Date))
     this.is_registration_request_now = true
 
     this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
       response => {
         if (localStorage) {
           localStorage.setItem('UserID', String(userID))
-          localStorage.setItem('UserName', String(this.name))
+          localStorage.setItem('username', String(this.name))
+          localStorage.setItem('password', String(this.password))
           this.popup_open = true
           this.VideosFetchService.send_email(this.email).subscribe()
           this.timeout = setTimeout(() => {
@@ -136,6 +137,7 @@ export class AccountComponent implements OnInit {
          location.reload()
       },
       error => {
+        console.log(error)
         this.errorMessage = 'Неверный логин или пароль'
         this.popup_open = true
         this.is_error = true

@@ -61,9 +61,9 @@ export class VideosFetchService {
     return this.http.post(this.apiUrl, formData, {headers: headers})
   }
 
-  createUser(userID: number, name: string, email: string, password: string, avatar: File, header: File) {
+  createUser(userID: string, name: string, email: string, password: string, avatar: File, header: File) {
     const formData = new FormData()
-    formData.append('User_ID', String(userID))
+    formData.append('User_ID', userID)
     formData.append('name', name)
     formData.append('email', email)
     formData.append('password', password)
