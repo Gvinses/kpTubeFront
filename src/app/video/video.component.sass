@@ -215,18 +215,15 @@
       font-size: 20px
 
     .videoContent
-      display: grid
-      grid-template-columns: 1.7fr
-      grid-template-rows: 1.7fr 1.2fr 1fr
-      align-items: baseline
-      gap: 50px
+      display: flex
       font-size: 30px
+      flex-direction: column
 
       .first_info_and_share_raiting
         flex-direction: column
 
-        .subscribe
-          display: none
+        .author
+          flex-direction: column
 
   .share_and_raiting
     display: flex
@@ -261,8 +258,14 @@
         margin-left: 10px
         flex-direction: column
 
-        .subscribe
-          display: none
+        .author
+          flex-direction: column
+
+
+  .video_stars
+    position: relative
+    margin-top: 50px
+
 
   .aboutVideo
     .video_info
