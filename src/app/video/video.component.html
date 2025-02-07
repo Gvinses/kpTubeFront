@@ -1,7 +1,8 @@
 <div class="main">
   <div class="videoPart">
     <div class="video_container">
-      <video class="video" rel=preload autoplay="autoplay" preload="metadata" controls="controls" poster="{{video_preview_link}}" src="{{ video_link }}" loop></video>
+      <video class="video" rel=preload autoplay="autoplay" preload="metadata" controls="controls"
+             poster="{{video_preview_link}}" src="{{ video_link }}" loop></video>
     </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ video_name }}</h1>
@@ -15,14 +16,16 @@
               </span>
               <span class="data_of_author">
                 <h3 class="video_author_name">{{ video_owner }}</h3>
-                <h6 class="author_subscribers">0 Подписчиков</h6>
+                <h6 class="author_subscribers">{{ author_subscribers }} Подписчиков</h6>
               </span>
             </span>
             <span class="subscribe">
-              <button (click)="subscribe_to_blogger()" [ngClass]="{'subscribed': !isSubscribe, 'not_subscribed': isSubscribe}">
+              <button (click)="subscribe_to_blogger()"
+                      [ngClass]="{'subscribed': !isSubscribe, 'not_subscribed': isSubscribe}">
                 @if (!isSubscribe) {
                   Подписаться
-                } @else {
+                }
+                @else {
                   Вы подписаны
                 }
               </button>
@@ -38,10 +41,10 @@
           <span class="video_info">
             <span class="views">
               <img src="Views_Icon.svg">
-              <p>{{video_views}}</p>
+              <p>{{ video_views }}</p>
             </span>
             <span class="when_created">
-              <p>{{get_created_date()}}</p>
+              <p>{{ get_created_date() }}</p>
             </span>
           </span>
           <details class="aboutVideoDetails">

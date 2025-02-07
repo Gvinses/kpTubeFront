@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {VideosFetchService} from "../videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
@@ -30,7 +30,7 @@ export interface video_type    // make as file
     RouterLinkActive,
   ],
   templateUrl: './videos-part.component.html',
-  styleUrl: './videos-part.component.sass'
+  styleUrl: './videos-part.component.sass',
 })
 export class VideosPartComponent implements AfterViewInit {
 
