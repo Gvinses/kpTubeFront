@@ -90,7 +90,6 @@ export class VideosFetchService {
   }
 
 
-
   getUserByID(UserID: string) {
 
     const username = localStorage.getItem('username')
@@ -159,17 +158,18 @@ export class VideosFetchService {
     return this.http.post(this.comment, formData, {headers: headers})
   }
 
-  subscribe_to_blogger(Blogger_ID: string) {
+  subscribe_to_blogger(User_ID: string, Blogger_ID: string) {
 
-    const username = String(localStorage.getItem('username'))
-    const password = String(localStorage.getItem('password'))
 
     const formData = new FormData()
 
-    formData.append('User_ID', username)
-    formData.append('Blogger_ID', Blogger_ID)
+    formData.append('User_ID', String(User_ID))
+    formData.append('Blogger_ID', String(Blogger_ID))
 
     let headers = new HttpHeaders()
+
+    const username = String(localStorage.getItem('username'))
+    const password = String(localStorage.getItem('password'))
 
     headers = headers.set('X-USERNAME', username)
     headers = headers.set('X-PASSWORD', password)
