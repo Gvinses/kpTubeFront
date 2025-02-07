@@ -187,7 +187,9 @@ export class VideoComponent implements OnInit {
 
   subscribe_to_blogger() {
     if (!this.isSubscribe) {
-      this.VideosFetchService.subscribe_to_blogger(this.VideoOwnerId).subscribe((data) => {
+      let userId = String(localStorage.getItem('UserID'))
+
+      this.VideosFetchService.subscribe_to_blogger(userId, this.VideoOwnerId).subscribe((data) => {
         this.isSubscribe = true
       })
     }
