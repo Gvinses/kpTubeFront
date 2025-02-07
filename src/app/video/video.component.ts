@@ -83,6 +83,7 @@ export class VideoComponent implements OnInit {
         this.VideosFetchService.getUserByID(String(userId)).subscribe(
           (data: any) => {
             this.userLikes = data[0].liked
+	    this.userSubscribes = data[0].subscribes
 
             this.loadStars()
             this.loadSubscribes()
@@ -147,7 +148,7 @@ export class VideoComponent implements OnInit {
   }
 
   loadSubscribes() {
-    let getted_data_of_subscribes = this.userLikes[this.videoId]
+    let getted_data_of_subscribes = this.userSubscribes[String(this.VideoOwnerId)]  
 
     if (getted_data_of_subscribes !== undefined) {
       this.isSubscribe = true
