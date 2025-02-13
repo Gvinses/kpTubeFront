@@ -108,7 +108,7 @@ export class VideosFetchService {
     const password = localStorage.getItem('password')
 
     let current_date = new Date()
-    console.log(current_date)
+
 
     let headers = new HttpHeaders()
 
