@@ -4,8 +4,20 @@ body {
   color: white;
   font-family: Roboto, Arial, sans-serif;
 
-  user-select: none;
-  -moz-user-select: none;
-
   overflow-x: hidden;
+  scrollbar-gutter: stable;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    transition: width 0.3s ease-out;
+
+    &:focus {
+      width: 20px;
+    }
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #1A1A1D;
+    border-radius: 90px;
+  }
+
 }

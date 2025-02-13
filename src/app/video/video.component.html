@@ -20,7 +20,7 @@
               </span>
             </span>
             <span class="subscribe">
-              <button (click)="subscribe_to_blogger()"
+              <button (click)="subscribe_to_blogger_handler()"
                       [ngClass]="{'subscribed': !isSubscribe, 'not_subscribed': isSubscribe}">
                 @if (!isSubscribe) {
                   Подписаться

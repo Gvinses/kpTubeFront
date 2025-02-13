@@ -1,15 +1,18 @@
 <div class="videos">
   @for (video of results; track video) {
     <div class="video" [routerLink]="['/video', video.Video_ID]">
-      <img src="{{video.preview}}" alt="{{video.preview}}">
+      <img src="{{video.preview}}" loading="eager" alt="{{video.preview}}">
       <div class="info">
-        <h5>{{video.name}}</h5>
-        <p>{{video.owner}}</p>
+        <h5 class="video_name">{{video.name}}</h5>
+        <span class="author_and_views">
+          <p>{{video.owner}}</p>
+          <p>{{video.views}} просмотров</p>
+        </span>
       </div>
     </div>
   } @empty {
-    <div>
-      <h1>Не найдено :(</h1>
+    <div class="loading">
+      <h1>Loading....</h1>
     </div>
   }
 </div>

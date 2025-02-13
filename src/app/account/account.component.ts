@@ -175,7 +175,7 @@ export class AccountComponent implements OnInit {
               video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             }
           })
-          this.userVideos = data
+          this.userVideos = data.reverse()
         })
       }
     )
