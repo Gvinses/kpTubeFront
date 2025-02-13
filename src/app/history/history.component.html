@@ -2,7 +2,7 @@
   <h1>История просмотра</h1>
   @for (video of videos; track video) {
     <div class="video" [routerLink]="['/video', video.Video_ID]">
-      <img src="{{video.preview}}" loading="eager" alt="{{video.preview}}">
+      <img src="{{video.preview}}" class="preview" loading="eager" alt="{{video.preview}}">
       <div class="info">
         <h5 class="video_name">{{video.name}}</h5>
         <span class="author_and_views">
@@ -10,6 +10,12 @@
           <p>{{video.views}} просмотров</p>
         </span>
       </div>
+<!--      <button (click)="delete_video_from_history(video)" class="delete_from_history_button">-->
+<!--        <img src="Delete_from_history.svg">-->
+<!--        <span class="helper">-->
+<!--          Удалить из истории-->
+<!--        </span>-->
+<!--      </button>-->
     </div>
   } @empty {
     <div class="loading">

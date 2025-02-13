@@ -8,20 +8,21 @@ $grid-gap: 30px
   gap: $grid-gap
 
   .video
-    width: 60%
-    height: auto
+    width: 90%
+    height: 200px
     padding: 20px
     border-radius: 15px
-    border: #616161
+    border: 2px solid #616161
 
     display: flex
     align-items: flex-start
     justify-content: flex-start
+    gap: 20px
 
-    img
+
+    .preview
       aspect-ratio: 16/9
-      width: 80%
-      height: 80%
+      height: 90%
       border-radius: 15px
       object-fit: cover
       padding: 5px
@@ -39,7 +40,8 @@ $grid-gap: 30px
         opacity: 1
 
     .info
-      display: block
+      width: 100%
+      display: inline-block
       position: relative
       top: 5px
       box-sizing: border-box
@@ -63,6 +65,36 @@ $grid-gap: 30px
           font-size: 1.1em
           color: #d5d5d5
           text-align: left
+
+    button
+      border: none
+      background: none
+      cursor: pointer
+      display: flex
+      flex-direction: column
+
+      .helper
+        margin-top: 20px
+        width: 70px
+        height: 30px
+        padding: 20px
+        border-radius: 15px
+        color: white
+        background: #363636
+        opacity: 0
+        transition: opacity 0.3s
+        font-size: 13px
+
+
+      img
+        width: 30px
+        height: 30px
+
+        &:hover
+          .helper
+            opacity: 1
+
+
 
 
 @media (max-width: 768px)

@@ -12,7 +12,7 @@ import {VideosFetchService} from "../../videos-fetch.service"
   ],
   templateUrl: './kp-rating.component.html',
   styleUrl: './kp-rating.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class KpRatingComponent {
   VideosFetchService = inject(VideosFetchService)

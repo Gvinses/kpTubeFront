@@ -107,14 +107,21 @@ export class VideosFetchService {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
 
+    let current_date = new Date()
+
+
     let headers = new HttpHeaders()
 
     headers = headers.set('X-USERNAME', String(username))
     headers = headers.set('X-PASSWORD', String(password))
 
     let post_data = {
-      'Video_ID': VIDEOID,
       'User_ID': USID,
+      'Video_ID': VIDEOID,
+      'length': 0,
+      'date': current_date.getDate(),
+      'time': current_date.getTime(),
+      'time_zone': current_date.getTimezoneOffset()
     }
 
     return this.http.post(this.watch_video, post_data, {headers: headers})
@@ -157,10 +164,7 @@ export class VideosFetchService {
 
     return this.http.post(this.comment, formData, {headers: headers})
   }
-
-  subscribe_to_blogger(User_ID: string, Blogger_ID: string) {
-
-
+  subscribeToBlogger(User_ID: string, Blogger_ID: string) {
     const formData = new FormData()
 
     formData.append('User_ID', String(User_ID))
@@ -177,6 +181,36 @@ export class VideosFetchService {
 
     return this.http.post(this.subscribe, formData, {headers: headers})
   }
+
+  unSubscribeFromBlogger(User_ID: string, Blogger_ID: string) {
+    const formData = new FormData()
+    formData.append('User_ID', String(User_ID))
+    formData.append('Blogger_ID', String(Blogger_ID))
+
+    const username = String(localStorage.getItem('username'))
+    const password = String(localStorage.getItem('password'))
+
+    let headers = new HttpHeaders()
+    headers = headers.set('X-USERNAME', username)
+    headers = headers.set('X-PASSWORD', password)
+
+    return this.http.put(this.subscribe, formData, {headers: headers})
+  }
+
+
+  deleteVideoFromHistory(VideoID: string) {
+    let headers = new HttpHeaders()
+
+    const username = String(localStorage.getItem('username'))
+    const password = String(localStorage.getItem('password'))
+
+    headers = headers.set('X-USERNAME', username)
+    headers = headers.set('X-PASSWORD', password)
+
+
+  }
+
+
 
   deleteVideo(id: number) {
     return this.http.delete(this.apiUrl + '/' + id)
