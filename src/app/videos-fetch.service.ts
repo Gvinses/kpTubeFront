@@ -118,10 +118,10 @@ export class VideosFetchService {
     let post_data = {
       'User_ID': USID,
       'Video_ID': VIDEOID,
-      // 'length':
-      // 'date':
-      // 'time':
-      // 'time_zone':
+      'length': 0,
+      'date': current_date.getDate(),
+      'time': current_date.getTime(),
+      'time_zone': current_date.getTimezoneOffset()
     }
 
     return this.http.post(this.watch_video, post_data, {headers: headers})
