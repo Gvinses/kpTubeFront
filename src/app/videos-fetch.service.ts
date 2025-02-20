@@ -52,6 +52,9 @@ export class VideosFetchService {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
 
+    console.log(formData)
+    console.log(file)
+
     let headers = new HttpHeaders()
 
     headers = headers.set('X-USERNAME', String(username))
