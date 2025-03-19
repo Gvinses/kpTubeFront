@@ -35,7 +35,7 @@
       <hr>
       <li>search-results: page of search results</li>
       <hr>                                        
-      <li>video: page to watch a single video</li>
+      <li>video: page to watch a single video with ability to star video, comment it and subscribe to author</li>
       <hr>
       <li>videos-part: page to find a video</li>
       <hr>
