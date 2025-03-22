@@ -5,7 +5,7 @@ import { videos } from "../videos-part/videos-part.component"
 import {HttpClient} from "@angular/common/http";
 import {NgClass, NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {filter, forkJoin} from "rxjs";
-import {VideosFetchService} from "../videos-fetch.service";
+import {VideosFetchService} from "../../videos-fetch.service";
 
 @Component({
   selector: 'app-search-results',

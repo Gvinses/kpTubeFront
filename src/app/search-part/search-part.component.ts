@@ -38,15 +38,19 @@ export class SearchPartComponent implements OnInit {
       if (localStorage) {
         this.gettedID = String(localStorage.getItem('UserID'))
       }
-      this.VideosFetchService.getUserByID(this.gettedID).subscribe(
-        (response): any => {
-          if (response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
-            response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
-            this.userAvatar = response[0].avatar
-          }
-        },
-      );
+      this.getUserAvatar()
     }
+  }
+
+  getUserAvatar() {
+    this.VideosFetchService.getUserByID(this.gettedID).subscribe(
+      (response): any => {
+        if (response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
+          response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+          this.userAvatar = response[0].avatar
+        }
+      },
+    )
   }
 
   isLogin(): boolean {
@@ -65,7 +69,7 @@ export class SearchPartComponent implements OnInit {
 
   checkScreenSize(width: number) {
     this.isMobile = width <= 650
-    this.isInputDisabled = width > 650
+    this.isInputDisabled = width < 650
   }
 
   searchIconClick() {

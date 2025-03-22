@@ -10,21 +10,21 @@
     </div>
     <div class="account">
       <button *ngIf="isMobile" (click)="searchIconClick()" class="system_search_icon">
-          <img id="search_button_icon" class="systemIcons" src="Search.svg">
+        <img id="search_button_icon" class="systemIcons" src="Search.svg">
       </button>
-      <span *ngIf="!isInputDisabled" class="search_mobile">
+      <span *ngIf="!isInputDisabled && isMobile" class="search_mobile">
         <input class="search_mobile_input"
                [(ngModel)]="userInput" (keyup.enter)="onSearch()" id="inputToMobileSearch" maxlength="25"
                placeholder="Введите запрос" autocomplete="off"
         >
       </span>
-      <span *ngIf="isInputDisabled" class="account_data">
+      <span *ngIf="isInputDisabled || !isMobile" class="account_data">
         <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
         <button><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
         @if (isLogin()) {
           <button class="userAvaterButton" routerLink="/account"><a><img [src]="userAvatar"></a></button>
         } @else {
-          <button><a routerLink="/account">Аккаунт</a></button>
+          <button class="userAvatarWithoutAccount systemIcons" routerLink="/account"><a><img src="UserIcon.svg"></a></button>
         }
       </span>
     </div>

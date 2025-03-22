@@ -1,14 +1,14 @@
 import {Routes} from '@angular/router';
-import {AccountComponent} from "./account/account.component";
-import {VideoCreatingComponent} from "./video-creating/video-creating.component";
-import {VideoComponent} from "./video/video.component";
-import {OtherAccountComponent} from "./other-account/other-account.component";
-import {MusicPartComponent} from "./music-part/music-part.component";
-import {MusicCreatingComponent} from "./music-creating/music-creating.component";
-import {SearchResultsComponent} from "./search-results/search-results.component";
-import {HistoryComponent} from "./history/history.component";
-import {LikedVideosComponent} from "./liked-videos/liked-videos.component";
-import {VideosPartComponent} from "./videos-part/videos-part.component";
+import {AccountComponent} from "./Account_pages/account/account.component";
+import {VideoCreatingComponent} from "./Videos_pages/video-creating/video-creating.component";
+import {VideoComponent} from "./Videos_pages/video/video.component";
+import {OtherAccountComponent} from "./Account_pages/other-account/other-account.component";
+import {MusicPartComponent} from "./Music_pages/music-part/music-part.component";
+import {MusicCreatingComponent} from "./Music_pages/music-creating/music-creating.component";
+import {SearchResultsComponent} from "./Videos_pages/search-results/search-results.component";
+import {HistoryComponent} from "./Videos_pages/history/history.component";
+import {LikedVideosComponent} from "./Videos_pages/liked-videos/liked-videos.component";
+import {VideosPartComponent} from "./Videos_pages/videos-part/videos-part.component";
 
 export const routes: Routes = [
   {

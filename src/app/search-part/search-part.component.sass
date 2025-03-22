@@ -1,10 +1,11 @@
 .search
   background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0)
   padding: 0px 16px
-  height: 55.9896px
+  height: 60px
   display: flex
   justify-content: center
   margin-bottom: 20px
+
   .searchInput
     display: flex
     background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0)
@@ -59,15 +60,15 @@
         width: 40vw
         height: 24px
         transition: opacity 0.3s ease
+
   .account
     display: inline-flex
     flex-direction: row
     height: 25px
-    width: calc(25px * 4 + 15px * 4 + 25px)
 
     padding-top: 7px
     padding-bottom: 7px
-    padding-left: 14px
+    padding-left: 7px
     padding-right: 14px
 
     transition: 1s
@@ -85,15 +86,18 @@
         border: none
         background: none
         cursor: pointer
+
         a
           text-decoration: none
           display: flex
           align-items: center
+
           img
             width: 25px
             height: 25px
-          .systemIcons
-            filter: invert(1)
+
+      .systemIcons
+        filter: invert(1)
 
 
     .system_search_icon
@@ -106,17 +110,16 @@
         filter: invert(1)
 
     .search_mobile
-      width: 120px
 
       .search_mobile_input
-        margin-left: -10px
+        margin-right: 30px
         display: inline
         box-sizing: border-box
         color: rgba(255, 255, 255, 0.88)
         border: none
         appearance: none
         padding: 5px 0 5px 10px
-        width: 120%
+        width: 100%
         height: 100%
         font-family: Roboto, Noto, sans-serif
         font-size: 16px
@@ -135,6 +138,7 @@
       background: #404040
       border-radius: 90px
       justify-content: flex-end
+      margin-right: 40px
 
     .searchInput
       .form
@@ -148,25 +152,24 @@
           //  left: 300px
           //  max-width: 300px
 
-@media (max-width: 650px)
+@media (max-width: 400px)
   .search
     grid-template-columns: 1fr
-    grid-row-gap: 10px
 
     .account
       background: #404040
       border-radius: 90px
-      display: inline-flex
       margin-left: 50px
-      justify-content: center
+      display: flex
+      justify-content: space-between
       float: right
+      width: 50%
 
       padding-top: 7px
       padding-bottom: 7px
       padding-left: 7px
       padding-right: 14px
 
-      margin-right: 40px
 
       .system_search_icon
         display: inline
@@ -176,6 +179,12 @@
 
       button
         display: inline
+
+      .account_data
+        width: 70%
+        display: flex
+        justify-content: space-between
+
 
     .form
       opacity: 0

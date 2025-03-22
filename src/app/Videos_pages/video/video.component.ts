@@ -3,10 +3,10 @@ import {ActivatedRoute} from '@angular/router'
 import {RouterLink, RouterLinkActive} from "@angular/router"
 import {HttpClient} from "@angular/common/http"
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common"
-import {VideosFetchService} from "../videos-fetch.service"
+import {VideosFetchService} from "../../videos-fetch.service"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
-import {KpRatingComponent} from "../KP-UI/kp-rating/kp-rating.component";
-import {DateService} from "../date.service";
+import {KpRatingComponent} from "../../KP-UI/kp-rating/kp-rating.component";
+import {DateService} from "../../date.service";
 
 @Component({
   selector: 'app-video',
@@ -149,7 +149,7 @@ export class VideoComponent implements OnInit {
   }
 
   loadSubscribes() {
-    let getted_data_of_subscribes = this.userSubscribes[String(this.VideoOwnerId)]  
+    let getted_data_of_subscribes = this.userSubscribes[String(this.VideoOwnerId)]
 
     if (getted_data_of_subscribes !== undefined) {
       this.isSubscribe = true

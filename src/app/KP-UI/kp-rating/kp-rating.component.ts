@@ -20,12 +20,6 @@ export class KpRatingComponent {
   @Input() current_star: number = 0
   @Input() video_id: string = ''
 
-  constructor(
-    private route: ActivatedRoute,
-    private http: HttpClient
-  ) {
-  }
-
   change_current_star(item: number) {
     this.current_star = item
     this.post_stars_data()
@@ -36,9 +30,6 @@ export class KpRatingComponent {
 
   post_stars_data() {
     let userId = String(localStorage.getItem('UserID'))
-
-    console.log(userId, this.video_id, this.current_star)
-
     this.VideosFetchService.PostStars(userId, this.video_id, this.current_star).subscribe()
   }
 }

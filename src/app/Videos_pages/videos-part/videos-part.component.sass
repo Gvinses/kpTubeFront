@@ -65,15 +65,18 @@ $grid-gap: 30px
 
 @media (max-width: 768px)
   .videos
+    margin-left: 140px
     grid-template-columns: repeat(2, 1fr)
 
     .video
       width: 25vw
+      img
+        width: 100%
 
-@media (max-width: 600px)
+@media (max-width: 400px)
   .videos
-    margin-left: 150px
+    margin-left: 100px
     grid-template-columns: 1fr
 
     .video
-      width: 40vw
+      width: 60vw

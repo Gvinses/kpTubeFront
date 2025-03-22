@@ -1,7 +1,7 @@
 import {Component, ElementRef, inject, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core'
 import {NgForOf, NgIf} from "@angular/common"
 import {RouterLink, RouterLinkActive} from "@angular/router"
-import {MusicFetchService} from "../music-fetch.service"
+import {MusicFetchService} from "../../music-fetch.service"
 
 let tracks = [
   {title: 'Трэк', artist: 'Gvins', image: 'gg.png', src: 'kp229SoundTrackv2.mp3', description: 'Track 1 transcript'},
