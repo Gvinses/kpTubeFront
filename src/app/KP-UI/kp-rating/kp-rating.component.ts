@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
@@ -11,7 +11,8 @@ import {VideosFetchService} from "../../Services/videos-fetch.service"
     NgForOf
   ],
   templateUrl: './kp-rating.component.html',
-  styleUrl: './kp-rating.component.scss'
+  styleUrl: './kp-rating.component.scss',
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class KpRatingComponent {
   VideosFetchService = inject(VideosFetchService)

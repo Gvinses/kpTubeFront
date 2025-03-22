@@ -4,8 +4,6 @@ import {VideosFetchService} from "../../Services/videos-fetch.service"
 import {NgClass, NgIf} from "@angular/common"
 import {Router} from '@angular/router'
 import {Subscription} from "rxjs"
-import {HttpEventType} from "@angular/common/http"
-import {response} from "express"
 import {File} from "node:buffer"
 
 @Component({
@@ -35,7 +33,7 @@ export class VideoCreatingComponent implements OnInit {
   choosedCategory: string | null = null
   isGlobal: boolean = true
 
-  mainLink = 'https://i.ibb.co/wBn5TrS/Loading-File-Img.png'
+  mainLink = 'Loading-File-Img.png'
 
   videoSrc: string | ArrayBuffer | null = null
   imageSrc: string | ArrayBuffer | null = null

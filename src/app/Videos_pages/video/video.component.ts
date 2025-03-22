@@ -39,8 +39,8 @@ export class VideoComponent implements OnInit {
 
   userComment: string | null = null
   userName: string = ''
-  userLikes: any;
-  userSubscribes: any;
+  userLikes: any
+  usersSubscribes: any
 
   video_name: string = ''
   video_owner: string = ''
@@ -60,7 +60,7 @@ export class VideoComponent implements OnInit {
   is_description_open: boolean = false
   created_date: Date = new Date()
   isSubscribe: boolean = false
-  owner_subscribers: string = ''
+  author_subscribers: number = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -85,7 +85,7 @@ export class VideoComponent implements OnInit {
         this.VideosFetchService.getUserByID(String(userId)).subscribe(
           (data: any) => {
             this.userLikes = data[0].liked
-            this.userSubscribes = data[0].subscribes
+            this.usersSubscribes = data[0].subscribes
 
             this.loadStars()
             this.loadSubscribes()
@@ -112,20 +112,23 @@ export class VideoComponent implements OnInit {
         this.video_description = data[0].description
         this.video_views = data[0].views
 
-        this.created_date = new Date(Number(this.videoId))
+        this.loadAuthorDetails()
 
-        this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
-          (data: any) => {
-            this.owner_subscribers = String(data[0].subscribers)
-            this.VideoOwnerId = data[0].User_ID
-            data[0].avatar = data[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
-            this.author_photo_link = data[0].avatar
-          }
-        )
+        this.created_date = new Date(Number(this.videoId))
       })
     }
   }
 
+  loadAuthorDetails() {
+    this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
+      (data: any) => {
+        this.VideoOwnerId = String(data[0].User_ID)
+        data[0].avatar = data[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
+        this.author_photo_link = data[0].avatar
+        this.author_subscribers = data[0].subscribers
+      }
+    )
+  }
   getComments() {
     this.http.get<any>(`https://kptube.kringeproduction.ru/comments/?Video_ID=${this.videoId}`).subscribe(commentsData => {
       this.comments = commentsData
@@ -150,7 +153,7 @@ export class VideoComponent implements OnInit {
   }
 
   loadSubscribes() {
-    let getted_data_of_subscribes = this.userSubscribes[String(this.VideoOwnerId)]
+    let getted_data_of_subscribes = this.usersSubscribes[this.VideoOwnerId]
 
     if (getted_data_of_subscribes !== undefined) {
       this.isSubscribe = true
@@ -185,16 +188,19 @@ export class VideoComponent implements OnInit {
   }
 
 
-  subscribe_to_blogger() {
-    if (!this.isSubscribe) {
-      let userId = String(localStorage.getItem('UserID'))
+  subscribe_to_blogger_handler() {
+    let userId = String(localStorage.getItem('UserID'))
 
-      this.VideosFetchService.subscribe_to_blogger(userId, this.VideoOwnerId).subscribe((data) => {
+    if (!this.isSubscribe) {
+      this.VideosFetchService.subscribeToBlogger(userId, this.VideoOwnerId).subscribe((data) => {
         this.isSubscribe = true
+      })
+    } else {
+      this.VideosFetchService.unSubscribeFromBlogger(userId, this.VideoOwnerId).subscribe((data) => {
+        this.isSubscribe = false
       })
     }
   }
-
 
   shareData = {
     title: "KPtube Video",

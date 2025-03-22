@@ -52,6 +52,9 @@ export class VideosFetchService {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
 
+    console.log(formData)
+    console.log(file)
+
     let headers = new HttpHeaders()
 
     headers = headers.set('X-USERNAME', String(username))
@@ -61,9 +64,9 @@ export class VideosFetchService {
     return this.http.post(this.apiUrl, formData, {headers: headers})
   }
 
-  createUser(userID: number, name: string, email: string, password: string, avatar: File, header: File) {
+  createUser(userID: string, name: string, email: string, password: string, avatar: File, header: File) {
     const formData = new FormData()
-    formData.append('User_ID', String(userID))
+    formData.append('User_ID', userID)
     formData.append('name', name)
     formData.append('email', email)
     formData.append('password', password)
@@ -90,7 +93,6 @@ export class VideosFetchService {
   }
 
 
-
   getUserByID(UserID: string) {
 
     const username = localStorage.getItem('username')
@@ -104,22 +106,12 @@ export class VideosFetchService {
     return this.http.get<any>(this.account + '?User_ID=' + UserID, {headers: headers})
   }
 
-  getUsers(): Observable<any> {
-
-    const username = localStorage.getItem('username')
-    const password = localStorage.getItem('password')
-
-    let headers = new HttpHeaders()
-
-    headers = headers.set('X-USERNAME', String(username))
-    headers = headers.set('X-PASSWORD', String(password))
-
-    return this.http.get(this.account, {headers: headers})
-  }
-
   addView(USID: string, VIDEOID: string): Observable<any> {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
+
+    let current_date = new Date()
+
 
     let headers = new HttpHeaders()
 
@@ -127,15 +119,15 @@ export class VideosFetchService {
     headers = headers.set('X-PASSWORD', String(password))
 
     let post_data = {
-      'Video_ID': VIDEOID,
       'User_ID': USID,
+      'Video_ID': VIDEOID,
+      'length': 0,
+      'date': current_date.getDate(),
+      'time': current_date.getTime(),
+      'time_zone': current_date.getTimezoneOffset()
     }
 
     return this.http.post(this.watch_video, post_data, {headers: headers})
-  }
-
-  updateVideo(video: any) {
-    return this.http.put(this.apiUrl + '/' + video.id, video)
   }
 
   PostStars(USID: any, VIDEOID: any, likes: any) {
@@ -175,23 +167,53 @@ export class VideosFetchService {
 
     return this.http.post(this.comment, formData, {headers: headers})
   }
-
-  subscribe_to_blogger(User_ID: string, Blogger_ID: string) {
+  subscribeToBlogger(User_ID: string, Blogger_ID: string) {
     const formData = new FormData()
-    formData.append('User_ID', User_ID)
-    formData.append('Blogger_ID', Blogger_ID)
 
-    const username = localStorage.getItem('username')
-    const password = localStorage.getItem('password')
+    formData.append('User_ID', String(User_ID))
+    formData.append('Blogger_ID', String(Blogger_ID))
 
     let headers = new HttpHeaders()
 
-    headers = headers.set('X-USERNAME', String(username))
-    headers = headers.set('X-PASSWORD', String(password))
+    const username = String(localStorage.getItem('username'))
+    const password = String(localStorage.getItem('password'))
+
+    headers = headers.set('X-USERNAME', username)
+    headers = headers.set('X-PASSWORD', password)
 
 
     return this.http.post(this.subscribe, formData, {headers: headers})
   }
+
+  unSubscribeFromBlogger(User_ID: string, Blogger_ID: string) {
+    const formData = new FormData()
+    formData.append('User_ID', String(User_ID))
+    formData.append('Blogger_ID', String(Blogger_ID))
+
+    const username = String(localStorage.getItem('username'))
+    const password = String(localStorage.getItem('password'))
+
+    let headers = new HttpHeaders()
+    headers = headers.set('X-USERNAME', username)
+    headers = headers.set('X-PASSWORD', password)
+
+    return this.http.put(this.subscribe, formData, {headers: headers})
+  }
+
+
+  deleteVideoFromHistory(VideoID: string) {
+    let headers = new HttpHeaders()
+
+    const username = String(localStorage.getItem('username'))
+    const password = String(localStorage.getItem('password'))
+
+    headers = headers.set('X-USERNAME', username)
+    headers = headers.set('X-PASSWORD', password)
+
+
+  }
+
+
 
   deleteVideo(id: number) {
     return this.http.delete(this.apiUrl + '/' + id)

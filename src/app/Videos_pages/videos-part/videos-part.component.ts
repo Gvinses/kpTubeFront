@@ -1,25 +1,12 @@
+import {AfterViewInit, ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {VideosFetchService} from "../videos-fetch.service";
 import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
 import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {VideoInterface} from "../video-interface";
 
 export let videos = [];
-
-
-export interface video_type    // make as file
-  {
-    "id": Number,
-    "Video_ID": String,
-    "name": String,
-    "description": String,
-    "likes": Number,
-    "views": Number,
-    "video": String,
-    "preview": String,
-    "category": String,
-    "owner": String
-  }
-
 
 @Component({
   selector: 'app-videos-part',
@@ -30,7 +17,7 @@ export interface video_type    // make as file
     RouterLinkActive,
   ],
   templateUrl: './videos-part.component.html',
-  styleUrl: './videos-part.component.sass'
+  styleUrl: './videos-part.component.sass',
 })
 export class VideosPartComponent implements AfterViewInit {
 
@@ -42,7 +29,7 @@ export class VideosPartComponent implements AfterViewInit {
 
   videos: any = []
 
-  items: video_type[] = []
+  items: VideoInterface[] = []
 
   constructor() {
   }

@@ -38,7 +38,7 @@ export class AccountComponent implements OnInit {
   userData: any[] = []
   userHeader: string | ArrayBuffer | null = null
   userAvatar: string | ArrayBuffer | null = null
-  userName: string | null = null
+  userName: string = ''
   userVideos: any[] = []
   usName: any | null = null
 
@@ -91,14 +91,15 @@ export class AccountComponent implements OnInit {
   }
 
   onRegister() {
-    let userID = Number(new Date)
+    let userID = String(Number(new Date))
     this.is_registration_request_now = true
 
     this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
       response => {
         if (localStorage) {
           localStorage.setItem('UserID', String(userID))
-          localStorage.setItem('UserName', String(this.name))
+          localStorage.setItem('username', String(this.name))
+          localStorage.setItem('password', String(this.password))
           this.popup_open = true
           this.VideosFetchService.send_email(this.email).subscribe()
           this.timeout = setTimeout(() => {
@@ -128,16 +129,15 @@ export class AccountComponent implements OnInit {
     localStorage.setItem('username', this.enterName)
     localStorage.setItem('password', this.enterPass)
 
-    this.VideosFetchService.enterUser(this.enterName).subscribe(
+    this.VideosFetchService.enterUser(String(this.enterName)).subscribe(
       response => {
         let userID = response[0].User_ID
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('UserID', userID)
+        localStorage.setItem('UserID', userID)
 
-          location.reload()
-        }
+         location.reload()
       },
       error => {
+        console.log(error)
         this.errorMessage = 'Неверный логин или пароль'
         this.popup_open = true
         this.is_error = true
@@ -175,7 +175,7 @@ export class AccountComponent implements OnInit {
               video.preview = video.preview.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             }
           })
-          this.userVideos = data
+          this.userVideos = data.reverse()
         })
       }
     )

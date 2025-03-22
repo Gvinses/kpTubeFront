@@ -21,16 +21,16 @@ import {VideosFetchService} from "../../Services/videos-fetch.service"
 export class MusicCreatingComponent {
   MusicFetchService = inject(MusicFetchService)
   VideoFetchService = inject(VideosFetchService)
+  constructor(private MusicUploadService: MusicFetchService, VideosUploadService: VideosFetchService, private router: Router) {
+  }
 
   selectedFile: File | null = null
   selectedPreview: File | null = null
   music_name: string = ''
   description: string = ''
 
-  constructor(private MusicUploadService: MusicFetchService, VideosUploadService: VideosFetchService, private router: Router) {
-  }
 
-  mainLink = 'https://i.ibb.co/wBn5TrS/Loading-File-Img.png'
+  mainLink = 'Loading-File-Img.png'
 
   audioSrc: string | ArrayBuffer | null = null
   loading: boolean = false
