@@ -5,8 +5,8 @@ import {Router} from '@angular/router'
 import {Subscription} from "rxjs"
 import {HttpEvent, HttpEventType} from "@angular/common/http"
 import {response} from "express"
-import {MusicFetchService} from "../../music-fetch.service"
-import {VideosFetchService} from "../../videos-fetch.service"
+import {MusicFetchService} from "../../Services/music-fetch.service"
+import {VideosFetchService} from "../../Services/videos-fetch.service"
 
 @Component({
   selector: 'app-music-creating',

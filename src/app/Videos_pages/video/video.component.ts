@@ -3,10 +3,10 @@ import {ActivatedRoute} from '@angular/router'
 import {RouterLink, RouterLinkActive} from "@angular/router"
 import {HttpClient} from "@angular/common/http"
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common"
-import {VideosFetchService} from "../../videos-fetch.service"
+import {VideosFetchService} from "../../Services/videos-fetch.service"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
 import {KpRatingComponent} from "../../KP-UI/kp-rating/kp-rating.component";
-import {DateService} from "../../date.service";
+import {DateService} from "../../Services/date.service";
 
 @Component({
   selector: 'app-video',
@@ -60,6 +60,7 @@ export class VideoComponent implements OnInit {
   is_description_open: boolean = false
   created_date: Date = new Date()
   isSubscribe: boolean = false
+  owner_subscribers: string = ''
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +85,7 @@ export class VideoComponent implements OnInit {
         this.VideosFetchService.getUserByID(String(userId)).subscribe(
           (data: any) => {
             this.userLikes = data[0].liked
-	    this.userSubscribes = data[0].subscribes
+            this.userSubscribes = data[0].subscribes
 
             this.loadStars()
             this.loadSubscribes()
@@ -115,7 +116,7 @@ export class VideoComponent implements OnInit {
 
         this.VideosFetchService.enterUser(String(this.video_owner)).subscribe(
           (data: any) => {
-            console.log(data)
+            this.owner_subscribers = String(data[0].subscribers)
             this.VideoOwnerId = data[0].User_ID
             data[0].avatar = data[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
             this.author_photo_link = data[0].avatar
@@ -193,7 +194,6 @@ export class VideoComponent implements OnInit {
       })
     }
   }
-
 
 
   shareData = {

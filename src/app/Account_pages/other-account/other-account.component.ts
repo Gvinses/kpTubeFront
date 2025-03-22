@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {VideosFetchService} from "../../videos-fetch.service";
+import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {response} from "express";

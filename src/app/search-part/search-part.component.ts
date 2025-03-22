@@ -1,6 +1,6 @@
 import {Component, HostListener, inject, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {VideosFetchService} from "../videos-fetch.service";
+import {VideosFetchService} from "../Services/videos-fetch.service";
 import {FormsModule} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
 

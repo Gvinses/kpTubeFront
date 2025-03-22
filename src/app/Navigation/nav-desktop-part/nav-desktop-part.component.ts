@@ -5,7 +5,7 @@ import {Router, RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-nav-part',
+  selector: 'app-desktop-nav-part',
   standalone: true,
   imports: [
     NgIf,
@@ -28,8 +28,6 @@ import {FormsModule} from "@angular/forms";
   ]
 })
 export class NavDesktopPartComponent {
-  isSlav = false
-
   isOpen = false
 
 
@@ -41,6 +39,7 @@ export class NavDesktopPartComponent {
   }
 
   set_client_web_pos() {
+    console.log(1)
     this.router.navigate(['/'])
   }
 }

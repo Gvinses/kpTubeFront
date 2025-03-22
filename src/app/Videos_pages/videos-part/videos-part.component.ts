@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
-import {VideosFetchService} from "../../videos-fetch.service";
+import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 

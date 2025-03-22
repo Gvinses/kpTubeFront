@@ -2,7 +2,7 @@ import {Component, inject, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {VideosFetchService} from "../../videos-fetch.service"
+import {VideosFetchService} from "../../Services/videos-fetch.service"
 
 @Component({
   selector: 'app-kp-rating',
