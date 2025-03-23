@@ -87,6 +87,8 @@ export class VideoComponent implements OnInit {
             this.userLikes = data[0].liked
             this.usersSubscribes = data[0].subscribes
 
+            console.log(data[0])
+
             this.loadStars()
             this.loadSubscribes()
             this.addToUserHistory()
@@ -154,6 +156,8 @@ export class VideoComponent implements OnInit {
 
   loadSubscribes() {
     let getted_data_of_subscribes = this.usersSubscribes[this.VideoOwnerId]
+
+    console.log(this.usersSubscribes)
 
     if (getted_data_of_subscribes !== undefined) {
       this.isSubscribe = true

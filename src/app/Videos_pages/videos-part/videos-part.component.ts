@@ -1,10 +1,8 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {VideosFetchService} from "../videos-fetch.service";
 import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
 import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {VideoInterface} from "../video-interface";
+import {VideoInterface} from "../../Interfaces/video-interface";
 
 export let videos = [];
 
