@@ -1,0 +1,99 @@
+<div class="main">
+  <div class="videoPart">
+    <div class="video_container">
+      <video class="video" rel=preload autoplay="autoplay" preload="metadata" controls="controls"
+             poster="{{video_preview_link}}" src="{{ video_link }}" loop></video>
+    </div>
+    <div class="videoInfo">
+      <h1 class="videoName">{{ video_name }}</h1>
+
+      <div class="videoContent">
+        <div class="first_info_and_share_raiting">
+          <span class="author">
+            <span class="non_interactive_author_data" [routerLink]="['/account', VideoOwnerId]">
+              <span class="avatar_of_author">
+                <img src="{{author_photo_link}}" alt="">
+              </span>
+              <span class="data_of_author">
+                <h3 class="video_author_name">{{ video_owner }}</h3>
+                <h6 class="author_subscribers">{{ author_subscribers }} Подписчиков</h6>
+              </span>
+            </span>
+            <span class="subscribe">
+              <button (click)="subscribe_to_blogger_handler()"
+                      [ngClass]="{'subscribed': !isSubscribe, 'not_subscribed': isSubscribe}">
+                @if (!isSubscribe) {
+                  Подписаться
+                } @else {
+                  Вы подписаны
+                }
+              </button>
+            </span>
+          </span>
+          <app-kp-rating *ngIf="userName != 'null'" class="video_stars" [current_star]="videoStars"
+                         [video_id]="videoId"></app-kp-rating>
+
+          <button (click)="shareInfo()" class="shareButt">Поделиться</button>
+        </div>
+
+        <div class="aboutVideo">
+          <span class="video_info">
+            <span class="views">
+              <p>{{ video_views }} просмотров</p>
+            </span>
+            <span class="when_created">
+              <p>{{ get_created_date() }}</p>
+            </span>
+          </span>
+          <details class="aboutVideoDetails">
+            <summary (click)="change_description_status()">
+              @if (is_description_open) {
+                Закрыть описание
+              } @else {
+                Открыть описание
+              }
+            </summary>
+            <p>{{ video_description }}</p>
+          </details>
+        </div>
+
+        <div class="category">
+          <p>Категория: <b>{{ video_category }}</b></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="comments">
+      <h2>{{ howMuchComments }} комментариев</h2>
+      <div class="commenter">
+        <span *ngIf="userName != 'null'">
+          {{ userName }}
+          <input class="commentInput" [(ngModel)]="userComment" (keyup.enter)="commentOnVideo()"
+                 placeholder="Введите комментарий">
+
+          <div *ngIf="userComment" class="buttons">
+            <button (click)="cleaner()">Отмена</button>
+            <button class="submitCommentButton" (click)="commentOnVideo()">Оставить комментарий</button>
+          </div>
+        </span>
+
+        <span *ngIf="userName === 'null'">
+          <div class="buttons">
+            <button class="dontHaveAccount_button" [routerLink]="'/account'">Войдите или создайте аккаунт для коментариев!</button>
+          </div>
+        </span>
+      </div>
+      <div class="allComments">
+        @for (comment of comments; track comment) {
+          <div class="comment">
+            <h3>{{ comment.owner }}</h3>
+            <p>{{ comment.text }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TODO-->
+<!--  Размер коментариев адаптивным + сами комменты крутые сделать (Это можно и к beta 2 думаю)-->
