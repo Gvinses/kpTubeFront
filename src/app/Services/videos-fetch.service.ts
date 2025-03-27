@@ -11,7 +11,7 @@ export class VideosFetchService {
   account = 'https://kptube.kringeproduction.ru/users/'
   category = 'https://kptube.kringeproduction.ru/categories/'
   comment = 'https://kptube.kringeproduction.ru/comments/'
-  create_user = 'https://kptube.kringeproduction.ru/create_user/'
+  create_user = 'https://kptube.kringeproduction.ru/users/'
   watch_video = 'https://kptube.kringeproduction.ru/watch_video/'
   like = 'https://kptube.kringeproduction.ru/like/'
   send_mail = 'https://kptube.kringeproduction.ru/send_mail/?email='
