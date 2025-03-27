@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
 import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {VideoInterface} from "../../Interfaces/video-interface";
+import {filter, from, map} from "rxjs";
 
 export let videos = [];
 
@@ -18,9 +19,23 @@ export let videos = [];
   styleUrl: './videos-part.component.sass',
 })
 export class VideosPartComponent implements AfterViewInit {
+  @ViewChild('myDiv') render_line!: ElementRef
 
   ngAfterViewInit() {
     this.getVideos()
+    this.intersectionCallback()
+  }
+
+  intersectionCallback() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          console.log('Div отобразился на экране!')
+        }
+      })
+    })
+
+    observer.observe(this.render_line.nativeElement)
   }
 
   postService = inject(VideosFetchService)
@@ -34,13 +49,14 @@ export class VideosPartComponent implements AfterViewInit {
 
   getVideos() {
     this.postService.getVideos().subscribe((data: any) => {
-      data.forEach((video: any) => {
-        if (video.isGlobal) {
+      let rxjsArr = from(data.reverse())
+      rxjsArr.pipe(
+        filter((video: any) => video.isGlobal),
+        map((video: any) => {
           this.linksChanger(video)
           this.videos.push(video)
-        }
-      })
-      this.videos.reverse()
+        })
+      ).subscribe()
     })
   }
 

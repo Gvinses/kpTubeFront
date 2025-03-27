@@ -1,8 +1,9 @@
-import {Component, HostListener, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {VideosFetchService} from "../Services/videos-fetch.service";
 import {FormsModule} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
+import {SystemIconsStylesDirective} from '../Directives/system-icons-styles.directive'
 
 @Component({
   selector: 'app-search-part',
@@ -12,7 +13,8 @@ import {NgIf, NgStyle} from "@angular/common";
     RouterLinkActive,
     FormsModule,
     NgStyle,
-    NgIf
+    NgIf,
+    SystemIconsStylesDirective
   ],
   templateUrl: './search-part.component.html',
   styleUrl: './search-part.component.sass'
@@ -23,6 +25,8 @@ export class SearchPartComponent implements OnInit {
   gettedID: any
   isInputDisabled: boolean = false
   isMobile: boolean = false
+  isServerOnline: boolean = true
+  isUserHaveAccount: boolean = false
 
   constructor(private router: Router) {
   }
@@ -34,27 +38,35 @@ export class SearchPartComponent implements OnInit {
     if (window) {
       this.checkScreenSize(window.innerWidth)
     }
-    if (this.isLogin()) {
-      if (localStorage) {
-        this.gettedID = String(localStorage.getItem('UserID'))
-      }
-      this.getUserAvatar()
+    if (localStorage) {
+      this.gettedID = String(localStorage.getItem('UserID'))
     }
+    this.getUserAvatar()
   }
 
   getUserAvatar() {
     this.VideosFetchService.getUserByID(this.gettedID).subscribe(
       (response): any => {
+        if (response == null) {
+          this.isServerOnline = false
+          return
+        }
+
         if (response[0].avatar.startsWith('http://127.0.0.1:8000/')) {
           response[0].avatar = response[0].avatar.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/')
           this.userAvatar = response[0].avatar
         }
       },
+      (error): any => {
+        this.isServerOnline = false
+      }
     )
+    this.isLogin()
   }
 
-  isLogin(): boolean {
-    return (localStorage.getItem('username') !== null) && (localStorage.getItem('UserID') !== null)
+  isLogin() {
+    let isInLS = (localStorage.getItem('username') !== null) && (localStorage.getItem('UserID') !== null)
+    this.isUserHaveAccount = isInLS
   }
 
   onSearch(): void {

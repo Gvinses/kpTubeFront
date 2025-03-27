@@ -43,6 +43,4 @@ export class SearchResultsComponent implements OnInit {
       })
     });
   }
-
-  protected readonly filter = filter;
 }

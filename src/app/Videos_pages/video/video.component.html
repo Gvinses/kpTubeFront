@@ -1,7 +1,8 @@
 <div class="main">
   <div class="videoPart">
     <div class="video_container">
-      <video class="video" rel=preload autoplay="autoplay" preload="metadata" controls="controls" poster="{{video_preview_link}}" src="{{ video_link }}" loop></video>
+      <video class="video" rel=preload autoplay="autoplay" preload="metadata" controls="controls"
+             poster="{{video_preview_link}}" src="{{ video_link }}" loop></video>
     </div>
     <div class="videoInfo">
       <h1 class="videoName">{{ video_name }}</h1>
@@ -23,8 +24,7 @@
                       [ngClass]="{'subscribed': !isSubscribe, 'not_subscribed': isSubscribe}">
                 @if (!isSubscribe) {
                   Подписаться
-                }
-                @else {
+                } @else {
                   Вы подписаны
                 }
               </button>
@@ -39,11 +39,10 @@
         <div class="aboutVideo">
           <span class="video_info">
             <span class="views">
-              <img src="Views_Icon.svg">
-              <p>{{video_views}}</p>
+              <p>{{ video_views }} просмотров</p>
             </span>
             <span class="when_created">
-              <p>{{get_created_date()}}</p>
+              <p>{{ get_created_date() }}</p>
             </span>
           </span>
           <details class="aboutVideoDetails">

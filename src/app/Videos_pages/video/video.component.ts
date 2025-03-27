@@ -157,8 +157,6 @@ export class VideoComponent implements OnInit {
   loadSubscribes() {
     let getted_data_of_subscribes = this.usersSubscribes[this.VideoOwnerId]
 
-    console.log(this.usersSubscribes)
-
     if (getted_data_of_subscribes !== undefined) {
       this.isSubscribe = true
     }

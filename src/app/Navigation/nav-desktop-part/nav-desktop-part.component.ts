@@ -3,6 +3,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {trigger, transition, style, animate} from '@angular/animations';
 import {Router, RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {SystemIconsStylesDirective} from "../../Directives/system-icons-styles.directive";
 
 @Component({
   selector: 'app-desktop-nav-part',
@@ -11,7 +12,8 @@ import {FormsModule} from "@angular/forms";
     NgIf,
     NgClass,
     RouterLink,
-    FormsModule
+    FormsModule,
+    SystemIconsStylesDirective,
   ],
   templateUrl: './nav-desktop-part.component.html',
   styleUrl: './nav-desktop-part.component.sass',
@@ -39,7 +41,6 @@ export class NavDesktopPartComponent {
   }
 
   set_client_web_pos() {
-    console.log(1)
     this.router.navigate(['/'])
   }
 }

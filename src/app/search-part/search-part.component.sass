@@ -1,10 +1,11 @@
 .search
+  width: 100%
   background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0)
   padding: 0px 16px
   height: 60px
   display: flex
   justify-content: center
-  margin-bottom: 20px
+  align-items: center
 
   .searchInput
     display: flex
@@ -29,6 +30,8 @@
       position: relative
       align-items: center
       flex-direction: row
+      height: 40px
+
       button
         padding: 15px 15px
         border-radius: 20px
@@ -58,7 +61,6 @@
         outline: rgba(255, 255, 255, 0.88) none 0px
         text-align: start
         width: 40vw
-        height: 24px
         transition: opacity 0.3s ease
 
   .account
@@ -129,7 +131,6 @@
         text-align: start
         z-index: 1
 
-
 @media (max-width: 950px)
   .search
     grid-template-columns: 140px auto 100px
@@ -194,3 +195,4 @@
 
     input
       z-index: 9999
+

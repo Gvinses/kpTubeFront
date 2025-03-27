@@ -19,12 +19,18 @@
         >
       </span>
       <span *ngIf="isInputDisabled || !isMobile" class="account_data">
-        <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
-        <button><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
-        @if (isLogin()) {
-          <button class="userAvaterButton" routerLink="/account"><a><img [src]="userAvatar"></a></button>
+
+<!--        TODO-->
+        <!--         Create button like in YouTube-->
+
+        <button appSystemIconsStyles><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
+        <button appSystemIconsStyles><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
+        @if (isUserHaveAccount && isServerOnline) {
+          <button appSystemIconsStyles class="userAvaterButton" routerLink="/account"><a><img
+            [src]="userAvatar"></a></button>
         } @else {
-          <button class="userAvatarWithoutAccount systemIcons" routerLink="/account"><a><img src="UserIcon.svg"></a></button>
+          <button appSystemIconsStyles class="userAvatarWithoutAccount systemIcons" routerLink="/account"><a><img
+            src="UserIcon.svg"></a></button>
         }
       </span>
     </div>
