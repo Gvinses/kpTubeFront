@@ -10,7 +10,7 @@ export class SystemIconsStylesDirective {
   }
 
   @HostListener('click') onClick(): void {
-    this.element.nativeElement.style.transform = 'scale(1.1)'
+    this.element.nativeElement.style.transform = 'scale(0.9)'
 
     setTimeout(() => {
       this.element.nativeElement.style.transform = 'scale(1)'
