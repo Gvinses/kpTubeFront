@@ -35,7 +35,7 @@ export class SearchPartComponent implements OnInit {
 
 
   ngOnInit() {
-    if (window) {
+    if (typeof window !== undefined) {
       this.checkScreenSize(window.innerWidth)
     }
     if (localStorage) {

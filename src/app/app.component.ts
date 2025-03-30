@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, inject, OnInit, Renderer2} from '@angular/core';
-import {RouterOutlet, RouterModule, RouterLink, RouterLinkActive} from "@angular/router";
+import {Component, inject, OnInit} from '@angular/core';
+import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {VideosPartComponent} from "./Videos_pages/videos-part/videos-part.component";
 import {NavDesktopPartComponent} from "./Navigation/nav-desktop-part/nav-desktop-part.component";
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   windowSize = inject(WindowSizeService)
 
   ngOnInit() {
-    if (window) {
+    if (typeof window !== undefined) {
       this.isMobile = this.windowSize.checkScreenSize(window)
     }
   }

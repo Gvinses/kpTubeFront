@@ -19,23 +19,8 @@ export let videos = [];
   styleUrl: './videos-part.component.sass',
 })
 export class VideosPartComponent implements AfterViewInit {
-  @ViewChild('myDiv') render_line!: ElementRef
-
   ngAfterViewInit() {
     this.getVideos()
-    this.intersectionCallback()
-  }
-
-  intersectionCallback() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          console.log('Div отобразился на экране!')
-        }
-      })
-    })
-
-    observer.observe(this.render_line.nativeElement)
   }
 
   postService = inject(VideosFetchService)
