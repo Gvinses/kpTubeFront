@@ -35,10 +35,7 @@ export class SearchPartComponent implements OnInit {
 
 
   ngOnInit() {
-    if (typeof window !== undefined) {
-      this.checkScreenSize(window.innerWidth)
-    }
-    if (localStorage) {
+    if (typeof localStorage !== undefined) {
       this.gettedID = String(localStorage.getItem('UserID'))
     }
     this.getUserAvatar()
