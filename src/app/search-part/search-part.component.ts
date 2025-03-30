@@ -3,6 +3,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {VideosFetchService} from "../videos-fetch.service";
 import {FormsModule} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
+import {SystemIconsStyleDirective} from "../system-icons-style.directive";
 
 @Component({
   selector: 'app-search-part',
@@ -12,7 +13,8 @@ import {NgIf, NgStyle} from "@angular/common";
     RouterLinkActive,
     FormsModule,
     NgStyle,
-    NgIf
+    NgIf,
+    SystemIconsStyleDirective
   ],
   templateUrl: './search-part.component.html',
   styleUrl: './search-part.component.sass'

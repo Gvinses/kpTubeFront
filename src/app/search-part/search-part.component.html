@@ -19,12 +19,13 @@
         >
       </span>
       <span *ngIf="isInputDisabled" class="account_data">
-        <button><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
-        <button><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
+        <button appSystemIconsStyle><a routerLink="/creating"><img class="systemIcons" src="newVideo.svg"></a></button>
+        <button appSystemIconsStyle><a routerLink="/KPmusic/Creating"><img class="systemIcons" src="NewMusic.svg"></a></button>
         @if (isLogin()) {
-          <button class="userAvaterButton" routerLink="/account"><a><img [src]="userAvatar"></a></button>
+          <button appSystemIconsStyle class="userAvaterButton" routerLink="/account"><a><img [src]="userAvatar"></a></button>
         } @else {
-          <button><a routerLink="/account">Аккаунт</a></button>
+          <button appSystemIconsStyle class="userAvatarWithoutAccount systemIcons" routerLink="/account"><a><img
+            src="UserIcon.svg"></a></button>
         }
       </span>
     </div>
