@@ -3,7 +3,7 @@ import {FormsModule} from "@angular/forms"
 import {VideosFetchService} from "../../Services/videos-fetch.service"
 import {NgIf} from "@angular/common"
 import {RouterLink} from "@angular/router"
-import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {HttpClient} from "@angular/common/http"
 
 @Component({
   selector: 'app-account',
@@ -94,7 +94,7 @@ export class AccountComponent implements OnInit {
     let userID = String(Number(new Date))
     this.is_registration_request_now = true
 
-    this.VideosFetchService.createUser(userID, this.name, this.email, this.password, this.avatar, this.header).subscribe(
+    this.VideosFetchService.createUser(String(userID), this.name, this.email, this.password, this.avatar, this.header).subscribe(
       response => {
         if (localStorage) {
           localStorage.setItem('UserID', String(userID))
@@ -134,7 +134,7 @@ export class AccountComponent implements OnInit {
         let userID = response[0].User_ID
         localStorage.setItem('UserID', userID)
 
-         location.reload()
+        location.reload()
       },
       error => {
         console.log(error)
