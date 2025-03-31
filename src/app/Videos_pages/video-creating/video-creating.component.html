@@ -57,8 +57,11 @@
 
 <div *ngIf="errorMessage" class="popup">
   <h1>Ошибка!</h1>
-  <p>Необходимо верефицировать аккаунт!</p>
-  <i>Сейчас это доступно только бета тестерам <br>(т.е вы знаете куда жаловаться!!!)</i>
-  <br>
-  <button (click)="closePage()">Закрыть</button>
+  @if (errorMessage === 'accountError') {
+    <p>Необходимо верефицировать аккаунт!</p>
+    <button (click)="closePage()">Закрыть</button>
+  } @else {
+    {{ errorMessage }}
+    <button (click)="closePopup()">Закрыть</button>
+  }
 </div>
