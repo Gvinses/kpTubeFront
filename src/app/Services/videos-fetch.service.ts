@@ -11,7 +11,7 @@ export class VideosFetchService {
   account = 'https://kptube.kringeproduction.ru/users/'
   category = 'https://kptube.kringeproduction.ru/categories/'
   comment = 'https://kptube.kringeproduction.ru/comments/'
-  create_user = 'https://kptube.kringeproduction.ru/users/'
+  create_user = 'https://kptube.kringeproduction.ru/create_users/'
   watch_video = 'https://kptube.kringeproduction.ru/watch_video/'
   like = 'https://kptube.kringeproduction.ru/like/'
   send_mail = 'https://kptube.kringeproduction.ru/send_mail/?email='
@@ -167,6 +167,7 @@ export class VideosFetchService {
 
     return this.http.post(this.comment, formData, {headers: headers})
   }
+
   subscribeToBlogger(User_ID: string, Blogger_ID: string) {
     const formData = new FormData()
 
@@ -211,7 +212,6 @@ export class VideosFetchService {
 
 
   }
-
 
 
   deleteVideo(id: number) {
