@@ -1,11 +1,12 @@
-import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, inject} from '@angular/core';
 import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {VideoInterface} from "../../Interfaces/video-interface";
 import {filter, from, map} from "rxjs";
+import {SystemIconsStylesDirective} from "../../Directives/system-icons-styles.directive";
 
-export let videos = [];
+export let videos = []
 
 @Component({
   selector: 'app-videos-part',
@@ -14,6 +15,7 @@ export let videos = [];
     NgForOf,
     RouterLink,
     RouterLinkActive,
+    SystemIconsStylesDirective,
   ],
   templateUrl: './videos-part.component.html',
   styleUrl: './videos-part.component.sass',
@@ -34,7 +36,8 @@ export class VideosPartComponent implements AfterViewInit {
 
   getVideos() {
     this.postService.getVideos().subscribe((data: any) => {
-      let rxjsArr = from(data.reverse())
+      this.shuffle(data)
+      let rxjsArr = from(data)
       rxjsArr.pipe(
         filter((video: any) => video.isGlobal),
         map((video: any) => {
@@ -43,6 +46,15 @@ export class VideosPartComponent implements AfterViewInit {
         })
       ).subscribe()
     })
+  }
+
+  shuffle(videos: VideoInterface[]) {
+    for (let i = videos.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1))
+      let temp = videos[i]
+      videos[i] = videos[j]
+      videos[j] = temp
+    }
   }
 
   linksChanger(video: any) {

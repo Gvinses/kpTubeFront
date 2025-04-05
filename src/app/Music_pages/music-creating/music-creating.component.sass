@@ -1,7 +1,7 @@
 .form
   display: grid
-  grid-template-columns: 5fr 1fr
-  gap: 20px
+  grid-template-columns: 5fr auto
+  gap: 40px
   justify-content: space-between
   align-items: center
 
@@ -11,7 +11,10 @@
     justify-content: center
     align-items: center
     margin-left: 130px
-    border: 2px solid black
+    //border: 2px solid black
+    height: 90%
+    width: 90%
+    background: rgba(74, 74, 74, 0.1)
 
     #fileUploadLabel
       display: flex
@@ -20,6 +23,7 @@
       flex-direction: column
       padding: 50px 0
       width: 100%
+      height: 100%
       cursor: pointer
 
       video
@@ -41,12 +45,13 @@
     align-items: center
     gap: 10px
     overflow: hidden
-    width: 20vw
+    width: 100%
 
     label
+      align-self: flex-start
       position: relative
       top: 10px
-      left: -70px
+      left: 20px
       z-index: 2
       transition: 1s
 
@@ -62,7 +67,7 @@
       align-items: center
       flex-direction: column
       left: 3px
-      width: 150%
+      width: 100%
 
       p
         position: relative
