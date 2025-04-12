@@ -23,7 +23,7 @@ export class VideosFetchService {
   }
 
   getVideos(): any {
-    return this.http.get<any>(this.apiUrl + '?ordering=id')
+    return this.http.get<any>(this.apiUrl)
   }
 
   getVideosByUser(userName: string): any {
