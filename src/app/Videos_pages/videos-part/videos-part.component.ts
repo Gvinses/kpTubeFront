@@ -3,7 +3,7 @@ import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {NgForOf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {VideoInterface} from "../../Interfaces/video-interface";
-import {filter, from, map} from "rxjs";
+import {filter, from} from "rxjs";
 import {SystemIconsStylesDirective} from "../../Directives/system-icons-styles.directive";
 
 export let videos = []
@@ -40,12 +40,17 @@ export class VideosPartComponent implements AfterViewInit {
       let rxjsArr = from(data)
       rxjsArr.pipe(
         filter((video: any) => video.isGlobal),
-        map((video: any) => {
-          this.linksChanger(video)
-          this.videos.push(video)
-        })
-      ).subscribe()
+      ).subscribe(
+        (d: any) => {
+          this.renderVideo(d)
+        }
+      )
     })
+  }
+
+  renderVideo(video: any) {
+    this.linksChanger(video)
+    this.videos.push(video)
   }
 
   shuffle(videos: VideoInterface[]) {
