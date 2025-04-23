@@ -1,10 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core'
+import {Component, inject} from '@angular/core'
 import {FormsModule} from "@angular/forms"
 import {NgIf} from "@angular/common"
 import {Router} from '@angular/router'
 import {Subscription} from "rxjs"
-import {HttpEvent, HttpEventType} from "@angular/common/http"
-import {response} from "express"
+import {HttpEvent} from "@angular/common/http"
 import {MusicFetchService} from "../../Services/music-fetch.service"
 import {VideosFetchService} from "../../Services/videos-fetch.service"
 
@@ -21,6 +20,7 @@ import {VideosFetchService} from "../../Services/videos-fetch.service"
 export class MusicCreatingComponent {
   MusicFetchService = inject(MusicFetchService)
   VideoFetchService = inject(VideosFetchService)
+
   constructor(private MusicUploadService: MusicFetchService, VideosUploadService: VideosFetchService, private router: Router) {
   }
 
@@ -47,6 +47,7 @@ export class MusicCreatingComponent {
     if (event.target.files.length > 0) {
       this.selectedFile = event.target.files[0]
       const file = event.target.files[0]
+
       if (file && (file.type === 'audio/mp3') || (file.type === 'audio/mpeg')) { //mpeg
         const reader = new FileReader()
         reader.onload = () => {
