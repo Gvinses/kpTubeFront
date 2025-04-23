@@ -52,9 +52,6 @@ export class VideosFetchService {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
 
-    console.log(formData)
-    console.log(file)
-
     let headers = new HttpHeaders()
 
     headers = headers.set('X-USERNAME', String(username))
@@ -83,11 +80,12 @@ export class VideosFetchService {
   enterUser(name: string) {
     const username = localStorage.getItem('username')
     const password = localStorage.getItem('password')
-
     let headers = new HttpHeaders()
 
-    headers = headers.set('X-USERNAME', String(username))
-    headers = headers.set('X-PASSWORD', String(password))
+    if (username != null && password != null) {
+      headers = headers.set('X-USERNAME', String(username))
+      headers = headers.set('X-PASSWORD', String(password))
+    }
 
     return this.http.get<any>(`${this.account}?name=${name}`, {headers: headers})
   }
@@ -100,8 +98,10 @@ export class VideosFetchService {
 
     let headers = new HttpHeaders()
 
-    headers = headers.set('X-USERNAME', String(username))
-    headers = headers.set('X-PASSWORD', String(password))
+    if (username != null && password != null) {
+      headers = headers.set('X-USERNAME', String(username))
+      headers = headers.set('X-PASSWORD', String(password))
+    }
 
     return this.http.get<any>(this.account + '?User_ID=' + UserID, {headers: headers})
   }

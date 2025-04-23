@@ -13,8 +13,11 @@ $grid-gap: 30px
     flex-direction: column
     width: 100%
     height: 100vh
+    gap: 50px
 
     .userInfo
+      gap: 10px
+      margin-left: 100px
       width: 100%
       display: flex
       flex-direction: column
@@ -24,11 +27,15 @@ $grid-gap: 30px
       .header
         display: flex
         justify-content: center
-        width: 50vw
-        height: auto
+        width: 80%
+        height: 400px
         aspect-ratio: 16/9
         position: relative
         overflow: hidden
+
+        background: #070707
+        border-radius: 15px
+        padding: 10px
 
         img
           border-radius: 15px
@@ -37,10 +44,15 @@ $grid-gap: 30px
           object-fit: cover
 
       .avatar_and_username
+        width: 80%
         display: grid
-        grid-template-columns: 1fr 1fr 1fr
+        grid-template-columns: 1fr 1fr 9fr
         justify-content: center
         align-items: center
+        position: relative
+        justify-self: flex-start
+        align-self: flex-start
+        margin-left: 140px
 
         .avatar
           display: flex
@@ -49,11 +61,16 @@ $grid-gap: 30px
           width: 70px
           height: 70px
           position: relative
+          border-radius: 90px
+          background: #070707
+          overflow: hidden
+          border: 5px solid #070707
 
           img
             width: 100%
             height: 100%
-            object-fit: contain
+            object-fit: cover
+            border-radius: 15px
 
         .userName
           margin-left: 25px
@@ -62,6 +79,18 @@ $grid-gap: 30px
 
         .exitAccount
           float: right
+          display: flex
+          width: 40%
+
+          button
+            padding: 13px
+            border-radius: 15px
+            outline: none
+            border: none
+            margin-right: 70px
+
+        .exitAccount
+          justify-self: flex-end
           display: flex
           width: 40%
 

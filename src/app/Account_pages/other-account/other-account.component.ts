@@ -1,8 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {VideosFetchService} from "../../Services/videos-fetch.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {response} from "express";
 
 @Component({
   selector: 'app-other-account',
@@ -26,7 +24,8 @@ export class OtherAccountComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -53,6 +52,7 @@ export class OtherAccountComponent implements OnInit {
       }
     )
   }
+
   loadOtherUserVideos(): void {
     this.VideosFetchService.getVideosByUser(String(this.userName)).subscribe((data: any) => {
       data.forEach((video: any) => {
@@ -64,6 +64,7 @@ export class OtherAccountComponent implements OnInit {
       this.videos.reverse()
     });
   }
+
   linksChanger(video: any) {
     if (video.video && video.video.startsWith('http://127.0.0.1:8000/')) {
       video.video = video.video.replace('http://127.0.0.1:8000/', 'https://kptube.kringeproduction.ru/files/');
