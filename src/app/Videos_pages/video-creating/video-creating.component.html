@@ -59,7 +59,7 @@
   <h1>Ошибка!</h1>
   @if (errorMessage === 'accountError') {
     <p>Необходимо верефицировать аккаунт!</p>
-    <button (click)="closePage()">Закрыть</button>
+    <button (click)="closePopup()">Закрыть</button>
   } @else {
     {{ errorMessage }}
     <button (click)="closePopup()">Закрыть</button>
