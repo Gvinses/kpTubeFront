@@ -5,6 +5,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {VideoInterface} from "../../Interfaces/video-interface";
 import {filter, from} from "rxjs";
 import {SystemIconsStylesDirective} from "../../Directives/system-icons-styles.directive";
+import {AsyncPipe} from "@angular/common"
 
 export let videos = []
 
@@ -16,6 +17,7 @@ export let videos = []
     RouterLink,
     RouterLinkActive,
     SystemIconsStylesDirective,
+    AsyncPipe
   ],
   templateUrl: './videos-part.component.html',
   styleUrl: './videos-part.component.sass',
