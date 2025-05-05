@@ -1,5 +1,5 @@
 <div class="videos">
-  @for (video of videos; track video) {
+  @for (video of videos|async; track video) {
     <div class="video" appSystemIconsStyles [routerLink]="['/video', video.Video_ID]">
       <img src="{{video.preview}}" loading="eager" alt="{{video.preview}}">
       <div class="info">
